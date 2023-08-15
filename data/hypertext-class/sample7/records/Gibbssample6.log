@@ -1,0 +1,4245 @@
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014791 seconds
+probability of topic_Faculty_73 is 0.308
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.024267 seconds
+probability of topic_Student_41 is 0.748
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007216 seconds
+probability of topic_Faculty_23 is 0.462
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007717 seconds
+probability of topic_Department_74 is 0.478
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007426 seconds
+probability of topic_Student_16 is 0.502
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011137 seconds
+probability of topic_Faculty_84 is 0.553
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.062574 seconds
+probability of topic_Course_154 is 0.438
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.062169 seconds
+probability of topic_Course_107 is 0.5
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.257148 seconds
+probability of topic_ResearchProject_43 is 0.263
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014952 seconds
+probability of topic_Department_48 is 0.363
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007383 seconds
+probability of topic_Staff_17 is 0.462
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.05066 seconds
+probability of topic_Student_94 is 0.487
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.01106 seconds
+probability of topic_Faculty_42 is 0.674
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.067183 seconds
+probability of topic_Staff_13 is 0.432
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.013671 seconds
+probability of topic_Course_82 is 0.501
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.013625 seconds
+probability of topic_Staff_82 is 0.484
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007342 seconds
+probability of topic_Faculty_97 is 0.507
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.388852 seconds
+probability of topic_Person_274 is 0.492
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.38633 seconds
+probability of topic_Person_159 is 0.57
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.387951 seconds
+probability of topic_Person_113 is 0.342
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.388449 seconds
+probability of topic_Person_51 is 0.428
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006857 seconds
+probability of topic_Person_96 is 0.572
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.379229 seconds
+probability of topic_Staff_75 is 0.318
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.065633 seconds
+probability of topic_Person_107 is 0.428
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010771 seconds
+probability of topic_Course_83 is 0.677
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.388459 seconds
+probability of topic_Course_75 is 0.549
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.38664 seconds
+probability of topic_Person_50 is 0.579
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011629 seconds
+probability of topic_Department_98 is 0.814
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.05023 seconds
+probability of topic_Student_47 is 0.436
+
+clique number: 45
+unobserved tuple number: 12
+gibbs sample time: 0.231942 seconds
+probability of topic_Staff_68 is 0.432
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.024562 seconds
+probability of topic_Faculty_22 is 0.375
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.04713 seconds
+probability of topic_Staff_26 is 0.429
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007649 seconds
+probability of topic_Person_32 is 0.478
+
+clique number: 46
+unobserved tuple number: 12
+gibbs sample time: 0.255119 seconds
+probability of topic_Faculty_131 is 0.45
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.375247 seconds
+probability of topic_Student_113 is 0.543
+
+clique number: 46
+unobserved tuple number: 12
+gibbs sample time: 0.255359 seconds
+probability of topic_Faculty_34 is 0.46
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006731 seconds
+probability of topic_Course_60 is 0.417
+
+clique number: 46
+unobserved tuple number: 12
+gibbs sample time: 0.255479 seconds
+probability of topic_Faculty_186 is 0.468
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.01455 seconds
+probability of topic_Staff_27 is 0.56
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.380121 seconds
+probability of topic_Staff_127 is 0.446
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007232 seconds
+probability of topic_Student_87 is 0.632
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007168 seconds
+probability of topic_Person_63 is 0.518
+
+clique number: 6
+unobserved tuple number: 2
+gibbs sample time: 0.033946 seconds
+probability of topic_Person_157 is 0.515
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.060379 seconds
+probability of topic_Staff_139 is 0.585
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011451 seconds
+probability of topic_Faculty_29 is 0.605
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.066717 seconds
+probability of topic_Course_30 is 0.499
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.06125 seconds
+probability of topic_Staff_154 is 0.477
+
+clique number: 46
+unobserved tuple number: 12
+gibbs sample time: 0.25563 seconds
+probability of topic_Faculty_90 is 0.493
+
+clique number: 46
+unobserved tuple number: 12
+gibbs sample time: 0.255599 seconds
+probability of topic_Faculty_40 is 0.6
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011275 seconds
+probability of topic_Faculty_25 is 0.584
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.406642 seconds
+probability of topic_Faculty_39 is 0.394
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.254511 seconds
+probability of topic_Course_40 is 0.55
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.0111 seconds
+probability of topic_Course_42 is 0.533
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.407667 seconds
+probability of topic_Faculty_127 is 0.574
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.049132 seconds
+probability of topic_Student_89 is 0.376
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014678 seconds
+probability of topic_Course_31 is 0.425
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.406969 seconds
+probability of topic_Faculty_46 is 0.409
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.40759 seconds
+probability of topic_Faculty_37 is 0.44
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007159 seconds
+probability of topic_Faculty_4 is 0.523
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.025025 seconds
+probability of topic_Person_41 is 0.764
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.069268 seconds
+probability of topic_ResearchProject_168 is 0.68
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007348 seconds
+probability of topic_Department_23 is 0.458
+
+clique number: 45
+unobserved tuple number: 12
+gibbs sample time: 0.233427 seconds
+probability of topic_Staff_34 is 0.481
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007132 seconds
+probability of topic_Person_72 is 0.495
+
+clique number: 7
+unobserved tuple number: 2
+gibbs sample time: 0.038445 seconds
+probability of topic_Course_157 is 0.576
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014803 seconds
+probability of topic_Faculty_14 is 0.502
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010737 seconds
+probability of topic_Student_3 is 0.432
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.047096 seconds
+probability of topic_Person_49 is 0.743
+
+clique number: 5
+unobserved tuple number: 1
+gibbs sample time: 0.017346 seconds
+probability of topic_Course_9 is 0.452
+
+clique number: 44
+unobserved tuple number: 12
+gibbs sample time: 0.242364 seconds
+probability of topic_Student_68 is 0.502
+
+clique number: 7
+unobserved tuple number: 3
+gibbs sample time: 0.039847 seconds
+probability of topic_Faculty_24 is 0.478
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.060492 seconds
+probability of topic_Student_71 is 0.51
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.386282 seconds
+probability of topic_Person_127 is 0.523
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011083 seconds
+probability of topic_Department_84 is 0.533
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011527 seconds
+probability of topic_Faculty_83 is 0.531
+
+clique number: 6
+unobserved tuple number: 2
+gibbs sample time: 0.028316 seconds
+probability of topic_Student_128 is 0.528
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006751 seconds
+probability of topic_Staff_63 is 0.594
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.01083 seconds
+probability of topic_Person_98 is 0.727
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010895 seconds
+probability of topic_Department_85 is 0.59
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.065678 seconds
+probability of topic_Faculty_154 is 0.459
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010769 seconds
+probability of topic_ResearchProject_99 is 0.475
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007563 seconds
+probability of topic_Department_4 is 0.473
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007244 seconds
+probability of topic_ResearchProject_63 is 0.462
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.247999 seconds
+probability of topic_Person_34 is 0.4
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007446 seconds
+probability of topic_Student_28 is 0.508
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.050521 seconds
+probability of topic_Person_7 is 0.514
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.025678 seconds
+probability of topic_ResearchProject_41 is 0.377
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014415 seconds
+probability of topic_ResearchProject_48 is 0.292
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011443 seconds
+probability of topic_Faculty_69 is 0.417
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007303 seconds
+probability of topic_Faculty_63 is 0.498
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007188 seconds
+probability of topic_Staff_32 is 0.598
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.025139 seconds
+probability of topic_Course_177 is 0.564
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.389084 seconds
+probability of topic_Course_50 is 0.38
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.068568 seconds
+probability of topic_Student_44 is 0.439
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.024912 seconds
+probability of topic_Course_41 is 0.405
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007583 seconds
+probability of topic_Student_17 is 0.288
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.067565 seconds
+probability of topic_Person_237 is 0.564
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.38913 seconds
+probability of topic_Course_274 is 0.457
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.050319 seconds
+probability of topic_ResearchProject_26 is 0.559
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007019 seconds
+probability of topic_Staff_87 is 0.491
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.081936 seconds
+probability of topic_Person_44 is 0.524
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.019493 seconds
+probability of topic_Course_14 is 0.513
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.009681 seconds
+probability of topic_Person_36 is 0.57
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.419997 seconds
+probability of topic_Student_39 is 0.319
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.375466 seconds
+probability of topic_Student_51 is 0.447
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.378774 seconds
+probability of topic_Staff_55 is 0.47
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014397 seconds
+probability of topic_Person_80 is 0.349
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.247731 seconds
+probability of topic_Person_40 is 0.644
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.060183 seconds
+probability of topic_Student_176 is 0.586
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.376557 seconds
+probability of topic_Department_274 is 0.479
+
+clique number: 5
+unobserved tuple number: 1
+gibbs sample time: 0.018668 seconds
+probability of topic_Student_86 is 0.435
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007225 seconds
+probability of topic_ResearchProject_28 is 0.449
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00745 seconds
+probability of topic_Department_77 is 0.486
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006739 seconds
+probability of topic_Person_70 is 0.361
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.047062 seconds
+probability of topic_Department_12 is 0.533
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006844 seconds
+probability of topic_Course_52 is 0.432
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.407175 seconds
+probability of topic_Faculty_33 is 0.431
+
+clique number: 11
+unobserved tuple number: 4
+gibbs sample time: 0.065058 seconds
+probability of topic_Course_20 is 0.51
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.042733 seconds
+probability of topic_Department_229 is 0.437
+
+clique number: 7
+unobserved tuple number: 3
+gibbs sample time: 0.03912 seconds
+probability of topic_Student_24 is 0.473
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.053407 seconds
+probability of topic_Department_89 is 0.685
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011308 seconds
+probability of topic_ResearchProject_42 is 0.546
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007413 seconds
+probability of topic_Student_62 is 0.508
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010531 seconds
+probability of topic_Course_15 is 0.431
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007135 seconds
+probability of topic_Course_76 is 0.505
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006823 seconds
+probability of topic_Person_2 is 0.578
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007112 seconds
+probability of topic_Course_74 is 0.419
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010555 seconds
+probability of topic_Course_84 is 0.588
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.055905 seconds
+probability of topic_Staff_176 is 0.57
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.056564 seconds
+probability of topic_Staff_93 is 0.4
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011745 seconds
+probability of topic_Department_29 is 0.613
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.379677 seconds
+probability of topic_Staff_50 is 0.538
+
+clique number: 44
+unobserved tuple number: 12
+gibbs sample time: 0.320861 seconds
+probability of topic_Student_88 is 0.378
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.03905 seconds
+probability of topic_Faculty_35 is 0.634
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.416043 seconds
+probability of topic_ResearchProject_51 is 0.391
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007154 seconds
+probability of topic_Student_6 is 0.467
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.26348 seconds
+probability of topic_ResearchProject_40 is 0.421
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007456 seconds
+probability of topic_ResearchProject_32 is 0.646
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.067407 seconds
+probability of topic_Person_139 is 0.597
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.043164 seconds
+probability of topic_Department_243 is 0.5
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010845 seconds
+probability of topic_Person_64 is 0.535
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.261742 seconds
+probability of topic_Department_68 is 0.52
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.01457 seconds
+probability of topic_Faculty_38 is 0.543
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.376703 seconds
+probability of topic_Student_127 is 0.457
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.024314 seconds
+probability of topic_Student_177 is 0.504
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.015517 seconds
+probability of topic_Faculty_64 is 0.466
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.375277 seconds
+probability of topic_Student_33 is 0.682
+
+clique number: 7
+unobserved tuple number: 2
+gibbs sample time: 0.036332 seconds
+probability of topic_Staff_58 is 0.446
+
+clique number: 46
+unobserved tuple number: 12
+gibbs sample time: 0.256258 seconds
+probability of topic_Faculty_301 is 0.502
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007321 seconds
+probability of topic_Department_16 is 0.447
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.407193 seconds
+probability of topic_Faculty_50 is 0.479
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010707 seconds
+probability of topic_Person_83 is 0.494
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007509 seconds
+probability of topic_Department_17 is 0.565
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.39065 seconds
+probability of topic_Course_159 is 0.532
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007361 seconds
+probability of topic_Faculty_81 is 0.397
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.261358 seconds
+probability of topic_Department_301 is 0.659
+
+clique number: 6
+unobserved tuple number: 1
+gibbs sample time: 0.02191 seconds
+probability of topic_Student_79 is 0.448
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.066155 seconds
+probability of topic_Person_154 is 0.418
+
+clique number: 6
+unobserved tuple number: 2
+gibbs sample time: 0.028533 seconds
+probability of topic_Faculty_128 is 0.441
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007053 seconds
+probability of topic_Staff_2 is 0.73
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007027 seconds
+probability of topic_Person_53 is 0.496
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007303 seconds
+probability of topic_Department_87 is 0.396
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.373646 seconds
+probability of topic_Department_61 is 0.297
+
+clique number: 6
+unobserved tuple number: 2
+gibbs sample time: 0.033266 seconds
+probability of topic_Course_108 is 0.425
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.069833 seconds
+probability of topic_Department_69 is 0.413
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.04355 seconds
+probability of topic_Department_24 is 0.612
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.38003 seconds
+probability of topic_Staff_189 is 0.504
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.052913 seconds
+probability of topic_Department_108 is 0.431
+
+clique number: 7
+unobserved tuple number: 2
+gibbs sample time: 0.038285 seconds
+probability of topic_Student_58 is 0.759
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007551 seconds
+probability of topic_Department_2 is 0.515
+
+clique number: 44
+unobserved tuple number: 12
+gibbs sample time: 0.24332 seconds
+probability of topic_Student_34 is 0.44
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007477 seconds
+probability of topic_Department_95 is 0.475
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.07049 seconds
+probability of topic_ResearchProject_221 is 0.484
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007386 seconds
+probability of topic_Faculty_72 is 0.448
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007475 seconds
+probability of topic_Student_96 is 0.531
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007197 seconds
+probability of topic_Faculty_96 is 0.543
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.378274 seconds
+probability of topic_Staff_159 is 0.451
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007131 seconds
+probability of topic_Person_17 is 0.249
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.388461 seconds
+probability of topic_Staff_113 is 0.434
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007105 seconds
+probability of topic_Course_17 is 0.77
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.015633 seconds
+probability of topic_Faculty_31 is 0.542
+
+clique number: 45
+unobserved tuple number: 12
+gibbs sample time: 0.232838 seconds
+probability of topic_Staff_131 is 0.454
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.391021 seconds
+probability of topic_Course_55 is 0.351
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.01575 seconds
+probability of topic_Student_64 is 0.431
+
+clique number: 44
+unobserved tuple number: 12
+gibbs sample time: 0.243268 seconds
+probability of topic_Student_40 is 0.593
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007103 seconds
+probability of topic_Course_62 is 0.423
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007391 seconds
+probability of topic_Department_60 is 0.429
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006859 seconds
+probability of topic_Course_97 is 0.597
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007354 seconds
+probability of topic_ResearchProject_87 is 0.44
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.065324 seconds
+probability of topic_Person_65 is 0.54
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010808 seconds
+probability of topic_Course_73 is 0.447
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007412 seconds
+probability of topic_Student_32 is 0.481
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011059 seconds
+probability of topic_ResearchProject_11 is 0.204
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.067024 seconds
+probability of topic_Person_30 is 0.508
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00676 seconds
+probability of topic_Staff_53 is 0.427
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007377 seconds
+probability of topic_Faculty_95 is 0.569
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.046628 seconds
+probability of topic_Person_20 is 0.504
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.260817 seconds
+probability of topic_Department_34 is 0.467
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.374528 seconds
+probability of topic_Department_37 is 0.425
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006801 seconds
+probability of topic_Course_63 is 0.47
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010408 seconds
+probability of topic_Staff_14 is 0.358
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007121 seconds
+probability of topic_Course_57 is 0.524
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.052149 seconds
+probability of topic_Faculty_108 is 0.386
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010929 seconds
+probability of topic_Staff_3 is 0.434
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.04955 seconds
+probability of topic_Person_146 is 0.596
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.023155 seconds
+probability of topic_Person_22 is 0.413
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007221 seconds
+probability of topic_ResearchProject_66 is 0.426
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011443 seconds
+probability of topic_Faculty_45 is 0.472
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.060888 seconds
+probability of topic_Staff_65 is 0.432
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.040819 seconds
+probability of topic_Staff_229 is 0.335
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.259091 seconds
+probability of topic_ResearchProject_131 is 0.463
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.258638 seconds
+probability of topic_ResearchProject_34 is 0.525
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006763 seconds
+probability of topic_Student_5 is 0.49
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010838 seconds
+probability of topic_Person_48 is 0.525
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007469 seconds
+probability of topic_Student_54 is 0.372
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.068131 seconds
+probability of topic_Staff_69 is 0.478
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.049355 seconds
+probability of topic_Course_146 is 0.403
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010826 seconds
+probability of topic_Course_45 is 0.514
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007391 seconds
+probability of topic_Course_67 is 0.589
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.068087 seconds
+probability of topic_Staff_221 is 0.512
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.403699 seconds
+probability of topic_ResearchProject_75 is 0.36
+
+clique number: 5
+unobserved tuple number: 1
+gibbs sample time: 0.018884 seconds
+probability of topic_Department_86 is 0.392
+
+clique number: 6
+unobserved tuple number: 1
+gibbs sample time: 0.021618 seconds
+probability of topic_Course_79 is 0.348
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.390212 seconds
+probability of topic_Course_61 is 0.354
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.06767 seconds
+probability of topic_ResearchProject_107 is 0.386
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006752 seconds
+probability of topic_Person_92 is 0.494
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.067773 seconds
+probability of topic_ResearchProject_65 is 0.513
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011226 seconds
+probability of topic_Faculty_11 is 0.316
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.046204 seconds
+probability of topic_Staff_49 is 0.451
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011179 seconds
+probability of topic_Department_42 is 0.402
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.050322 seconds
+probability of topic_Student_12 is 0.489
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007446 seconds
+probability of topic_Student_67 is 0.415
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007118 seconds
+probability of topic_Person_57 is 0.464
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.01138 seconds
+probability of topic_ResearchProject_25 is 0.404
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.01469 seconds
+probability of topic_Faculty_27 is 0.401
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.067333 seconds
+probability of topic_Person_13 is 0.519
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.064409 seconds
+probability of topic_ResearchProject_124 is 0.458
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.389604 seconds
+probability of topic_Course_39 is 0.674
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.015081 seconds
+probability of topic_Student_48 is 0.543
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007205 seconds
+probability of topic_Person_76 is 0.659
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.053329 seconds
+probability of topic_ResearchProject_94 is 0.438
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.043039 seconds
+probability of topic_Course_24 is 0.381
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.050265 seconds
+probability of topic_Student_146 is 0.354
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.388972 seconds
+probability of topic_Person_46 is 0.492
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007337 seconds
+probability of topic_Staff_74 is 0.416
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006998 seconds
+probability of topic_Faculty_5 is 0.395
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014744 seconds
+probability of topic_ResearchProject_14 is 0.468
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.401057 seconds
+probability of topic_ResearchProject_274 is 0.443
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.042705 seconds
+probability of topic_ResearchProject_243 is 0.66
+
+clique number: 45
+unobserved tuple number: 12
+gibbs sample time: 0.232668 seconds
+probability of topic_Staff_90 is 0.609
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.389526 seconds
+probability of topic_Course_127 is 0.46
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.260259 seconds
+probability of topic_ResearchProject_68 is 0.442
+
+clique number: 6
+unobserved tuple number: 2
+gibbs sample time: 0.028499 seconds
+probability of topic_Student_85 is 0.703
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007182 seconds
+probability of topic_Course_8 is 0.596
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.373282 seconds
+probability of topic_Department_21 is 0.465
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.389353 seconds
+probability of topic_Course_19 is 0.691
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.01128 seconds
+probability of topic_Department_11 is 0.33
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.253935 seconds
+probability of topic_Course_88 is 0.339
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007099 seconds
+probability of topic_Faculty_8 is 0.463
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.408456 seconds
+probability of topic_Faculty_19 is 0.471
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.389594 seconds
+probability of topic_Course_51 is 0.427
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.382272 seconds
+probability of topic_Staff_153 is 0.601
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.085258 seconds
+probability of topic_Student_107 is 0.442
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.085271 seconds
+probability of topic_ResearchProject_154 is 0.447
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.008468 seconds
+probability of topic_Person_16 is 0.485
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.010149 seconds
+probability of topic_Department_76 is 0.421
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.420912 seconds
+probability of topic_Course_10 is 0.461
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.403371 seconds
+probability of topic_ResearchProject_61 is 0.364
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.072314 seconds
+probability of topic_Department_237 is 0.416
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006762 seconds
+probability of topic_Staff_52 is 0.553
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.402478 seconds
+probability of topic_ResearchProject_127 is 0.457
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011417 seconds
+probability of topic_ResearchProject_45 is 0.491
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.064956 seconds
+probability of topic_ResearchProject_237 is 0.538
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011073 seconds
+probability of topic_ResearchProject_29 is 0.335
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007151 seconds
+probability of topic_Course_54 is 0.606
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007245 seconds
+probability of topic_Course_32 is 0.416
+
+clique number: 44
+unobserved tuple number: 12
+gibbs sample time: 0.244669 seconds
+probability of topic_Student_78 is 0.711
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.255138 seconds
+probability of topic_Course_198 is 0.429
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.372892 seconds
+probability of topic_Department_103 is 0.498
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.01494 seconds
+probability of topic_ResearchProject_27 is 0.418
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.404277 seconds
+probability of topic_ResearchProject_103 is 0.473
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00713 seconds
+probability of topic_Staff_95 is 0.465
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.049059 seconds
+probability of topic_Student_49 is 0.756
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.069111 seconds
+probability of topic_Course_139 is 0.528
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.05345 seconds
+probability of topic_ResearchProject_7 is 0.441
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.376241 seconds
+probability of topic_Student_75 is 0.744
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.374549 seconds
+probability of topic_Department_10 is 0.608
+
+clique number: 5
+unobserved tuple number: 1
+gibbs sample time: 0.01863 seconds
+probability of topic_ResearchProject_86 is 0.433
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.372684 seconds
+probability of topic_Department_189 is 0.375
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.01086 seconds
+probability of topic_Person_25 is 0.525
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006763 seconds
+probability of topic_Faculty_2 is 0.534
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006767 seconds
+probability of topic_Course_96 is 0.499
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010797 seconds
+probability of topic_Department_99 is 0.432
+
+clique number: 45
+unobserved tuple number: 12
+gibbs sample time: 0.232754 seconds
+probability of topic_Staff_301 is 0.477
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.254242 seconds
+probability of topic_Course_34 is 0.488
+
+clique number: 45
+unobserved tuple number: 12
+gibbs sample time: 0.23321 seconds
+probability of topic_Staff_198 is 0.611
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.404684 seconds
+probability of topic_ResearchProject_59 is 0.502
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.015133 seconds
+probability of topic_Department_14 is 0.312
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.067164 seconds
+probability of topic_Person_69 is 0.617
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010935 seconds
+probability of topic_Staff_31 is 0.552
+
+clique number: 11
+unobserved tuple number: 4
+gibbs sample time: 0.067191 seconds
+probability of topic_Faculty_221 is 0.474
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.372222 seconds
+probability of topic_Department_127 is 0.447
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.015375 seconds
+probability of topic_Student_31 is 0.667
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.050365 seconds
+probability of topic_Faculty_26 is 0.619
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.374277 seconds
+probability of topic_Department_55 is 0.262
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.069364 seconds
+probability of topic_ResearchProject_69 is 0.33
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007507 seconds
+probability of topic_Department_5 is 0.516
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007254 seconds
+probability of topic_ResearchProject_52 is 0.467
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.390284 seconds
+probability of topic_Course_21 is 0.495
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010577 seconds
+probability of topic_Person_84 is 0.603
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.069183 seconds
+probability of topic_Course_237 is 0.454
+
+clique number: 45
+unobserved tuple number: 12
+gibbs sample time: 0.233288 seconds
+probability of topic_Staff_78 is 0.431
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.055815 seconds
+probability of topic_Person_93 is 0.471
+
+clique number: 11
+unobserved tuple number: 4
+gibbs sample time: 0.064628 seconds
+probability of topic_Course_18 is 0.403
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007442 seconds
+probability of topic_Student_30 is 0.516
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010564 seconds
+probability of topic_Person_11 is 0.029
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014116 seconds
+probability of topic_Course_27 is 0.313
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.052579 seconds
+probability of topic_Department_7 is 0.474
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.401762 seconds
+probability of topic_ResearchProject_46 is 0.439
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011137 seconds
+probability of topic_Department_73 is 0.412
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00749 seconds
+probability of topic_ResearchProject_4 is 0.456
+
+clique number: 6
+unobserved tuple number: 1
+gibbs sample time: 0.020836 seconds
+probability of topic_Person_79 is 0.692
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.261183 seconds
+probability of topic_Department_88 is 0.62
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.01167 seconds
+probability of topic_Department_3 is 0.398
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.255035 seconds
+probability of topic_Course_43 is 0.367
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.06054 seconds
+probability of topic_ResearchProject_176 is 0.363
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.379839 seconds
+probability of topic_Staff_10 is 0.566
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007398 seconds
+probability of topic_Student_57 is 0.496
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.053398 seconds
+probability of topic_ResearchProject_108 is 0.432
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007155 seconds
+probability of topic_Person_8 is 0.557
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.04976 seconds
+probability of topic_Course_26 is 0.542
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.047044 seconds
+probability of topic_Person_26 is 0.593
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.261832 seconds
+probability of topic_Department_43 is 0.215
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00696 seconds
+probability of topic_Staff_16 is 0.452
+
+clique number: 6
+unobserved tuple number: 2
+gibbs sample time: 0.02781 seconds
+probability of topic_Course_128 is 0.485
+
+clique number: 45
+unobserved tuple number: 12
+gibbs sample time: 0.233626 seconds
+probability of topic_Staff_43 is 0.268
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.37907 seconds
+probability of topic_Student_153 is 0.492
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011043 seconds
+probability of topic_Student_83 is 0.519
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.050386 seconds
+probability of topic_ResearchProject_89 is 0.412
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007448 seconds
+probability of topic_ResearchProject_36 is 0.404
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010863 seconds
+probability of topic_Course_98 is 0.469
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.046419 seconds
+probability of topic_Person_102 is 0.433
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014252 seconds
+probability of topic_Person_31 is 0.551
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007458 seconds
+probability of topic_ResearchProject_57 is 0.485
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010713 seconds
+probability of topic_Person_29 is 0.636
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.378736 seconds
+probability of topic_Staff_37 is 0.462
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.259971 seconds
+probability of topic_ResearchProject_301 is 0.614
+
+clique number: 46
+unobserved tuple number: 12
+gibbs sample time: 0.256699 seconds
+probability of topic_Faculty_198 is 0.451
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.38063 seconds
+probability of topic_Staff_19 is 0.509
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006849 seconds
+probability of topic_Staff_91 is 0.476
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.376682 seconds
+probability of topic_Student_103 is 0.498
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006758 seconds
+probability of topic_Course_92 is 0.316
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.376633 seconds
+probability of topic_Student_21 is 0.509
+
+clique number: 5
+unobserved tuple number: 1
+gibbs sample time: 0.017812 seconds
+probability of topic_Staff_9 is 0.423
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010642 seconds
+probability of topic_Course_64 is 0.561
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.390386 seconds
+probability of topic_Course_59 is 0.429
+
+clique number: 45
+unobserved tuple number: 12
+gibbs sample time: 0.234212 seconds
+probability of topic_Staff_119 is 0.46
+
+clique number: 5
+unobserved tuple number: 1
+gibbs sample time: 0.01841 seconds
+probability of topic_Faculty_86 is 0.385
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011554 seconds
+probability of topic_Department_45 is 0.507
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007061 seconds
+probability of topic_Staff_81 is 0.431
+
+clique number: 7
+unobserved tuple number: 2
+gibbs sample time: 0.038608 seconds
+probability of topic_Student_157 is 0.333
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.015665 seconds
+probability of topic_Department_64 is 0.379
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.046153 seconds
+probability of topic_Staff_89 is 0.555
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.407193 seconds
+probability of topic_Faculty_61 is 0.481
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.02314 seconds
+probability of topic_Person_35 is 0.511
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007625 seconds
+probability of topic_Student_42 is 0.592
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007087 seconds
+probability of topic_Staff_8 is 0.567
+
+clique number: 7
+unobserved tuple number: 2
+gibbs sample time: 0.036325 seconds
+probability of topic_Staff_157 is 0.43
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.05654 seconds
+probability of topic_Staff_71 is 0.434
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.40855 seconds
+probability of topic_Faculty_10 is 0.491
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011002 seconds
+probability of topic_ResearchProject_38 is 0.541
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.261308 seconds
+probability of topic_Department_40 is 0.645
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.01363 seconds
+probability of topic_Staff_48 is 0.406
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011548 seconds
+probability of topic_ResearchProject_83 is 0.451
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007244 seconds
+probability of topic_Student_91 is 0.468
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.404521 seconds
+probability of topic_ResearchProject_153 is 0.649
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.023533 seconds
+probability of topic_Staff_41 is 0.456
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.386811 seconds
+probability of topic_Department_39 is 0.369
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.024178 seconds
+probability of topic_Staff_177 is 0.553
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014841 seconds
+probability of topic_Person_38 is 0.335
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.062384 seconds
+probability of topic_ResearchProject_93 is 0.473
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011343 seconds
+probability of topic_Staff_29 is 0.431
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007484 seconds
+probability of topic_Department_53 is 0.473
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.065303 seconds
+probability of topic_Course_65 is 0.491
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.25669 seconds
+probability of topic_Person_119 is 0.476
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.395979 seconds
+probability of topic_Person_59 is 0.484
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.408731 seconds
+probability of topic_Faculty_59 is 0.567
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00769 seconds
+probability of topic_ResearchProject_72 is 0.459
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.052167 seconds
+probability of topic_Faculty_7 is 0.446
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.025299 seconds
+probability of topic_ResearchProject_177 is 0.613
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.37703 seconds
+probability of topic_Student_61 is 0.087
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.379154 seconds
+probability of topic_Staff_274 is 0.441
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007442 seconds
+probability of topic_ResearchProject_74 is 0.442
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010011 seconds
+probability of topic_Staff_99 is 0.484
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.391601 seconds
+probability of topic_Person_153 is 0.512
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.40494 seconds
+probability of topic_ResearchProject_55 is 0.594
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.389752 seconds
+probability of topic_Person_103 is 0.603
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007455 seconds
+probability of topic_Faculty_92 is 0.419
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.40346 seconds
+probability of topic_ResearchProject_189 is 0.582
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.377807 seconds
+probability of topic_Student_37 is 0.478
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.379372 seconds
+probability of topic_Staff_21 is 0.52
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014805 seconds
+probability of topic_Student_14 is 0.573
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.379147 seconds
+probability of topic_Staff_51 is 0.494
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.407691 seconds
+probability of topic_Faculty_153 is 0.746
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.0735 seconds
+probability of topic_Department_20 is 0.479
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007294 seconds
+probability of topic_Staff_36 is 0.513
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.389746 seconds
+probability of topic_Person_189 is 0.546
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.408115 seconds
+probability of topic_Faculty_103 is 0.56
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011453 seconds
+probability of topic_Person_42 is 0.67
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.2539 seconds
+probability of topic_Course_131 is 0.477
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010968 seconds
+probability of topic_Staff_83 is 0.557
+
+clique number: 11
+unobserved tuple number: 4
+gibbs sample time: 0.066835 seconds
+probability of topic_Faculty_18 is 0.365
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014373 seconds
+probability of topic_Faculty_82 is 0.416
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007176 seconds
+probability of topic_Person_4 is 0.561
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.04275 seconds
+probability of topic_Course_243 is 0.436
+
+clique number: 45
+unobserved tuple number: 12
+gibbs sample time: 0.233081 seconds
+probability of topic_Staff_186 is 0.585
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007345 seconds
+probability of topic_Staff_72 is 0.377
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.372407 seconds
+probability of topic_Department_46 is 0.457
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.045321 seconds
+probability of topic_Staff_7 is 0.467
+
+clique number: 11
+unobserved tuple number: 4
+gibbs sample time: 0.065086 seconds
+probability of topic_Course_102 is 0.566
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.403651 seconds
+probability of topic_ResearchProject_50 is 0.427
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.069686 seconds
+probability of topic_Student_20 is 0.522
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.024925 seconds
+probability of topic_ResearchProject_35 is 0.56
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.387838 seconds
+probability of topic_Person_55 is 0.43
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.40883 seconds
+probability of topic_Faculty_21 is 0.48
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.402862 seconds
+probability of topic_ResearchProject_21 is 0.535
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.259317 seconds
+probability of topic_ResearchProject_88 is 0.501
+
+clique number: 45
+unobserved tuple number: 12
+gibbs sample time: 0.233455 seconds
+probability of topic_Staff_40 is 0.565
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.26193 seconds
+probability of topic_Department_198 is 0.55
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.05089 seconds
+probability of topic_Student_108 is 0.468
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007106 seconds
+probability of topic_Person_56 is 0.374
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.377476 seconds
+probability of topic_Student_10 is 0.503
+
+clique number: 46
+unobserved tuple number: 12
+gibbs sample time: 0.256317 seconds
+probability of topic_Faculty_78 is 0.542
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.015368 seconds
+probability of topic_Staff_64 is 0.575
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.060409 seconds
+probability of topic_ResearchProject_71 is 0.503
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011522 seconds
+probability of topic_Faculty_15 is 0.442
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007396 seconds
+probability of topic_Faculty_74 is 0.411
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.067124 seconds
+probability of topic_Course_13 is 0.46
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.255179 seconds
+probability of topic_Course_301 is 0.482
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.068648 seconds
+probability of topic_Staff_20 is 0.46
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.381396 seconds
+probability of topic_Staff_61 is 0.386
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.260509 seconds
+probability of topic_ResearchProject_119 is 0.486
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.248676 seconds
+probability of topic_Person_88 is 0.425
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00676 seconds
+probability of topic_Course_2 is 0.461
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00712 seconds
+probability of topic_Course_72 is 0.371
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.049645 seconds
+probability of topic_Faculty_49 is 0.496
+
+clique number: 5
+unobserved tuple number: 1
+gibbs sample time: 0.018128 seconds
+probability of topic_Faculty_9 is 0.517
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011086 seconds
+probability of topic_Student_25 is 0.534
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.390983 seconds
+probability of topic_Course_103 is 0.503
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.26134 seconds
+probability of topic_Department_119 is 0.471
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007411 seconds
+probability of topic_ResearchProject_76 is 0.465
+
+clique number: 7
+unobserved tuple number: 3
+gibbs sample time: 0.040365 seconds
+probability of topic_Faculty_229 is 0.39
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007187 seconds
+probability of topic_Student_97 is 0.43
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.055754 seconds
+probability of topic_Person_71 is 0.487
+
+clique number: 6
+unobserved tuple number: 2
+gibbs sample time: 0.027827 seconds
+probability of topic_Course_85 is 0.485
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.262167 seconds
+probability of topic_Department_131 is 0.637
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.025089 seconds
+probability of topic_ResearchProject_22 is 0.61
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.060758 seconds
+probability of topic_Student_93 is 0.508
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006822 seconds
+probability of topic_Course_87 is 0.477
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006805 seconds
+probability of topic_Staff_28 is 0.48
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.04923 seconds
+probability of topic_Course_47 is 0.754
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014547 seconds
+probability of topic_Student_73 is 0.437
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.056494 seconds
+probability of topic_Person_176 is 0.641
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.01155 seconds
+probability of topic_Student_69 is 0.518
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.253819 seconds
+probability of topic_Course_68 is 0.425
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.049358 seconds
+probability of topic_Course_12 is 0.623
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.40834 seconds
+probability of topic_Faculty_189 is 0.514
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.049784 seconds
+probability of topic_Course_89 is 0.674
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.25429 seconds
+probability of topic_Course_78 is 0.665
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007418 seconds
+probability of topic_Faculty_62 is 0.425
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.060569 seconds
+probability of topic_Staff_124 is 0.571
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.389861 seconds
+probability of topic_Person_39 is 0.464
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.253809 seconds
+probability of topic_Course_186 is 0.569
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006857 seconds
+probability of topic_Staff_6 is 0.463
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.254302 seconds
+probability of topic_Course_119 is 0.489
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011022 seconds
+probability of topic_Person_45 is 0.418
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.390406 seconds
+probability of topic_Course_46 is 0.431
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.024705 seconds
+probability of topic_Faculty_41 is 0.672
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.06756 seconds
+probability of topic_Person_124 is 0.498
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.065055 seconds
+probability of topic_Faculty_124 is 0.418
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.260965 seconds
+probability of topic_ResearchProject_198 is 0.614
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011164 seconds
+probability of topic_Student_45 is 0.449
+
+clique number: 7
+unobserved tuple number: 2
+gibbs sample time: 0.037484 seconds
+probability of topic_Faculty_58 is 0.429
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010647 seconds
+probability of topic_Person_15 is 0.488
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.025187 seconds
+probability of topic_Department_35 is 0.496
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007099 seconds
+probability of topic_Course_3 is 0.505
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014657 seconds
+probability of topic_Faculty_80 is 0.497
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.069543 seconds
+probability of topic_ResearchProject_13 is 0.503
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007161 seconds
+probability of topic_Staff_4 is 0.488
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006761 seconds
+probability of topic_Course_16 is 0.429
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.248449 seconds
+probability of topic_Person_198 is 0.503
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.070213 seconds
+probability of topic_Department_30 is 0.412
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.379507 seconds
+probability of topic_Staff_59 is 0.486
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007388 seconds
+probability of topic_Student_81 is 0.499
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011214 seconds
+probability of topic_Department_15 is 0.402
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.047244 seconds
+probability of topic_Person_89 is 0.422
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.068563 seconds
+probability of topic_Course_124 is 0.613
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007209 seconds
+probability of topic_Staff_77 is 0.505
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.049929 seconds
+probability of topic_Person_12 is 0.465
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.061311 seconds
+probability of topic_Staff_107 is 0.328
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00744 seconds
+probability of topic_Faculty_54 is 0.461
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.392902 seconds
+probability of topic_Course_33 is 0.547
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.013905 seconds
+probability of topic_Course_80 is 0.48
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007333 seconds
+probability of topic_Person_95 is 0.417
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007725 seconds
+probability of topic_Department_57 is 0.513
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011068 seconds
+probability of topic_Staff_15 is 0.437
+
+clique number: 6
+unobserved tuple number: 2
+gibbs sample time: 0.034142 seconds
+probability of topic_Person_58 is 0.647
+
+clique number: 5
+unobserved tuple number: 1
+gibbs sample time: 0.0182 seconds
+probability of topic_Student_9 is 0.459
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014792 seconds
+probability of topic_Student_27 is 0.502
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.015063 seconds
+probability of topic_Department_27 is 0.587
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.375641 seconds
+probability of topic_Student_274 is 0.499
+
+clique number: 44
+unobserved tuple number: 12
+gibbs sample time: 0.243601 seconds
+probability of topic_Student_43 is 0.448
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.06713 seconds
+probability of topic_Course_168 is 0.457
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.068261 seconds
+probability of topic_Staff_30 is 0.445
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.065986 seconds
+probability of topic_Faculty_65 is 0.453
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.01444 seconds
+probability of topic_ResearchProject_82 is 0.548
+
+clique number: 44
+unobserved tuple number: 12
+gibbs sample time: 0.243113 seconds
+probability of topic_Student_131 is 0.396
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.042895 seconds
+probability of topic_Course_229 is 0.47
+
+clique number: 44
+unobserved tuple number: 12
+gibbs sample time: 0.244906 seconds
+probability of topic_Student_90 is 0.586
+
+clique number: 44
+unobserved tuple number: 12
+gibbs sample time: 0.244311 seconds
+probability of topic_Student_198 is 0.438
+
+clique number: 44
+unobserved tuple number: 12
+gibbs sample time: 0.243233 seconds
+probability of topic_Student_301 is 0.701
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.024796 seconds
+probability of topic_Department_22 is 0.704
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007816 seconds
+probability of topic_Faculty_67 is 0.473
+
+clique number: 44
+unobserved tuple number: 12
+gibbs sample time: 0.243997 seconds
+probability of topic_Student_186 is 0.544
+
+clique number: 44
+unobserved tuple number: 12
+gibbs sample time: 0.243558 seconds
+probability of topic_Student_119 is 0.498
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.070269 seconds
+probability of topic_ResearchProject_20 is 0.441
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011154 seconds
+probability of topic_Department_38 is 0.576
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006769 seconds
+probability of topic_Staff_60 is 0.419
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.058234 seconds
+probability of topic_Course_93 is 0.438
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007431 seconds
+probability of topic_ResearchProject_56 is 0.539
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.057614 seconds
+probability of topic_Course_71 is 0.401
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.042747 seconds
+probability of topic_ResearchProject_229 is 0.294
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.059131 seconds
+probability of topic_Course_176 is 0.546
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.067152 seconds
+probability of topic_Course_69 is 0.377
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007422 seconds
+probability of topic_Department_91 is 0.442
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007091 seconds
+probability of topic_Staff_57 is 0.491
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007429 seconds
+probability of topic_Student_72 is 0.673
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.01135 seconds
+probability of topic_Faculty_30 is 0.613
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.390195 seconds
+probability of topic_Course_153 is 0.53
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.071891 seconds
+probability of topic_Department_221 is 0.431
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.379129 seconds
+probability of topic_Staff_33 is 0.421
+
+clique number: 5
+unobserved tuple number: 1
+gibbs sample time: 0.018798 seconds
+probability of topic_Department_9 is 0.502
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006762 seconds
+probability of topic_Faculty_1 is 0.519
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011413 seconds
+probability of topic_ResearchProject_15 is 0.459
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010547 seconds
+probability of topic_Course_25 is 0.538
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.049346 seconds
+probability of topic_Person_47 is 0.453
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00679 seconds
+probability of topic_Person_28 is 0.491
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007212 seconds
+probability of topic_Student_53 is 0.476
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.052951 seconds
+probability of topic_Department_26 is 0.618
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006773 seconds
+probability of topic_Staff_5 is 0.411
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.390281 seconds
+probability of topic_Person_19 is 0.373
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.402255 seconds
+probability of topic_ResearchProject_19 is 0.511
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006944 seconds
+probability of topic_Course_99 is 0.654
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.376005 seconds
+probability of topic_Student_59 is 0.382
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.066256 seconds
+probability of topic_Faculty_107 is 0.474
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007237 seconds
+probability of topic_Student_70 is 0.443
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007376 seconds
+probability of topic_Staff_22 is 0.542
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007358 seconds
+probability of topic_Staff_76 is 0.649
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007456 seconds
+probability of topic_Student_74 is 0.518
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007595 seconds
+probability of topic_Department_56 is 0.602
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.404828 seconds
+probability of topic_ResearchProject_33 is 0.29
+
+clique number: 5
+unobserved tuple number: 1
+gibbs sample time: 0.017955 seconds
+probability of topic_Person_9 is 0.469
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.391011 seconds
+probability of topic_Course_189 is 0.61
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007106 seconds
+probability of topic_Person_67 is 0.384
+
+clique number: 46
+unobserved tuple number: 12
+gibbs sample time: 0.259442 seconds
+probability of topic_Faculty_119 is 0.479
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.022804 seconds
+probability of topic_Course_22 is 0.568
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.022884 seconds
+probability of topic_Course_35 is 0.621
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007122 seconds
+probability of topic_Staff_62 is 0.391
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011066 seconds
+probability of topic_Student_15 is 0.482
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007427 seconds
+probability of topic_ResearchProject_17 is 0.453
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.248098 seconds
+probability of topic_Person_90 is 0.602
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.248354 seconds
+probability of topic_Person_301 is 0.729
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.044518 seconds
+probability of topic_Staff_47 is 0.365
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.247986 seconds
+probability of topic_Person_186 is 0.534
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.381263 seconds
+probability of topic_Staff_46 is 0.411
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007208 seconds
+probability of topic_Student_60 is 0.539
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006727 seconds
+probability of topic_Person_6 is 0.506
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007034 seconds
+probability of topic_Course_28 is 0.453
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.261678 seconds
+probability of topic_Department_90 is 0.498
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.407913 seconds
+probability of topic_Faculty_274 is 0.431
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.408237 seconds
+probability of topic_Faculty_51 is 0.448
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007453 seconds
+probability of topic_ResearchProject_2 is 0.435
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.255474 seconds
+probability of topic_Course_90 is 0.352
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014418 seconds
+probability of topic_Person_14 is 0.507
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.064674 seconds
+probability of topic_ResearchProject_44 is 0.447
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.408924 seconds
+probability of topic_Faculty_159 is 0.618
+
+clique number: 6
+unobserved tuple number: 2
+gibbs sample time: 0.029623 seconds
+probability of topic_Faculty_85 is 0.391
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.047476 seconds
+probability of topic_Department_47 is 0.306
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.046858 seconds
+probability of topic_Department_146 is 0.415
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010813 seconds
+probability of topic_Staff_25 is 0.557
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.070286 seconds
+probability of topic_ResearchProject_102 is 0.502
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007422 seconds
+probability of topic_Student_36 is 0.571
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.406722 seconds
+probability of topic_Faculty_113 is 0.367
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.410231 seconds
+probability of topic_Faculty_55 is 0.29
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.401598 seconds
+probability of topic_ResearchProject_159 is 0.526
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.401913 seconds
+probability of topic_ResearchProject_113 is 0.625
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.38964 seconds
+probability of topic_Person_21 is 0.41
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007612 seconds
+probability of topic_ResearchProject_60 is 0.492
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.016882 seconds
+probability of topic_Department_31 is 0.498
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.069596 seconds
+probability of topic_Faculty_237 is 0.458
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007998 seconds
+probability of topic_Department_81 is 0.492
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007267 seconds
+probability of topic_Person_52 is 0.527
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011652 seconds
+probability of topic_ResearchProject_80 is 0.445
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007248 seconds
+probability of topic_Staff_1 is 0.534
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.388813 seconds
+probability of topic_Department_59 is 0.519
+
+clique number: 7
+unobserved tuple number: 2
+gibbs sample time: 0.039755 seconds
+probability of topic_Department_157 is 0.388
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011583 seconds
+probability of topic_Staff_45 is 0.492
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.388406 seconds
+probability of topic_Staff_39 is 0.674
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007876 seconds
+probability of topic_ResearchProject_96 is 0.379
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.026215 seconds
+probability of topic_Department_177 is 0.46
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014658 seconds
+probability of topic_Faculty_48 is 0.333
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.374653 seconds
+probability of topic_Department_75 is 0.78
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006737 seconds
+probability of topic_Faculty_6 is 0.427
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.389881 seconds
+probability of topic_Person_61 is 0.118
+
+clique number: 7
+unobserved tuple number: 2
+gibbs sample time: 0.038141 seconds
+probability of topic_ResearchProject_58 is 0.355
+
+clique number: 7
+unobserved tuple number: 2
+gibbs sample time: 0.038132 seconds
+probability of topic_ResearchProject_157 is 0.467
+
+clique number: 11
+unobserved tuple number: 4
+gibbs sample time: 0.06731 seconds
+probability of topic_Faculty_102 is 0.5
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007738 seconds
+probability of topic_Faculty_76 is 0.508
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.049297 seconds
+probability of topic_Student_26 is 0.654
+
+clique number: 7
+unobserved tuple number: 3
+gibbs sample time: 0.039131 seconds
+probability of topic_Student_229 is 0.391
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.04397 seconds
+probability of topic_Staff_146 is 0.69
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.248891 seconds
+probability of topic_Person_131 is 0.315
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011235 seconds
+probability of topic_Student_11 is 0.036
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010716 seconds
+probability of topic_Faculty_3 is 0.466
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007431 seconds
+probability of topic_ResearchProject_95 is 0.431
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.072229 seconds
+probability of topic_Department_18 is 0.489
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.261151 seconds
+probability of topic_Department_78 is 0.66
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.064843 seconds
+probability of topic_Department_65 is 0.377
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.261344 seconds
+probability of topic_Department_186 is 0.526
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.049668 seconds
+probability of topic_Faculty_89 is 0.464
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007095 seconds
+probability of topic_Person_81 is 0.476
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007275 seconds
+probability of topic_Department_66 is 0.492
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007015 seconds
+probability of topic_Course_66 is 0.431
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007298 seconds
+probability of topic_Department_52 is 0.449
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011118 seconds
+probability of topic_ResearchProject_84 is 0.361
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.409971 seconds
+probability of topic_Faculty_75 is 0.415
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.40237 seconds
+probability of topic_ResearchProject_10 is 0.458
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.248627 seconds
+probability of topic_Person_78 is 0.658
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007433 seconds
+probability of topic_Faculty_17 is 0.452
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00739 seconds
+probability of topic_Student_22 is 0.44
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011033 seconds
+probability of topic_Staff_84 is 0.584
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014298 seconds
+probability of topic_Staff_80 is 0.329
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007248 seconds
+probability of topic_Faculty_70 is 0.426
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007231 seconds
+probability of topic_Student_66 is 0.518
+
+clique number: 7
+unobserved tuple number: 3
+gibbs sample time: 0.040715 seconds
+probability of topic_Faculty_243 is 0.445
+
+clique number: 5
+unobserved tuple number: 1
+gibbs sample time: 0.018111 seconds
+probability of topic_Person_86 is 0.522
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014691 seconds
+probability of topic_Student_38 is 0.308
+
+clique number: 6
+unobserved tuple number: 1
+gibbs sample time: 0.021951 seconds
+probability of topic_Staff_79 is 0.628
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.044057 seconds
+probability of topic_Staff_12 is 0.511
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007288 seconds
+probability of topic_ResearchProject_98 is 0.626
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.060796 seconds
+probability of topic_Staff_44 is 0.406
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.050777 seconds
+probability of topic_ResearchProject_49 is 0.191
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.260787 seconds
+probability of topic_ResearchProject_78 is 0.32
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.373044 seconds
+probability of topic_Department_33 is 0.612
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.060833 seconds
+probability of topic_Staff_237 is 0.439
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007226 seconds
+probability of topic_Faculty_53 is 0.438
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010562 seconds
+probability of topic_Course_38 is 0.4
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007084 seconds
+probability of topic_Person_66 is 0.472
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.01138 seconds
+probability of topic_ResearchProject_64 is 0.464
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.072406 seconds
+probability of topic_Department_102 is 0.453
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010678 seconds
+probability of topic_Staff_98 is 0.495
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014269 seconds
+probability of topic_Staff_73 is 0.464
+
+clique number: 5
+unobserved tuple number: 1
+gibbs sample time: 0.017914 seconds
+probability of topic_Staff_86 is 0.459
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.372902 seconds
+probability of topic_Department_50 is 0.6
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.064385 seconds
+probability of topic_Faculty_44 is 0.444
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.065168 seconds
+probability of topic_Faculty_139 is 0.4
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.061484 seconds
+probability of topic_Department_176 is 0.607
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.069364 seconds
+probability of topic_Department_168 is 0.673
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.013548 seconds
+probability of topic_Person_82 is 0.428
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.072165 seconds
+probability of topic_Department_44 is 0.367
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.015158 seconds
+probability of topic_ResearchProject_31 is 0.489
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010808 seconds
+probability of topic_Department_82 is 0.47
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.068064 seconds
+probability of topic_Staff_102 is 0.458
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010733 seconds
+probability of topic_Person_3 is 0.475
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007497 seconds
+probability of topic_Student_23 is 0.522
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.260002 seconds
+probability of topic_ResearchProject_186 is 0.533
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010591 seconds
+probability of topic_Course_11 is 0.206
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006776 seconds
+probability of topic_Staff_70 is 0.481
+
+clique number: 46
+unobserved tuple number: 12
+gibbs sample time: 0.256476 seconds
+probability of topic_Faculty_68 is 0.423
+
+clique number: 7
+unobserved tuple number: 2
+gibbs sample time: 0.038491 seconds
+probability of topic_Department_58 is 0.884
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007467 seconds
+probability of topic_Faculty_57 is 0.485
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006999 seconds
+probability of topic_Staff_96 is 0.421
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007322 seconds
+probability of topic_Faculty_60 is 0.427
+
+clique number: 45
+unobserved tuple number: 12
+gibbs sample time: 0.232763 seconds
+probability of topic_Staff_88 is 0.48
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011185 seconds
+probability of topic_ResearchProject_3 is 0.345
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.069284 seconds
+probability of topic_Department_13 is 0.398
+
+clique number: 6
+unobserved tuple number: 2
+gibbs sample time: 0.026736 seconds
+probability of topic_Staff_128 is 0.596
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006891 seconds
+probability of topic_Course_5 is 0.425
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.070731 seconds
+probability of topic_ResearchProject_18 is 0.403
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007487 seconds
+probability of topic_Department_36 is 0.362
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011307 seconds
+probability of topic_Student_29 is 0.541
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.068809 seconds
+probability of topic_Course_44 is 0.263
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.060876 seconds
+probability of topic_Faculty_71 is 0.423
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.391481 seconds
+probability of topic_Person_33 is 0.679
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00739 seconds
+probability of topic_Student_13 is 0.534
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007064 seconds
+probability of topic_Staff_97 is 0.452
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007684 seconds
+probability of topic_Student_77 is 0.583
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.01524 seconds
+probability of topic_ResearchProject_73 is 0.589
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007071 seconds
+probability of topic_Course_95 is 0.466
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007499 seconds
+probability of topic_ResearchProject_97 is 0.39
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.372013 seconds
+probability of topic_Department_159 is 0.402
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.067312 seconds
+probability of topic_Student_65 is 0.548
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007389 seconds
+probability of topic_Course_81 is 0.413
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007424 seconds
+probability of topic_ResearchProject_67 is 0.628
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.375051 seconds
+probability of topic_Student_55 is 0.463
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.259133 seconds
+probability of topic_ResearchProject_90 is 0.534
+
+clique number: 6
+unobserved tuple number: 1
+gibbs sample time: 0.022775 seconds
+probability of topic_Department_79 is 0.248
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007119 seconds
+probability of topic_Staff_56 is 0.499
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.053145 seconds
+probability of topic_Department_49 is 0.503
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.067486 seconds
+probability of topic_Staff_168 is 0.688
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007132 seconds
+probability of topic_Person_54 is 0.381
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.05084 seconds
+probability of topic_Person_108 is 0.484
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014482 seconds
+probability of topic_Student_82 is 0.527
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.072696 seconds
+probability of topic_Department_124 is 0.47
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.071481 seconds
+probability of topic_Department_139 is 0.374
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.378022 seconds
+probability of topic_Student_50 is 0.612
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006759 seconds
+probability of topic_Person_91 is 0.456
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007598 seconds
+probability of topic_ResearchProject_6 is 0.445
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00757 seconds
+probability of topic_Faculty_66 is 0.412
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.026199 seconds
+probability of topic_Department_41 is 0.411
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007884 seconds
+probability of topic_Student_76 is 0.552
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00715 seconds
+probability of topic_Course_36 is 0.679
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007623 seconds
+probability of topic_Student_56 is 0.328
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.045442 seconds
+probability of topic_Staff_94 is 0.543
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007509 seconds
+probability of topic_Department_8 is 0.481
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007262 seconds
+probability of topic_Faculty_87 is 0.522
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.042622 seconds
+probability of topic_ResearchProject_24 is 0.576
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007371 seconds
+probability of topic_Faculty_77 is 0.433
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007129 seconds
+probability of topic_Student_4 is 0.557
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.375514 seconds
+probability of topic_Department_51 is 0.595
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.24889 seconds
+probability of topic_Person_68 is 0.507
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.374799 seconds
+probability of topic_Department_113 is 0.287
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010842 seconds
+probability of topic_Student_99 is 0.764
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007297 seconds
+probability of topic_Department_97 is 0.327
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.01463 seconds
+probability of topic_Person_73 is 0.361
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.051956 seconds
+probability of topic_Faculty_94 is 0.424
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007104 seconds
+probability of topic_Staff_54 is 0.507
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006714 seconds
+probability of topic_Person_97 is 0.396
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010418 seconds
+probability of topic_Person_99 is 0.711
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014776 seconds
+probability of topic_Department_80 is 0.386
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010595 seconds
+probability of topic_Course_29 is 0.41
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007411 seconds
+probability of topic_ResearchProject_81 is 0.453
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.013968 seconds
+probability of topic_Course_48 is 0.452
+
+clique number: 46
+unobserved tuple number: 12
+gibbs sample time: 0.256943 seconds
+probability of topic_Faculty_88 is 0.477
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.010667 seconds
+probability of topic_ResearchProject_85 is 0.272
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011086 seconds
+probability of topic_Staff_11 is 0.215
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011105 seconds
+probability of topic_Faculty_98 is 0.514
+
+clique number: 5
+unobserved tuple number: 1
+gibbs sample time: 0.018683 seconds
+probability of topic_ResearchProject_9 is 0.329
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.379153 seconds
+probability of topic_Staff_103 is 0.511
+
+clique number: 7
+unobserved tuple number: 2
+gibbs sample time: 0.037441 seconds
+probability of topic_Faculty_157 is 0.47
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011437 seconds
+probability of topic_Department_25 is 0.605
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007269 seconds
+probability of topic_ResearchProject_16 is 0.444
+
+clique number: 47
+unobserved tuple number: 12
+gibbs sample time: 0.249045 seconds
+probability of topic_Person_43 is 0.235
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00757 seconds
+probability of topic_Department_28 is 0.49
+
+clique number: 6
+unobserved tuple number: 2
+gibbs sample time: 0.033334 seconds
+probability of topic_Course_94 is 0.443
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.376577 seconds
+probability of topic_Student_159 is 0.61
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.068519 seconds
+probability of topic_Student_237 is 0.525
+
+clique number: 6
+unobserved tuple number: 1
+gibbs sample time: 0.022159 seconds
+probability of topic_ResearchProject_79 is 0.277
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007786 seconds
+probability of topic_Department_63 is 0.636
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.069231 seconds
+probability of topic_Student_139 is 0.627
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007217 seconds
+probability of topic_Student_63 is 0.53
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.042982 seconds
+probability of topic_Person_243 is 0.523
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.06869 seconds
+probability of topic_Student_124 is 0.592
+
+clique number: 11
+unobserved tuple number: 4
+gibbs sample time: 0.065112 seconds
+probability of topic_Course_221 is 0.526
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.049472 seconds
+probability of topic_Course_49 is 0.456
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007236 seconds
+probability of topic_Student_98 is 0.7
+
+clique number: 7
+unobserved tuple number: 3
+gibbs sample time: 0.038912 seconds
+probability of topic_Student_243 is 0.539
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007432 seconds
+probability of topic_ResearchProject_77 is 0.517
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014335 seconds
+probability of topic_Person_27 is 0.487
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007472 seconds
+probability of topic_ResearchProject_62 is 0.443
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.061923 seconds
+probability of topic_Department_93 is 0.388
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.061779 seconds
+probability of topic_Department_71 is 0.433
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.404241 seconds
+probability of topic_ResearchProject_37 is 0.459
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006737 seconds
+probability of topic_Student_1 is 0.492
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.060615 seconds
+probability of topic_Faculty_176 is 0.586
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007503 seconds
+probability of topic_ResearchProject_91 is 0.449
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.01427 seconds
+probability of topic_Course_86 is 0.277
+
+clique number: 61
+unobserved tuple number: 19
+gibbs sample time: 0.375793 seconds
+probability of topic_Department_153 is 0.718
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006726 seconds
+probability of topic_Student_2 is 0.462
+
+clique number: 11
+unobserved tuple number: 3
+gibbs sample time: 0.067779 seconds
+probability of topic_Student_154 is 0.434
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006801 seconds
+probability of topic_Person_85 is 0.684
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.051039 seconds
+probability of topic_Student_7 is 0.508
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.042681 seconds
+probability of topic_Person_24 is 0.478
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.042838 seconds
+probability of topic_Person_229 is 0.336
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007425 seconds
+probability of topic_Faculty_13 is 0.558
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.067215 seconds
+probability of topic_Person_168 is 0.557
+
+clique number: 6
+unobserved tuple number: 2
+gibbs sample time: 0.026746 seconds
+probability of topic_Staff_85 is 0.382
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00744 seconds
+probability of topic_Course_4 is 0.457
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007372 seconds
+probability of topic_Faculty_56 is 0.567
+
+clique number: 7
+unobserved tuple number: 2
+gibbs sample time: 0.033801 seconds
+probability of topic_ResearchProject_146 is 0.565
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007525 seconds
+probability of topic_Department_54 is 0.513
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.061174 seconds
+probability of topic_Faculty_93 is 0.443
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007219 seconds
+probability of topic_Faculty_16 is 0.425
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.064225 seconds
+probability of topic_Department_107 is 0.579
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.070136 seconds
+probability of topic_Student_18 is 0.461
+
+clique number: 10
+unobserved tuple number: 3
+gibbs sample time: 0.064816 seconds
+probability of topic_Department_154 is 0.497
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007498 seconds
+probability of topic_Student_92 is 0.515
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.024659 seconds
+probability of topic_Faculty_177 is 0.506
+
+clique number: 7
+unobserved tuple number: 2
+gibbs sample time: 0.038614 seconds
+probability of topic_Course_58 is 0.511
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007213 seconds
+probability of topic_Faculty_28 is 0.422
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006753 seconds
+probability of topic_Course_70 is 0.433
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.00746 seconds
+probability of topic_Department_67 is 0.487
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.389733 seconds
+probability of topic_Course_37 is 0.461
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.041199 seconds
+probability of topic_Staff_24 is 0.612
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.069376 seconds
+probability of topic_Staff_18 is 0.428
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007434 seconds
+probability of topic_Student_95 is 0.397
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.064806 seconds
+probability of topic_ResearchProject_139 is 0.431
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.015083 seconds
+probability of topic_Student_80 is 0.449
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.050982 seconds
+probability of topic_Person_94 is 0.478
+
+clique number: 67
+unobserved tuple number: 20
+gibbs sample time: 0.389833 seconds
+probability of topic_Course_113 is 0.382
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.014211 seconds
+probability of topic_Staff_38 is 0.398
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007314 seconds
+probability of topic_Department_6 is 0.472
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007529 seconds
+probability of topic_Department_62 is 0.478
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007117 seconds
+probability of topic_Person_62 is 0.502
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007189 seconds
+probability of topic_Faculty_99 is 0.497
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.378931 seconds
+probability of topic_Student_46 is 0.46
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007103 seconds
+probability of topic_Staff_67 is 0.482
+
+clique number: 6
+unobserved tuple number: 2
+gibbs sample time: 0.029632 seconds
+probability of topic_Faculty_47 is 0.622
+
+clique number: 6
+unobserved tuple number: 2
+gibbs sample time: 0.029808 seconds
+probability of topic_Faculty_146 is 0.521
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007457 seconds
+probability of topic_Person_74 is 0.491
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007249 seconds
+probability of topic_ResearchProject_92 is 0.482
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007407 seconds
+probability of topic_Faculty_32 is 0.403
+
+clique number: 63
+unobserved tuple number: 19
+gibbs sample time: 0.37675 seconds
+probability of topic_Student_189 is 0.547
+
+clique number: 4
+unobserved tuple number: 1
+gibbs sample time: 0.015908 seconds
+probability of topic_Faculty_79 is 0.571
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.388907 seconds
+probability of topic_Person_75 is 0.628
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.070184 seconds
+probability of topic_Student_102 is 0.371
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007249 seconds
+probability of topic_ResearchProject_53 is 0.465
+
+clique number: 13
+unobserved tuple number: 4
+gibbs sample time: 0.069537 seconds
+probability of topic_ResearchProject_30 is 0.509
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007334 seconds
+probability of topic_Department_96 is 0.38
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011366 seconds
+probability of topic_Student_84 is 0.541
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007124 seconds
+probability of topic_Course_77 is 0.498
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.045729 seconds
+probability of topic_Staff_108 is 0.4
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.046673 seconds
+probability of topic_Person_18 is 0.483
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007369 seconds
+probability of topic_ResearchProject_5 is 0.43
+
+clique number: 9
+unobserved tuple number: 3
+gibbs sample time: 0.05228 seconds
+probability of topic_Department_94 is 0.485
+
+clique number: 46
+unobserved tuple number: 12
+gibbs sample time: 0.256067 seconds
+probability of topic_Faculty_43 is 0.291
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.0076 seconds
+probability of topic_Department_32 is 0.401
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.403897 seconds
+probability of topic_ResearchProject_39 is 0.551
+
+clique number: 8
+unobserved tuple number: 3
+gibbs sample time: 0.040935 seconds
+probability of topic_Staff_243 is 0.509
+
+clique number: 7
+unobserved tuple number: 2
+gibbs sample time: 0.033739 seconds
+probability of topic_ResearchProject_47 is 0.417
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006938 seconds
+probability of topic_Course_23 is 0.504
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.391392 seconds
+probability of topic_Person_37 is 0.449
+
+clique number: 5
+unobserved tuple number: 2
+gibbs sample time: 0.02478 seconds
+probability of topic_Person_177 is 0.46
+
+clique number: 3
+unobserved tuple number: 1
+gibbs sample time: 0.011218 seconds
+probability of topic_Department_83 is 0.417
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.007225 seconds
+probability of topic_ResearchProject_23 is 0.441
+
+clique number: 12
+unobserved tuple number: 4
+gibbs sample time: 0.0697 seconds
+probability of topic_Student_221 is 0.53
+
+clique number: 2
+unobserved tuple number: 1
+gibbs sample time: 0.006759 seconds
+probability of topic_Staff_23 is 0.461
+
+clique number: 11
+unobserved tuple number: 4
+gibbs sample time: 0.066974 seconds
+probability of topic_Faculty_20 is 0.4
+
+clique number: 66
+unobserved tuple number: 20
+gibbs sample time: 0.391434 seconds
+probability of topic_Person_10 is 0.501
+
