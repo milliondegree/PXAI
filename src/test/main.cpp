@@ -12,6 +12,18 @@
 using namespace std;
 
 
+#define provFile \
+"./data/prov/cancer5.txt"
+
+#define ObsFile \
+"./data/observe/smokeTest.db"
+
+#define provFileTrain \
+"./data/prov/cancer2Train.txt"
+
+#define ObsFileTrain \
+"./data/observe/smokeTrain.db"
+
 
 bool sortByValue(const pair<string, double>& p1, const pair<string, double>& p2) {
   return fabs(p1.second) > fabs(p2.second);
@@ -44,6 +56,24 @@ double calcVar(vector<double>& values) {
 }
 
 
+double calcStdVar(vector<double>& values) {
+  return sqrt(calcVar(values));
+}
+
+
+double calcAbsDev(vector<double>& values) {
+  double mean = 0;
+  for (int i=0; i<values.size(); i++) {
+    mean += values[i];
+  }
+  mean /= values.size();
+  double var = 0;
+  for (int i=0; i<values.size(); i++) {
+    var += abs(values[i]-mean);
+  }
+  var /= values.size();
+  return var;
+}
 
 void printLiterals(MLN mln) {
   // print out the observed literals and unknown literals after parsing
@@ -78,10 +108,40 @@ void printMLNStatistic(MLN& mln) {
 
 
 
+void saveToFile(MLN& mln, string file_name) {
+  cout << "saving to file " << file_name << endl;
+  clock_t t1 = clock();
+  ofstream file;
+  file.open(file_name);
+  mln.saveToFile(file);
+  file.close();
+  clock_t t2 = clock();
+  cout << "saving finished, time cost: " << ((double)(t2-t1))/CLOCKS_PER_SEC << " seconds" << endl;
+}
+
+
+
+
 void probabilityQuery(MLN& mln, int round, string query_name, string mode, double delta) {
   clock_t t1 = clock();
   if (mode=="gibbs") {
     mln.gibbsSampling(round);
+  }
+  else if (mode=="pgibbs") {
+    // wrong results
+    mln.gibbsSampling_vp(round, query_name, delta);
+  }
+  else if (mode=="mcsat"){
+    mln.mcsat(round, query_name);
+  }
+  else if (mode=="pmcsat") {
+    mln.pmcsat(round, query_name);
+  }
+  else if (mode=="bp") {
+    mln.naiveBeliefPropagation(query_name);
+  }
+  else if (mode=="abp") {
+    mln.advanceBeliefPropagation(query_name);
   }
   else if (mode=="lbp") {
     mln.loopyBeliefPropagation(query_name);
@@ -90,7 +150,89 @@ void probabilityQuery(MLN& mln, int round, string query_name, string mode, doubl
     mln.loopyBeliefPropagationMCS(query_name, round);
   }
   clock_t t2 = clock();
+  // cout << mode+" sample time: " << ((double)(t2-t1))/CLOCKS_PER_SEC << " seconds" << endl;
+  // double prob = mln.queryProb(query_name);
+  // cout << "probability of " << query_name << " is " << setprecision(9) << prob << endl;
+  // cout << endl;
 }
+
+
+void probabilityQueryAll(MLN& mln, int round, string mode) {
+  clock_t t1 = clock();
+  // mln.gibbsSampling_v3(round);
+  unordered_set<string> queries = mln.getQueryLiterals();
+  for (string query : queries) {
+    MLN mmln = mln.getMinimalMLN(query);
+    printLiterals(mmln);
+    if (mode=="gibbs") {
+      mmln.gibbsSampling_v4(round, query);
+    }
+    else if (mode=="pgibbs") {
+      mmln.gibbsSampling_vp(round, query, 0.000001);
+    }
+    else if (mode=="mcsat"){
+      mmln.mcsat(round, query);
+    }
+    else if (mode=="pmcsat") {
+      mmln.pmcsat(round, query);
+    }
+    double prob = mmln.queryProb(query);
+    cout << "probability of " << query << " is " << prob << endl;
+  }
+  clock_t t2 = clock();
+  cout << mode+" sample time: " << ((double)(t2-t1))/CLOCKS_PER_SEC << " seconds" << endl;
+  cout << endl;
+}
+
+
+void verifyProb(MLN& mln) {
+  unordered_set<string> queries = mln.getQueryLiterals();
+  map<string, double> probs = mln.getProb();
+  for (string query : queries) {
+    double p = mln.estimatedProb(query);
+    cout << query << ": " << abs(p-probs[query]) << endl;
+  }
+}
+
+
+
+map<string, vector<double> > boxplotTest(MLN& mln, int round, int times) {
+  map<string, vector<double> > values;
+  unordered_set<string> queries = mln.getQueryLiterals();
+  for (string s : queries) {
+    values[s] = vector<double> ();
+  }
+  for (int t=0; t<times; t++) {
+    mln.gibbsSampling_v3(round);
+    for (string s : queries) {
+      values[s].push_back(mln.queryProb(s));
+    }
+  }
+  return values;
+}
+
+
+void boxplotTestSave(MLN& mln, string query_name, string file_name, int times) {
+  ofstream file;
+  file.open(file_name);
+  vector<int> rounds = {1, 2, 4, 6, 8, 10};
+  unordered_set<string> queries = mln.getQueryLiterals();
+  for (int round : rounds) {
+    // cout << round << endl;
+    file << "rounds: " << round << ' ' << "times: " << times << endl;
+    file << query_name << ": ";
+    for (int i=0; i<times; i++) {
+      cout << round << ' ' << i << endl;
+      // mln.gibbsSampling_v4(round, query_name);
+      mln.gibbsSampling_vp(round, query_name, 1e-10);
+      double prob = mln.queryProb(query_name);
+      file << prob << ' ';
+    }
+    file << endl;
+  }
+  file.close();
+}
+
 
 
 
@@ -122,6 +264,24 @@ void influenceQueryAll(MLN& mln, string query, int round, double delta, string m
     vp.push_back(pair<string, double>({observed, influs}));
   }
   sort(vp.begin(), vp.end(), sortByValue);
+    // for (auto it=vp.begin(); it<vp.end(); it++) {
+    //   cout << "influence of " << it->first << " on " << query << " is " << it->second << endl;
+    // }
+  // clock_t t2 = clock();
+  // cout << "influence compute time (" << mode << "): " << ((double)(t2-t1))/CLOCKS_PER_SEC << " seconds" << endl;
+  // cout << endl;
+}
+
+
+void setDefaultArgs(unordered_map<string, string>& args) {
+  args["observe_file"] = "./data/observe/smokeTest.db";
+  args["provenance_file"] = "./data/prov/cancer2.txt";
+  args["round"] = "100000";
+  args["delta"] = "0.01";
+  args["approx"] = "1e-7";
+  // args["equation"] = "0";
+  // args["mode"] = "pgibbs";
+  // args["influ_mode"] = "naiveBP";
 }
 
 
@@ -238,8 +398,7 @@ int main(int argc, char* argv[]) {
     }
   }
 
-  if (args.find("provenance_file")==args.end() || args.find("observe_file")==args.end() || 
-      (args.find("query_name")!=args.end() && args.find("mode")==args.end()) ) {
+  if (args.find("provenance_file")==args.end() || args.find("observe_file")==args.end()) {
     cout << "missing input of provenance and observe" << endl;
     exit(0);
   }
@@ -291,8 +450,6 @@ int main(int argc, char* argv[]) {
         cout << query_name << ' ' << mmln.prob[query_name] << endl;
       }
       clique_number.push_back(amln.cliques.size());
-      // cout << amln.toString() << endl;
-      // MLN amln = mmln;
 
       t1 = clock();
       for (string literal : amln.obs) {
@@ -414,7 +571,6 @@ int main(int argc, char* argv[]) {
       }
       MLNs.push_back(mmln);
     }
-    exit(0);
 
     // graph combination
     MLN mmln = MLNs[0];

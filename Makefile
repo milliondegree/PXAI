@@ -30,6 +30,8 @@ SRCS := $(shell find $(SRC) -name *.cpp)
 OBJS := build/ApproximateSubGraph.o build/Clique.o build/Grader.o build/Load.o build/LoopyBP.o build/LoopyBPProv.o build/MLN.o build/Parser.o build/mcsat.o build/BPInfluence.o 
 DEPS := $(OBJS:.o=.d)
 
+ARGS := ./data/hypertext-class/sample7/sample71.obs -p ./data/hypertext-class/sample7/prov/sample71.txt -q topic_Department_29 -m lbp -r 1 -i all -rule_name 1 -delta 1
+
 # Run task
 run: build
 	@echo "🚀 Executing..."
