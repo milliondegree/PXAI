@@ -12,7 +12,7 @@ void enumerateTruth(Clique& c,
     res.push_back(exp(c.getPotential(truth)));
   }
   else {
-    for (auto i=0; i<=1; i++) {
+    for (int i=0; i<=1; i++) {
       truth[toSearch[pos]] = i;
       enumerateTruth(c, toSearch, truth, res, pos+1);
     }
@@ -27,7 +27,7 @@ vector<double> loopyBPRun(MLN* mln, string query) {
   map<int, vector<double> > potentials;
   map<string, vector<double> > dists;
   for (string literal : mln->queries) {
-    for (auto c : mln->c_map[literal]) {
+    for (int c : mln->c_map[literal]) {
       nodeMsgs[literal][c] = vector<double> (2, 1);
       cliqueMsgs[c][literal] = vector<double> (2, 0);
     }
@@ -68,16 +68,16 @@ vector<double> loopyBPRun(MLN* mln, string query) {
       for (auto it : cliqueMsgs[c]) {
         toQuery.push_back(it.first);
       }
-      for (auto i=0; i<potentials[c].size(); i++) {
+      for (int i=0; i<potentials[c].size(); i++) {
         int tmp = i;
         double value = potentials[c][i];
-        for (auto s=toQuery.size()-1; s>=0; s--) {
+        for (int s=toQuery.size()-1; s>=0; s--) {
           int truth_value = tmp%2;
           value *= nodeMsgs[toQuery[s]][c][truth_value];
           tmp /= 2;
         }
         tmp = i;
-        for (auto s=toQuery.size()-1; s>=0; s--) {
+        for (int s=toQuery.size()-1; s>=0; s--) {
           int truth_value = tmp%2;
           newcliqueMsgs[c][toQuery[s]][truth_value] += value/nodeMsgs[toQuery[s]][c][truth_value];
           tmp /= 2;
@@ -97,14 +97,14 @@ vector<double> loopyBPRun(MLN* mln, string query) {
     }
     // pass clique messages to nodes
     for (string literal : mln->queries) {
-      for (auto c : mln->c_map[literal]) {
+      for (int c : mln->c_map[literal]) {
         newDists[literal][0] *= cliqueMsgs[c][literal][0];
         newDists[literal][1] *= cliqueMsgs[c][literal][1];
       }
       double z = newDists[literal][0]+newDists[literal][1];
       newDists[literal][0] /= z;
       newDists[literal][1] /= z;
-      for (auto c : mln->c_map[literal]) {
+      for (int c : mln->c_map[literal]) {
         nodeMsgs[literal][c][0] = newDists[literal][0]/cliqueMsgs[c][literal][0];
         nodeMsgs[literal][c][1] = newDists[literal][1]/cliqueMsgs[c][literal][1];
       }
@@ -133,7 +133,7 @@ pair<map<string, vector<double> >, int > loopyBPRun(MLN* mln) {
   map<int, vector<double> > potentials;
   map<string, vector<double> > dists;
   for (string literal : mln->queries) {
-    for (auto c : mln->c_map[literal]) {
+    for (int c : mln->c_map[literal]) {
       nodeMsgs[literal][c] = vector<double> (2, 1);
       cliqueMsgs[c][literal] = vector<double> (2, 0);
     }
@@ -174,16 +174,16 @@ pair<map<string, vector<double> >, int > loopyBPRun(MLN* mln) {
       for (auto it : cliqueMsgs[c]) {
         toQuery.push_back(it.first);
       }
-      for (auto i=0; i<potentials[c].size(); i++) {
+      for (int i=0; i<potentials[c].size(); i++) {
         int tmp = i;
         double value = potentials[c][i];
-        for (auto s=toQuery.size()-1; s>=0; s--) {
+        for (int s=toQuery.size()-1; s>=0; s--) {
           int truth_value = tmp%2;
           value *= nodeMsgs[toQuery[s]][c][truth_value];
           tmp /= 2;
         }
         tmp = i;
-        for (auto s=toQuery.size()-1; s>=0; s--) {
+        for (int s=toQuery.size()-1; s>=0; s--) {
           int truth_value = tmp%2;
           newcliqueMsgs[c][toQuery[s]][truth_value] += value/nodeMsgs[toQuery[s]][c][truth_value];
           tmp /= 2;
@@ -203,14 +203,14 @@ pair<map<string, vector<double> >, int > loopyBPRun(MLN* mln) {
     }
     // pass clique messages to nodes
     for (string literal : mln->queries) {
-      for (auto c : mln->c_map[literal]) {
+      for (int c : mln->c_map[literal]) {
         newDists[literal][0] *= cliqueMsgs[c][literal][0];
         newDists[literal][1] *= cliqueMsgs[c][literal][1];
       }
       double z = newDists[literal][0]+newDists[literal][1];
       newDists[literal][0] /= z;
       newDists[literal][1] /= z;
-      for (auto c : mln->c_map[literal]) {
+      for (int c : mln->c_map[literal]) {
         nodeMsgs[literal][c][0] = newDists[literal][0]/cliqueMsgs[c][literal][0];
         nodeMsgs[literal][c][1] = newDists[literal][1]/cliqueMsgs[c][literal][1];
       }
@@ -258,7 +258,7 @@ void enumerateLoopyBeliefPropagation(MLN* mln,
     prob += tmp*dist[1];
   }
   else {
-    for (auto i=0; i<=1; i++) {
+    for (int i=0; i<=1; i++) {
       prob_obs_truth[prob_obs[pos]] = i;
       enumerateLoopyBeliefPropagation(mln, query, prob_obs, prob_obs_truth, prev_probs, prob, pos+1);
     }
@@ -314,7 +314,7 @@ vector<double> pLoopyBPRun(MLN* mln, string query, map<int, vector<double> >& po
   map<int, map<string, vector<double> > > cliqueMsgs;
   map<string, vector<double> > dists;
   for (string literal : mln->queries) {
-    for (auto c : mln->c_map[literal]) {
+    for (int c : mln->c_map[literal]) {
       nodeMsgs[literal][c] = vector<double> (2, 1);
       cliqueMsgs[c][literal] = vector<double> (2, 0);
     }
@@ -339,16 +339,16 @@ vector<double> pLoopyBPRun(MLN* mln, string query, map<int, vector<double> >& po
       for (auto it : cliqueMsgs[c]) {
         toQuery.push_back(it.first);
       }
-      for (auto i=0; i<potentials[c].size(); i++) {
+      for (int i=0; i<potentials[c].size(); i++) {
         int tmp = i;
         double value = potentials[c][i];
-        for (auto s=toQuery.size()-1; s>=0; s--) {
+        for (int s=toQuery.size()-1; s>=0; s--) {
           int truth_value = tmp%2;
           value *= nodeMsgs[toQuery[s]][c][truth_value];
           tmp /= 2;
         }
         tmp = i;
-        for (auto s=toQuery.size()-1; s>=0; s--) {
+        for (int s=toQuery.size()-1; s>=0; s--) {
           int truth_value = tmp%2;
           newcliqueMsgs[c][toQuery[s]][truth_value] += value/nodeMsgs[toQuery[s]][c][truth_value];
           tmp /= 2;
@@ -372,14 +372,14 @@ vector<double> pLoopyBPRun(MLN* mln, string query, map<int, vector<double> >& po
     // pass clique messages to nodes
     // cout << "clique to node" << endl;
     for (string literal : mln->queries) {
-      for (auto c : mln->c_map[literal]) {
+      for (int c : mln->c_map[literal]) {
         newDists[literal][0] *= cliqueMsgs[c][literal][0];
         newDists[literal][1] *= cliqueMsgs[c][literal][1];
       }
       double z = newDists[literal][0]+newDists[literal][1];
       newDists[literal][0] /= z;
       newDists[literal][1] /= z;
-      for (auto c : mln->c_map[literal]) {
+      for (int c : mln->c_map[literal]) {
         nodeMsgs[literal][c][0] = dists[literal][0]/cliqueMsgs[c][literal][0];
         nodeMsgs[literal][c][1] = dists[literal][1]/cliqueMsgs[c][literal][1];
       }
@@ -414,7 +414,7 @@ void enumerateExpectedTruth(Clique& c,
     double pot = prob * exp(c.getPotential(truth));
     // compute index
     int index = 0;
-    for (auto i=toSearch.size()-1; i>=0; i--) {
+    for (int i=toSearch.size()-1; i>=0; i--) {
       int value = truth[toSearch[i]];
       index += (int)pow(2, toSearch.size()-i-1)*value;
     }
@@ -435,7 +435,7 @@ void enumerateExpectedTruth(Clique& c,
     }
     else {
       // unobserved tuples
-      for (auto i=0; i<=1; i++) {
+      for (int i=0; i<=1; i++) {
         truth[literal] = i;
         enumerateExpectedTruth(c, toSearch, prob_obs, nonprob_obs, truth, prev_probs, potential, prob, pos+1);
       }
@@ -462,7 +462,7 @@ void MLN::pLoopyBeliefPropagation(string query) {
     }
   }
   map<int, vector<double> > potentials;
-  for (auto c=0; c<this->cliques.size(); c++) {
+  for (int c=0; c<this->cliques.size(); c++) {
     map<string, int> truth;
     vector<string> toSearch;
     for (string literal : this->cliques[c].getLiterals()) {
@@ -475,7 +475,7 @@ void MLN::pLoopyBeliefPropagation(string query) {
     enumerateExpectedTruth(this->cliques[c], toSearch, prob_obs, nonprob_obs, truth, prev_probs, potentials[c], 1, 0);
   }
   // cout << "potential success" << endl;
-  // for (auto c=0; c<potentials.size(); c++) {
+  // for (int c=0; c<potentials.size(); c++) {
   //   cout << this->cliques[c].toString() << endl;
   //   for (auto it : potentials[c]) {
   //     cout << it << ' ';
@@ -521,11 +521,35 @@ void enumerateNaiveLBPInfluence(MLN* mln,
     infl_value += tmp;
   }
   else {
-    for (auto i=0; i<=1; i++) {
+    for (int i=0; i<=1; i++) {
       truth[prob_obs[pos]] = i;
       enumerateNaiveLBPInfluence(mln, query, infl, prob_obs, truth, prev_probs, infl_value, pos+1);
     }
   }
+}
+
+
+void MLN::naiveLBPInfluence(string query, string infl) {
+  assert(this->queries.find(query)!=this->queries.end() &&
+          this->obs.find(infl)!=this->obs.end());
+  // save the original probabilities of probabilistic observed tuples first
+  map<string, double> prev_prob = this->prob;
+  // find all probabilistic observed tuples
+  vector<string> prob_obs;
+  for (string literal : this->obs) {
+    if (this->prob[literal]>0&&
+        this->prob[literal]<1&&
+        !Parser::isRuleName(literal)) {
+      prob_obs.push_back(literal);
+    }
+  }
+  map<string, int> truth; 
+  double infl_value = 0.0;
+  for (int i=0; i<=1; i++) {
+    truth[infl] = i;
+    enumerateNaiveLBPInfluence(this, query, infl, prob_obs, truth, prev_prob, infl_value, 0);
+  }
+  this->pd[query][infl] = infl_value;
 }
 
 
@@ -552,7 +576,7 @@ vector<double> loopyBPRunMCS(MLN* mln, string query, map<int, vector<double> >& 
   int iteration = 0;
   while (!converge&&iteration<10) {
     // pass node messages to cliques:
-    for (auto c=0; c<mln->cliques.size(); c++) {
+    for (int c=0; c<mln->cliques.size(); c++) {
       vector<string> toQuery;
       for (string literal : mln->cliques[c].getLiterals()) {
         if (mln->queries.find(literal)!=mln->queries.end()) {
@@ -561,16 +585,16 @@ vector<double> loopyBPRunMCS(MLN* mln, string query, map<int, vector<double> >& 
           cliqueMsgs[c][literal][1] = 0;
         }
       }
-      for (auto i=0; i<potentials[c].size(); i++) {
+      for (int i=0; i<potentials[c].size(); i++) {
         int tmp = i;
         double value = potentials[c][i];
-        for (auto s=toQuery.size()-1; s>=0; s--) {
+        for (int s=toQuery.size()-1; s>=0; s--) {
           int truth_value = tmp%2;
           value *= nodeMsgs[toQuery[s]][c][truth_value];
           tmp /= 2;
         }
         tmp = i;
-        for (auto s=toQuery.size()-1; s>=0; s--) {
+        for (int s=toQuery.size()-1; s>=0; s--) {
           int truth_value = tmp%2;
           cliqueMsgs[c][toQuery[s]][truth_value] += value/nodeMsgs[toQuery[s]][c][truth_value];
           tmp /= 2;
@@ -586,14 +610,14 @@ vector<double> loopyBPRunMCS(MLN* mln, string query, map<int, vector<double> >& 
     for (string literal : mln->queries) {
       newDists[literal][0] = 1;
       newDists[literal][1] = 1;
-      for (auto c : mln->c_map[literal]) {
+      for (int c : mln->c_map[literal]) {
         newDists[literal][0] *= cliqueMsgs[c][literal][0];
         newDists[literal][1] *= cliqueMsgs[c][literal][1];
       }
       double z = newDists[literal][0]+newDists[literal][1];
       newDists[literal][0] /= z;
       newDists[literal][1] /= z;
-      for (auto c : mln->c_map[literal]) {
+      for (int c : mln->c_map[literal]) {
         nodeMsgs[literal][c][0] = newDists[literal][0]/cliqueMsgs[c][literal][0];
         nodeMsgs[literal][c][1] = newDists[literal][1]/cliqueMsgs[c][literal][1];
       }
@@ -633,7 +657,7 @@ void enumerateTotalPotentials(Clique& c,
       obs_index = -1;
     }
     else {
-      for (auto i=c.getLiterals().size()-1; i>=0; i--) {
+      for (int i=c.getLiterals().size()-1; i>=0; i--) {
         string literal = c.getLiterals()[i];
         if (prob_obs.find(literal)!=prob_obs.end()) {
           obs_index += (int)pow(2, obs_power++)*truth[literal];
@@ -648,7 +672,7 @@ void enumerateTotalPotentials(Clique& c,
   else {
     string literal = c.getLiterals()[pos];
     if (prob_obs.find(literal)!=prob_obs.end()) {
-      for (auto i=0; i<=1; i++) {
+      for (int i=0; i<=1; i++) {
         truth[literal] = i;
         obs_indices.push_back(i);
         enumerateTotalPotentials(c, clique_potentials, truth, prob_obs, queries, obs_indices, prob, pos+1);
@@ -656,7 +680,7 @@ void enumerateTotalPotentials(Clique& c,
       }
     }
     else if (queries.find(literal)!=queries.end()) {
-      for (auto i=0; i<=1; i++) {
+      for (int i=0; i<=1; i++) {
         truth[literal] = i;
         enumerateTotalPotentials(c, clique_potentials, truth, prob_obs, queries, obs_indices, prob, pos+1);
       }
@@ -686,7 +710,7 @@ void MLN::loopyBeliefPropagationMCS(string query, int rounds) {
 
   // build total potentials
   map<int, map<int, vector<double> > > total_potentials;
-  for (auto i=0; i<this->cliques.size(); i++) {
+  for (int i=0; i<this->cliques.size(); i++) {
     Clique c = this->cliques[i];
     map<int, vector<double> > tmp = c.getAllPotentials();
     if (tmp.size()!=0) {
@@ -710,7 +734,7 @@ void MLN::loopyBeliefPropagationMCS(string query, int rounds) {
   map<string, vector<double> > dists;
   map<string, vector<double> > newDists;
   for (string literal : this->queries) {
-    for (auto c : this->c_map[literal]) {
+    for (int c : this->c_map[literal]) {
       nodeMsgs[literal][c] = vector<double> (2, 1);
       cliqueMsgs[c][literal] = vector<double> (2, 0);
     }
@@ -724,7 +748,7 @@ void MLN::loopyBeliefPropagationMCS(string query, int rounds) {
   map<int, vector<double> > potentials;
   map<string, double> sums;
   // double sum = 0;
-  for (auto r=0; r<rounds; r++) {
+  for (int r=0; r<rounds; r++) {
     string key = "";
     for (string literal : prob_obs) {
       double r = distribution(generator);
@@ -742,11 +766,11 @@ void MLN::loopyBeliefPropagationMCS(string query, int rounds) {
       }
       continue;
     }
-    for (auto ci=0; ci<this->cliques.size(); ci++) {
+    for (int ci=0; ci<this->cliques.size(); ci++) {
       Clique c = this->cliques[ci];
       int index = 0;
       int index_power = -1;
-      for (auto i=c.getLiterals().size()-1; i>=0; i--) {
+      for (int i=c.getLiterals().size()-1; i>=0; i--) {
         string literal = c.getLiterals()[i];
         if (prob_obs.find(literal)!=prob_obs.end()) {
           index += (int)pow(2, ++index_power)*sample[literal];

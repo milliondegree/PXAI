@@ -78,20 +78,6 @@ void printMLNStatistic(MLN& mln) {
 
 
 
-void saveToFile(MLN& mln, string file_name) {
-  cout << "saving to file " << file_name << endl;
-  clock_t t1 = clock();
-  ofstream file;
-  file.open(file_name);
-  mln.saveToFile(file);
-  file.close();
-  clock_t t2 = clock();
-  cout << "saving finished, time cost: " << ((double)(t2-t1))/CLOCKS_PER_SEC << " seconds" << endl;
-}
-
-
-
-
 void probabilityQuery(MLN& mln, int round, string query_name, string mode, double delta) {
   clock_t t1 = clock();
   if (mode=="gibbs") {

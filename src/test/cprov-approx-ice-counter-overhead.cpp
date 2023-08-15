@@ -56,27 +56,27 @@ double computeInfluence(MLN& mln, CProvGraph& query_of_output, string& output_va
 
 int main(int argc, char* argv[]) {  
 
-  vector<string> provenance_file_list = {"/home/jz598/MLNInfer/data/hypertext-class/sample7/prov/sample71.txt",
-                                        "/home/jz598/MLNInfer/data/hypertext-class/sample7/prov/sample72.txt",
-                                        "/home/jz598/MLNInfer/data/hypertext-class/sample7/prov/sample73.txt",
-                                        "/home/jz598/MLNInfer/data/hypertext-class/sample7/prov/sample74.txt",
-                                        "/home/jz598/MLNInfer/data/hypertext-class/sample7/prov/sample75.txt",
-                                        "/home/jz598/MLNInfer/data/hypertext-class/sample7/prov/sample76.txt",
-                                        "/home/jz598/MLNInfer/data/hypertext-class/sample7/prov/sample77.txt",
-                                        "/home/jz598/MLNInfer/data/hypertext-class/sample7/prov/sample78.txt",
-                                        "/home/jz598/MLNInfer/data/hypertext-class/sample7/prov/sample79.txt",
-                                        "/home/jz598/MLNInfer/data/hypertext-class/sample7/prov/sample710.txt"
+  vector<string> provenance_file_list = {"./data/hypertext-class/sample7/prov/sample71.txt",
+                                        "./data/hypertext-class/sample7/prov/sample72.txt",
+                                        "./data/hypertext-class/sample7/prov/sample73.txt",
+                                        "./data/hypertext-class/sample7/prov/sample74.txt",
+                                        "./data/hypertext-class/sample7/prov/sample75.txt",
+                                        "./data/hypertext-class/sample7/prov/sample76.txt",
+                                        "./data/hypertext-class/sample7/prov/sample77.txt",
+                                        "./data/hypertext-class/sample7/prov/sample78.txt",
+                                        "./data/hypertext-class/sample7/prov/sample79.txt",
+                                        "./data/hypertext-class/sample7/prov/sample710.txt"
   };
-  vector<string> observe_file_list = {"/home/jz598/MLNInfer/data/hypertext-class/sample7/sample71.obs",
-                                      "/home/jz598/MLNInfer/data/hypertext-class/sample7/sample72.obs",
-                                      "/home/jz598/MLNInfer/data/hypertext-class/sample7/sample73.obs",
-                                      "/home/jz598/MLNInfer/data/hypertext-class/sample7/sample74.obs",
-                                      "/home/jz598/MLNInfer/data/hypertext-class/sample7/sample75.obs",
-                                      "/home/jz598/MLNInfer/data/hypertext-class/sample7/sample76.obs",
-                                      "/home/jz598/MLNInfer/data/hypertext-class/sample7/sample77.obs",
-                                      "/home/jz598/MLNInfer/data/hypertext-class/sample7/sample78.obs",
-                                      "/home/jz598/MLNInfer/data/hypertext-class/sample7/sample79.obs",
-                                      "/home/jz598/MLNInfer/data/hypertext-class/sample7/sample710.obs"
+  vector<string> observe_file_list = {"./data/hypertext-class/sample7/sample71.obs",
+                                      "./data/hypertext-class/sample7/sample72.obs",
+                                      "./data/hypertext-class/sample7/sample73.obs",
+                                      "./data/hypertext-class/sample7/sample74.obs",
+                                      "./data/hypertext-class/sample7/sample75.obs",
+                                      "./data/hypertext-class/sample7/sample76.obs",
+                                      "./data/hypertext-class/sample7/sample77.obs",
+                                      "./data/hypertext-class/sample7/sample78.obs",
+                                      "./data/hypertext-class/sample7/sample79.obs",
+                                      "./data/hypertext-class/sample7/sample710.obs"
   };
   vector<double> ice_time_list, approx_time_list, ice_time_list_on_approx;
 

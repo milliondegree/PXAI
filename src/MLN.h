@@ -94,12 +94,21 @@ public:
   void gibbsSampling_v2(int round);
   void gibbsSampling_v3(int round);
   void gibbsSampling_v4(int round, string query);
+  void gibbsSampling_vp(int round, string query, double delta);
 
   double estimatedProb(string query);
   
   double queryProb(string query);
 
+  void mcsat(int round, string query);
+  void pmcsat(int round, string query);
+
+  void naiveBPInfluence(string query, string infl);
+  void naiveLBPInfluence(string query, string infl);
+
   void naiveBeliefPropagation(string query);
+  void nonProbabilisticBeliefPropagation(string query);
+  void advanceBeliefPropagation(string query);
   void loopyBeliefPropagation(string query);
   int loopyBeliefPropagation();
   void pLoopyBeliefPropagation(string query);
@@ -133,6 +142,19 @@ public:
 private:
 
   void dfsSearch(unordered_set<string>& valid_unknown, vector<bool>& visited, string& query, bool stopObserved=true);
+  void sampleSAT(unordered_map<string, int>& state, unordered_set<int>& c_idx, int maxFlips, int maxTries, double target, double p);
+  void maxWalkSAT(unordered_map<string, int>& state, unordered_set<int>& c_idx, int maxFlips, int maxTries, double target, double p);
+  void pSampleSAT(unordered_map<string, double>& state, unordered_set<int>& c_idx, int maxFlips, int maxTries, double target, double p);
+
+  // double getCost(unordered_map<string, int>& state, unordered_set<int>& c_idx);
+  double getCost(unordered_map<string, int>& state, unordered_set<int>& c_idx, string& mode);
+  double pGetCost(unordered_map<string, double>& state, unordered_set<int>& c_idx, string& mode);
+  // double getSampleSATCost(unordered_map<string, int>& state, unordered_set<int>& c_idx);
+  string randomPick(Clique& c);
+  string lowestPick(Clique& c, unordered_map<string, int>& state, unordered_set<int>& c_idx, string& mode);
+  string optimalPick(unordered_map<string, int>& state, unordered_set<int>& c_idx, string& mode);
+  string ssPick(unordered_map<string, int>& state, unordered_set<int>& c_idx, string& mode);
+  string pSsPick(unordered_map<string, double>& state, unordered_set<int>& c_idx, string& mode);
 
   
 };
@@ -169,6 +191,7 @@ class Grader {
 public:
   Grader();
 
+  void computeGradients_v2(MLN& mln, string query, int round, double delta);
   void computeGradient(MLN& mln, string query, string infl, int round, double delta, string mode);
   void computeGradient(MLN& mln, vector<string>& query_names, string infl, int round, double delta);
   unordered_set<string> getValidObservedTuples(MLN& mln, string query);

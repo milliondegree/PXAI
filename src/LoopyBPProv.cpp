@@ -17,7 +17,7 @@ void enumerateTruthWithProv(Clique& c,
     res.push_back(exp(c.getPotential(truth)));
   }
   else {
-    for (auto i=0; i<=1; i++) {
+    for (int i=0; i<=1; i++) {
       truth[toSearch[pos]] = i;
       enumerateTruthWithProv(c, toSearch, truth, res, pos+1);
     }
@@ -34,7 +34,7 @@ vector<double> loopyBPRunWithProv(MLN* mln, string query) {
   double nodeMsg_init_value = 1;
   double cliqueMsg_init_value = 0;
   for (string literal : mln->queries) {
-    for (auto c : mln->c_map[literal]) {
+    for (int c : mln->c_map[literal]) {
       nodeMsgs[literal][c] = vector<double> (2, nodeMsg_init_value);
       cliqueMsgs[c][literal] = vector<double> (2, cliqueMsg_init_value);
       /* build EDB vertices of initial nodeMsgs */
@@ -62,7 +62,7 @@ vector<double> loopyBPRunWithProv(MLN* mln, string query) {
 
   /* build EDB vertices of potentials */
   for (auto it : potentials) {
-    for (auto i=0; i<it.second.size(); i++) {
+    for (int i=0; i<it.second.size(); i++) {
       string vertex_name = "potential_"+to_string(it.first)+"_"+to_string(i);
       mln->provG.addVariableVertex(Input, vertex_name, it.second[i]);
     }
@@ -89,7 +89,7 @@ vector<double> loopyBPRunWithProv(MLN* mln, string query) {
       for (auto it : cliqueMsgs[c]) {
         toQuery.push_back(it.first);
       }
-      for (auto i=0; i<potentials[c].size(); i++) {
+      for (int i=0; i<potentials[c].size(); i++) {
         int tmp = i;
 
         double value = potentials[c][i];
@@ -98,7 +98,7 @@ vector<double> loopyBPRunWithProv(MLN* mln, string query) {
         vector<string> value_input_names {"potential_"+to_string(c)+"_"+to_string(i)};
         mln->provG.addComputingSubgraph(value_name, value, Mul, value_input_names);
         
-        for (auto s=toQuery.size()-1; s>=0; s--) {
+        for (int s=toQuery.size()-1; s>=0; s--) {
           // for each unknown vertex
           int truth_value = tmp%2;
           value *= nodeMsgs[toQuery[s]][c][truth_value];
@@ -109,7 +109,7 @@ vector<double> loopyBPRunWithProv(MLN* mln, string query) {
         }
 
         tmp = i;
-        for (auto s=toQuery.size()-1; s>=0; s--) {
+        for (int s=toQuery.size()-1; s>=0; s--) {
           int truth_value = tmp%2;
 
           double valueByNodeMsg = value/nodeMsgs[toQuery[s]][c][truth_value];
@@ -136,20 +136,20 @@ vector<double> loopyBPRunWithProv(MLN* mln, string query) {
     map<string, vector<double> > newDists;
     for (string literal : mln->queries) {
       newDists[literal] = vector<double> (2, 1);
-      for (auto c : mln->c_map[literal]) {
+      for (int c : mln->c_map[literal]) {
         newDists[literal][0] *= cliqueMsgs[c][literal][0];
         newDists[literal][1] *= cliqueMsgs[c][literal][1];
       }
       /* add dist computing subgraph */
       string dist_1_name = "dist_"+literal+"_1_iteration_"+to_string(iteration);
       vector<string> dist_1_input_names;
-      for (auto cc : mln->c_map[literal]) {
+      for (int cc : mln->c_map[literal]) {
         dist_1_input_names.push_back("cliqueMsg_"+to_string(cc)+"_"+literal+"_1_iteration_"+to_string(iteration));
       }
       mln->provG.addComputingSubgraph(dist_1_name, newDists[literal][1], Mul, dist_1_input_names);
       string dist_0_name = "dist_"+literal+"_0_iteration_"+to_string(iteration);
       vector<string> dist_0_input_names;
-      for (auto cc : mln->c_map[literal]) {
+      for (int cc : mln->c_map[literal]) {
         dist_0_input_names.push_back("cliqueMsg_"+to_string(cc)+"_"+literal+"_0_iteration_"+to_string(iteration));
       }
       mln->provG.addComputingSubgraph(dist_0_name, newDists[literal][0], Mul, dist_0_input_names);
@@ -157,12 +157,12 @@ vector<double> loopyBPRunWithProv(MLN* mln, string query) {
 
     // pass clique messages to nodes
     for (string literal : mln->queries) {
-      for (auto c : mln->c_map[literal]) {
+      for (int c : mln->c_map[literal]) {
         nodeMsgs[literal][c][0] = newDists[literal][0]/cliqueMsgs[c][literal][0];
         nodeMsgs[literal][c][1] = newDists[literal][1]/cliqueMsgs[c][literal][1];
       }
       /* add subgraph of computing new nodeMsgs */
-      for (auto c : mln->c_map[literal]) {
+      for (int c : mln->c_map[literal]) {
         string nodeMsg_1_name = "nodeMsg_"+literal+"_"+to_string(c)+"_1_iteration_"+to_string(iteration);
         vector<string> nodeMsg_1_input_names {"dist_"+literal+"_1_iteration_"+to_string(iteration),
                                               "cliqueMsg_"+to_string(c)+"_"+literal+"_1_iteration_"+to_string(iteration)};
@@ -212,7 +212,7 @@ pair<map<string, vector<double> >, int > loopyBPRunWithProv(MLN* mln) {
   double nodeMsg_init_value = 1;
   double cliqueMsg_init_value = 0;
   for (string literal : mln->queries) {
-    for (auto c : mln->c_map[literal]) {
+    for (int c : mln->c_map[literal]) {
       nodeMsgs[literal][c] = vector<double> (2, nodeMsg_init_value);
       cliqueMsgs[c][literal] = vector<double> (2, cliqueMsg_init_value);
       /* build EDB vertices of initial nodeMsgs */
@@ -240,7 +240,7 @@ pair<map<string, vector<double> >, int > loopyBPRunWithProv(MLN* mln) {
 
   /* build EDB vertices of potentials */
   for (auto it : potentials) {
-    for (auto i=0; i<it.second.size(); i++) {
+    for (int i=0; i<it.second.size(); i++) {
       string vertex_name = "potential_"+to_string(it.first)+"_"+to_string(i);
       mln->provG.addVariableVertex(Input, vertex_name, it.second[i]);
     }
@@ -267,7 +267,7 @@ pair<map<string, vector<double> >, int > loopyBPRunWithProv(MLN* mln) {
       for (auto it : cliqueMsgs[c]) {
         toQuery.push_back(it.first);
       }
-      for (auto i=0; i<potentials[c].size(); i++) {
+      for (int i=0; i<potentials[c].size(); i++) {
         int tmp = i;
 
         double value = potentials[c][i];
@@ -276,7 +276,7 @@ pair<map<string, vector<double> >, int > loopyBPRunWithProv(MLN* mln) {
         vector<string> value_input_names {"potential_"+to_string(c)+"_"+to_string(i)};
         mln->provG.addComputingSubgraph(value_name, value, Mul, value_input_names);
         
-        for (auto s=toQuery.size()-1; s>=0; s--) {
+        for (int s=toQuery.size()-1; s>=0; s--) {
           // for each unknown vertex
           int truth_value = tmp%2;
           value *= nodeMsgs[toQuery[s]][c][truth_value];
@@ -287,7 +287,7 @@ pair<map<string, vector<double> >, int > loopyBPRunWithProv(MLN* mln) {
         }
 
         tmp = i;
-        for (auto s=toQuery.size()-1; s>=0; s--) {
+        for (int s=toQuery.size()-1; s>=0; s--) {
           int truth_value = tmp%2;
 
           double valueByNodeMsg = value/nodeMsgs[toQuery[s]][c][truth_value];
@@ -314,20 +314,20 @@ pair<map<string, vector<double> >, int > loopyBPRunWithProv(MLN* mln) {
     map<string, vector<double> > newDists;
     for (string literal : mln->queries) {
       newDists[literal] = vector<double> (2, 1);
-      for (auto c : mln->c_map[literal]) {
+      for (int c : mln->c_map[literal]) {
         newDists[literal][0] *= cliqueMsgs[c][literal][0];
         newDists[literal][1] *= cliqueMsgs[c][literal][1];
       }
       /* add dist computing subgraph */
       string dist_1_name = "dist_"+literal+"_1_iteration_"+to_string(iteration);
       vector<string> dist_1_input_names;
-      for (auto cc : mln->c_map[literal]) {
+      for (int cc : mln->c_map[literal]) {
         dist_1_input_names.push_back("cliqueMsg_"+to_string(cc)+"_"+literal+"_1_iteration_"+to_string(iteration));
       }
       mln->provG.addComputingSubgraph(dist_1_name, newDists[literal][1], Mul, dist_1_input_names);
       string dist_0_name = "dist_"+literal+"_0_iteration_"+to_string(iteration);
       vector<string> dist_0_input_names;
-      for (auto cc : mln->c_map[literal]) {
+      for (int cc : mln->c_map[literal]) {
         dist_0_input_names.push_back("cliqueMsg_"+to_string(cc)+"_"+literal+"_0_iteration_"+to_string(iteration));
       }
       mln->provG.addComputingSubgraph(dist_0_name, newDists[literal][0], Mul, dist_0_input_names);
@@ -335,12 +335,12 @@ pair<map<string, vector<double> >, int > loopyBPRunWithProv(MLN* mln) {
 
     // pass clique messages to nodes
     for (string literal : mln->queries) {
-      for (auto c : mln->c_map[literal]) {
+      for (int c : mln->c_map[literal]) {
         nodeMsgs[literal][c][0] = newDists[literal][0]/cliqueMsgs[c][literal][0];
         nodeMsgs[literal][c][1] = newDists[literal][1]/cliqueMsgs[c][literal][1];
       }
       /* add subgraph of computing new nodeMsgs */
-      for (auto c : mln->c_map[literal]) {
+      for (int c : mln->c_map[literal]) {
         string nodeMsg_1_name = "nodeMsg_"+literal+"_"+to_string(c)+"_1_iteration_"+to_string(iteration);
         vector<string> nodeMsg_1_input_names {"dist_"+literal+"_1_iteration_"+to_string(iteration),
                                               "cliqueMsg_"+to_string(c)+"_"+literal+"_1_iteration_"+to_string(iteration)};
@@ -405,7 +405,7 @@ void enumerateLoopyBeliefPropagationWithProv(MLN* mln,
     prob += tmp*dist[1];
   }
   else {
-    for (auto i=0; i<=1; i++) {
+    for (int i=0; i<=1; i++) {
       prob_obs_truth[prob_obs[pos]] = i;
       enumerateLoopyBeliefPropagationWithProv(mln, query, prob_obs, prob_obs_truth, prev_probs, prob, pos+1);
     }
@@ -456,7 +456,7 @@ int MLN::loopyBeliefPropagationWithCoarseProv() {
   double nodeMsg_init_value = 1;
   double cliqueMsg_init_value = 0;
   for (string literal : this->queries) {
-    for (auto c : this->c_map[literal]) {
+    for (int c : this->c_map[literal]) {
       nodeMsgs[literal][c] = vector<double> (2, nodeMsg_init_value);
       cliqueMsgs[c][literal] = vector<double> (2, cliqueMsg_init_value);
       /* build EDB vertices of initial nodeMsgs */
@@ -484,7 +484,7 @@ int MLN::loopyBeliefPropagationWithCoarseProv() {
 
   /* build EDB vertices of potentials */
   for (auto it : potentials) {
-    for (auto i=0; i<it.second.size(); i++) {
+    for (int i=0; i<it.second.size(); i++) {
       string vertex_name = "potential_"+to_string(it.first)+"_"+to_string(i);
       this->provG.addVariableVertex(Input, vertex_name, it.second[i]);
     }
@@ -522,13 +522,13 @@ int MLN::loopyBeliefPropagationWithCoarseProv() {
       for (auto it : cliqueMsgs[c]) {
         toQuery.push_back(it.first);
       }
-      for (auto i=0; i<potentials[c].size(); i++) {
+      for (int i=0; i<potentials[c].size(); i++) {
         int tmp = i;
         double value = potentials[c][i];
         std::stringstream psts;
         psts << "potential_" << c << "_" << i;
 
-        for (auto s=toQuery.size()-1; s>=0; s--) {
+        for (int s=toQuery.size()-1; s>=0; s--) {
           // for each unknown vertex
           int truth_value = tmp%2;
           value *= nodeMsgs[toQuery[s]][c][truth_value];
@@ -545,7 +545,7 @@ int MLN::loopyBeliefPropagationWithCoarseProv() {
         }
 
         tmp = i;
-        for (auto s=toQuery.size()-1; s>=0; s--) {
+        for (int s=toQuery.size()-1; s>=0; s--) {
           int truth_value = tmp%2;
           double valueByNodeMsg = value/nodeMsgs[toQuery[s]][c][truth_value];
           newcliqueMsgs[c][toQuery[s]][truth_value] += valueByNodeMsg;
@@ -559,14 +559,14 @@ int MLN::loopyBeliefPropagationWithCoarseProv() {
     map<string, vector<double> > newDists;
     for (string literal : this->queries) {
       newDists[literal] = vector<double> (2, 1);
-      for (auto c : this->c_map[literal]) {
+      for (int c : this->c_map[literal]) {
         newDists[literal][0] *= cliqueMsgs[c][literal][0];
         newDists[literal][1] *= cliqueMsgs[c][literal][1];
       }
       /* add dist computing subgraph */
       string dist_1_name = "dist_"+literal+"_1_iteration_"+to_string(iteration);
       vector<string> dist_1_input_names;
-      for (auto cc : this->c_map[literal]) {
+      for (int cc : this->c_map[literal]) {
         for (std::string input_name : clique_variable_names["cliqueMsg_"+to_string(cc)+"_"+literal+"_"+to_string(1)+"_iteration_"+to_string(iteration)]) {
           dist_1_input_names.push_back(input_name);
         }
@@ -574,7 +574,7 @@ int MLN::loopyBeliefPropagationWithCoarseProv() {
       this->provG.addComputingSubgraph(dist_1_name, newDists[literal][1], BeliefPropagation, dist_1_input_names);
       string dist_0_name = "dist_"+literal+"_0_iteration_"+to_string(iteration);
       vector<string> dist_0_input_names;
-      for (auto cc : this->c_map[literal]) {
+      for (int cc : this->c_map[literal]) {
         for (std::string input_name : clique_variable_names["cliqueMsg_"+to_string(cc)+"_"+literal+"_"+to_string(0)+"_iteration_"+to_string(iteration)]) {
           dist_0_input_names.push_back(input_name);
         }
@@ -584,12 +584,12 @@ int MLN::loopyBeliefPropagationWithCoarseProv() {
 
     // pass clique messages to nodes
     for (string literal : this->queries) {
-      for (auto c : this->c_map[literal]) {
+      for (int c : this->c_map[literal]) {
         nodeMsgs[literal][c][0] = newDists[literal][0]/cliqueMsgs[c][literal][0];
         nodeMsgs[literal][c][1] = newDists[literal][1]/cliqueMsgs[c][literal][1];
       }
       /* add subgraph of computing new nodeMsgs */
-      for (auto c : this->c_map[literal]) {
+      for (int c : this->c_map[literal]) {
         string nodeMsg_1_name = "nodeMsg_"+literal+"_"+to_string(c)+"_1_iteration_"+to_string(iteration);
         vector<string> nodeMsg_1_input_names {"dist_"+literal+"_1_iteration_"+to_string(iteration),
                                               "cliqueMsg_"+to_string(c)+"_"+literal+"_1_iteration_"+to_string(iteration)};

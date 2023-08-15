@@ -34,7 +34,7 @@ MLN MLN::operator + (const MLN& mln) {
     if (ind==this->cliques.size()) this->cliques.push_back(c);
   }
   map<string, vector<int> > new_cmap;
-  for (auto ci=0; ci<this->cliques.size(); ci++) {
+  for (int ci=0; ci<this->cliques.size(); ci++) {
     Clique c = this->cliques[ci];
     for (string literal : c.getLiterals()) {
       if (new_cmap.find(literal)==new_cmap.end()) {
@@ -117,9 +117,9 @@ void MLN::merge() {
   for (auto it=this->c_map.begin(); it!=c_map.end(); it++) {
     nc_map[it->first] = vector<int> ();
   }
-  for (auto i=0; i<this->cliques.size(); i++) {
+  for (int i=0; i<this->cliques.size(); i++) {
     int target = -1;
-    for (auto j=i+1; j<this->cliques.size(); j++) {
+    for (int j=i+1; j<this->cliques.size(); j++) {
       if (this->cliques[i].sameLiterals(this->cliques[j])) {
         target = j;
         break;
@@ -148,7 +148,7 @@ void MLN::removeRedundant(string& prov) {
       return;
     }
     int count = 0;
-    for (auto i=0; i<prov.length(); i++) {
+    for (int i=0; i<prov.length(); i++) {
       if (prov[i]=='(') {
         count++;
       }
@@ -305,7 +305,7 @@ vector<Clique> MLN::getCliques() {
 vector<Clique> MLN::getCliques(string literal) {
   vector<int> indices = this->c_map[literal];
   vector<Clique> res;
-  for (auto i : indices) {
+  for (int i : indices) {
     res.push_back(this->cliques[i]);
   }
   return res;
@@ -341,7 +341,7 @@ MLN MLN::getMinimalMLN(string& query) {
   unordered_set<string> mobs;
   unordered_set<string> mqueries;
   map<string, vector<int> > mc_map;
-  for (auto i=0; i<this->cliques.size(); i++) {
+  for (int i=0; i<this->cliques.size(); i++) {
     if (visited[i]) {
       mcliques.push_back(this->cliques[i]);
       // if (!this->cliques[i].isSingular()) {
@@ -380,7 +380,7 @@ MLN MLN::getConnectedMLN(string& query) {
   unordered_set<string> mobs;
   unordered_set<string> mqueries;
   map<string, vector<int> > mc_map;
-  for (auto i=0; i<this->cliques.size(); i++) {
+  for (int i=0; i<this->cliques.size(); i++) {
     if (visited[i]) {
       mcliques.push_back(this->cliques[i]);
       // if (!this->cliques[i].isSingular()) {
@@ -435,12 +435,12 @@ void MLN::gibbsSampling(int round) {
     }
   }
 
-  for (auto r=0; r<round; r++) {
+  for (int r=0; r<round; r++) {
     for (string query : this->queries) {
       vector<int> indices = this->c_map[query];
       vector<double> potentials_0;
       vector<double> potentials_1;
-      for (auto i : indices) {
+      for (int i : indices) {
         Clique c = this->cliques[i];
         unordered_map<string, int> truth;
         vector<string> literals = c.getLiterals();
@@ -513,12 +513,12 @@ void MLN::gibbsSampling_v2(int round) {
     }
   }
 
-  for (auto r=0; r<round; r++) {
+  for (int r=0; r<round; r++) {
     for (string query : this->queries) {
       vector<int> indices = this->c_map[query];
       vector<double> potentials_0;
       vector<double> potentials_1;
-      for (auto i : indices) {
+      for (int i : indices) {
         Clique c = this->cliques[i];
         map<string, double> truth;
         vector<string> literals = c.getLiterals();
@@ -596,12 +596,12 @@ void MLN::gibbsSampling_v3(int round) {
     truth_tables.push_back(m);
   }
 
-  for (auto r=0; r<round; r++) {
+  for (int r=0; r<round; r++) {
     for (string query : this->queries) {
       vector<int> indices = this->c_map[query];
       vector<double> potentials_0;
       vector<double> potentials_1;
-      for (auto i : indices) {
+      for (int i : indices) {
         Clique c = this->cliques[i];
         vector<string> literals = c.getLiterals();
         for (string literal : literals) {
@@ -642,6 +642,268 @@ void MLN::gibbsSampling_v3(int round) {
 }
 
 
+void MLN::gibbsSampling_v4(int round, string query) {
+  unordered_set<string> valid_unknown;
+  valid_unknown = this->queries;
+  // vector<bool> visited (this->cliques.size(), false);
+  // dfsSearch(valid_unknown, visited, query);
+
+  unordered_map<string, int> samples;
+  for (string query : valid_unknown) {
+    samples[query] = 0;
+  }
+
+  unordered_map<string, int> assignments;
+  random_device rd;
+  mt19937 generator(rd());
+  uniform_real_distribution<double> distribution(0.0, 1.0);
+  // initialize randomly
+  /*
+  for (string query : valid_unknown) {
+    double rand = distribution(generator);
+    if (rand>0.5) {
+      assignments[query] = 1;
+    }
+    else {
+      assignments[query] = 0;
+    }
+  }
+  */
+  // intialize assignment with maxwalksat
+  unordered_set<int> c_idx;
+  for (auto& query_name : valid_unknown) {
+    for (int id : this->c_map[query_name]) {
+      c_idx.insert(id);
+    }
+  }
+  maxWalkSAT(assignments, c_idx, MAXFLIPS, MAXTRIES, TARGET, NOISE);
+  // cout << "after maxWalkSAT initialization: " << endl;
+  // for (auto& query_name : valid_unknown) {
+  //   cout << query_name << ' ' << assignments[query_name] << endl;
+  // }
+
+
+  vector<unordered_map<string, double> > truth_tables;
+  for (Clique c : this->cliques) {
+    unordered_map<string, double> m;
+    vector<string> literals = c.getLiterals();
+    for (string literal : literals) {
+      if (this->obs.find(literal)==this->obs.end()) {
+        m[literal] = (double)assignments[literal];
+      }
+      else {
+        m[literal] = this->prob[literal];
+      }
+    }
+    truth_tables.push_back(m);
+  }
+
+  unordered_map<string, vector<double> > potentials_0s;
+  unordered_map<string, vector<double> > potentials_1s;
+  for (string query : valid_unknown) {
+    potentials_0s[query] = vector<double> (this->c_map[query].size(), 0.0);
+    potentials_1s[query] = vector<double> (this->c_map[query].size(), 0.0);
+  }
+
+  vector<string> v_query;
+  for (string query : valid_unknown) {
+    v_query.push_back(query);
+  }
+  vector<int> q_indices (v_query.size());
+  for (int i=0; i<v_query.size(); i++) {
+    q_indices[i] = i;
+  }
+
+  auto rng = std::default_random_engine {};
+
+  for (int r=0; r<round; r++) {
+    shuffle(q_indices.begin(), q_indices.end(), rng);
+    for (int qi : q_indices) {
+      string query = v_query[qi];
+      for (int i=0; i<this->c_map[query].size(); i++) {
+        int ind = this->c_map[query][i];
+        Clique c = this->cliques[ind];
+        vector<string> literals = c.getLiterals();
+        for (string literal : literals) {
+          if (this->obs.find(literal)==this->obs.end()) {
+            truth_tables[ind][literal] = (double)assignments[literal];
+          }
+        }
+        truth_tables[ind][query] = 1.0;
+        potentials_1s[query][i] = c.getPotential(truth_tables[ind]);
+        // c.printClique();
+        // cout << potentials_1s[query][i] << ' ';
+        truth_tables[ind][query] = 0.0;
+        potentials_0s[query][i] = c.getPotential(truth_tables[ind]);
+        // cout << potentials_0s[query][i] << endl;
+      }
+      double sum_1 = 0;
+      for (double p : potentials_1s[query]) {
+        sum_1 += p;
+      }
+      double sum_0 = 0;
+      for (double p : potentials_0s[query]) {
+        sum_0 += p;
+      }
+      // cout << sum_1 << ' ' << sum_0 << endl;
+      double exp_1 = exp(sum_1);
+      double exp_0 = exp(sum_0);
+      double p = exp_1 / (exp_1+exp_0);
+      // cout << query << ' ' << p << endl;
+      double prand = distribution(generator);
+      if (prand<p) {
+        if (round<10000 || r>1000) {
+          samples[query] += 1;
+        }
+        assignments[query] = 1;
+      }
+      else {
+        assignments[query] = 0;
+      }
+    }
+  }
+
+  int denominator = round>=10000 ? round-1000 : round;
+  for (string query : valid_unknown) {
+    this->prob[query] = ((double)samples[query]) / denominator;
+    // cout << query << ": " << this->prob[query] << endl;
+  }
+}
+
+
+
+void MLN::gibbsSampling_vp(int round, string query, double delta) {
+  unordered_set<string> valid_unknown;
+  valid_unknown = this->queries;
+
+  random_device rd;
+  mt19937 generator(rd());
+  uniform_real_distribution<double> distribution(0.0, 1.0);
+
+  // initialize randomly
+  map<string, double> assignments;
+  for (string query : valid_unknown) {
+    // assignments[query] = 0.5;
+    assignments[query] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+    assignments[query] = distribution(generator);
+    // cout << query << ' ' << assignments[query] << endl;
+  }
+  map<string, double> temp (assignments);
+
+  unordered_set<int> c_idx;
+  for (auto& query_name : valid_unknown) {
+    for (int id : this->c_map[query_name]) {
+      c_idx.insert(id);
+    }
+  }
+
+  vector<unordered_map<string, double> > truth_tables;
+  for (int c_i=0; c_i<this->cliques.size(); c_i++) {
+    Clique c = this->cliques[c_i];
+    unordered_map<string, double> m;
+    vector<string> literals = c.getLiterals();
+    for (string literal : literals) {
+      if (this->obs.find(literal)==this->obs.end()) {
+        m[literal] = assignments[literal];
+      }
+      else {
+        m[literal] = this->prob[literal];
+      }
+    }
+    truth_tables.push_back(m);
+  }
+
+  unordered_map<string, vector<double> > potentials_0s;
+  unordered_map<string, vector<double> > potentials_1s;
+  for (string query : valid_unknown) {
+    potentials_0s[query] = vector<double> (this->c_map[query].size(), 0.0);
+    potentials_1s[query] = vector<double> (this->c_map[query].size(), 0.0);
+  }
+
+  vector<string> v_query;
+  for (string query : valid_unknown) {
+    v_query.push_back(query);
+  }
+  vector<int> q_indices (v_query.size());
+  for (int i=0; i<v_query.size(); i++) {
+    q_indices[i] = i;
+  }
+
+  auto rng = std::default_random_engine {};
+
+  vector<bool> converges (v_query.size(), false);
+  for (int r=0; r<round; r++) {
+    shuffle(q_indices.begin(), q_indices.end(), rng);
+    for (int qi : q_indices) {
+      string query = v_query[qi];
+      // cout << query << endl;
+      for (int i=0; i<this->c_map[query].size(); i++) {
+        int ind = this->c_map[query][i];
+        Clique c = this->cliques[ind];
+        vector<string> literals = c.getLiterals();
+        string rule_name = c.getRuleName();
+        for (string literal : literals) {
+          if (this->obs.find(literal)==this->obs.end()) {
+            truth_tables[ind][literal] = assignments[literal];
+          }
+        }
+        truth_tables[ind][query] = 1.0;
+        potentials_1s[query][i] = -this->prob[rule_name]*c.getHingeSatisifiablity(truth_tables[ind]);
+        // cout << rule_name << ' ' << this->prob[rule_name] << endl;
+        // cout << c.toString() << endl;
+        // cout << potentials_1s[query][i] << ' ';
+        // cout << c.satisifiablity(truth_tables[ind]) << ' ' << endl;
+        // cout << c.toString() << ' ' << rule_name << endl;
+        truth_tables[ind][query] = 0.0;
+        potentials_0s[query][i] = -this->prob[rule_name]*c.getHingeSatisifiablity(truth_tables[ind]);
+        // cout << potentials_0s[query][i] << ' ';
+        // cout << endl;
+        // cout << c.getPotential(truth_tables[ind]) << ' ';
+        // cout << c.toString() << ' ' << rule_name << endl;
+      }
+      double sum_1 = 0;
+      for (double p : potentials_1s[query]) {
+        sum_1 += p;
+      }
+      double sum_0 = 0;
+      for (double p : potentials_0s[query]) {
+        sum_0 += p;
+      }
+      // cout << sum_1 << ' ' << sum_0 << endl;
+      double exp_1 = exp(sum_1);
+      double exp_0 = exp(sum_0);
+      double p = exp_1 / (exp_1+exp_0);
+      temp[query] = p;
+      converges[qi] = abs(temp[query]-assignments[query])<delta;
+      // if (!converges[qi]) {
+      //   cout << query << ": " << abs(temp[query]-assignments[query]) << endl;
+      //   cout << query << ": " << assignments[query] << ' ' << temp[query] << endl;
+      // }
+    }
+    // cout << endl << "round " << r << " finished " << endl;
+    // for (string query : this->queries) {
+    //   cout << query << ": " << temp[query] << endl;
+    // }
+    // cout << endl;
+    bool converge = true;
+    for (int qi : q_indices) {
+      string query = v_query[qi];
+      assignments[query] = temp[query];
+      converge &= converges[qi];
+    }
+    if (converge) {
+      // cout << "converge at iteration: " << r << endl;
+      break;
+    }
+  }
+
+  for (string query : valid_unknown) {
+    this->prob[query] = assignments[query];
+  }
+}
+
+
+
 
 double MLN::estimatedProb(string query) {
   assert(this->queries.find(query)!=this->queries.end());
@@ -650,7 +912,7 @@ double MLN::estimatedProb(string query) {
   }
   map<string, double> truth_table (this->prob);
   double potential_1 = 0.0, potential_0 = 0.0;
-  for (auto c_i : this->c_map[query]) {
+  for (int c_i : this->c_map[query]) {
     Clique c = this->cliques[c_i];
     truth_table[query] = 1;
     potential_1 += c.getPotential(truth_table);
@@ -674,7 +936,7 @@ map<string, vector<double> > MLN::getAllProbs(int round, int times) {
   for (string query : this->queries) {
     res[query] = vector<double> (times);
   }
-  for (auto i=0; i<times; i++) {
+  for (int i=0; i<times; i++) {
     gibbsSampling_v3(round);
     for (string query : this->queries) {
       res[query][i] = queryProb(query);
@@ -692,7 +954,7 @@ unordered_map<string, double> MLN::getInfluence(string query) {
 
 
 void MLN::buildCliqueMaps() {
-  for (auto ci=0; ci<this->cliques.size(); ci++) {
+  for (int ci=0; ci<this->cliques.size(); ci++) {
     this->cliques[ci].buildPotentialMaps(this->obs, this->queries, this->prob);
   }
 }
@@ -731,12 +993,12 @@ void MLN::saveToFile(ofstream& file) {
     file << s << ' ';
   }
   file << endl;
-  for (auto i=0; i<this->cliques.size(); i++) {
+  for (int i=0; i<this->cliques.size(); i++) {
     this->cliques[i].saveToFile(file);
   }
   for (auto it=this->c_map.begin(); it!=this->c_map.end(); it++) {
     file << "c_map: " << it->first << ' ';
-    for (auto i=0; i<it->second.size(); i++) {
+    for (int i=0; i<it->second.size(); i++) {
       file << it->second[i] << ' ';
     }
     file << endl;
@@ -784,14 +1046,14 @@ void MLN::saveToDotFile(ofstream& file) {
   }
 
   unordered_set<string> edge_set;
-  for (auto i=0; i<this->cliques.size(); i++) {
+  for (int i=0; i<this->cliques.size(); i++) {
     Clique c = this->cliques[i];
     if (c.isSingular()) continue;
     vector<string> literals = c.getLiterals();
-    for (auto i=0; i<literals.size(); i++) {
+    for (int i=0; i<literals.size(); i++) {
       string l = literals[i];
       int l_i = node_map[l];
-      for (auto j=i+1; j<literals.size(); j++) {
+      for (int j=i+1; j<literals.size(); j++) {
         string r = literals[j];
         int r_i = node_map[r];
         string edge1 = to_string(l_i)+"_"+to_string(r_i);
@@ -815,7 +1077,7 @@ void MLN::dfsSearch(unordered_set<string>& valid_unknown, vector<bool>& visited,
   else {
     valid_unknown.insert(query);
   }
-  for (auto ind : this->c_map[query]) {
+  for (int ind : this->c_map[query]) {
     if (!visited[ind]) {
       visited[ind] = true;
       for (string s : this->cliques[ind].getLiterals()) {
