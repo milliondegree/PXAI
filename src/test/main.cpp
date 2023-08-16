@@ -274,14 +274,11 @@ void influenceQueryAll(MLN& mln, string query, int round, double delta, string m
 
 
 void setDefaultArgs(unordered_map<string, string>& args) {
-  args["observe_file"] = "./data/observe/smokeTest.db";
-  args["provenance_file"] = "./data/prov/cancer2.txt";
-  args["round"] = "100000";
-  args["delta"] = "0.01";
-  args["approx"] = "1e-7";
-  // args["equation"] = "0";
-  // args["mode"] = "pgibbs";
-  // args["influ_mode"] = "naiveBP";
+  args["round"] = "1";
+  args["delta"] = "1";
+  // args["approx"] = "1e-7";
+  args["rule_name"] = "1";
+  args["mode"] = "lbp";
 }
 
 
@@ -397,6 +394,8 @@ int main(int argc, char* argv[]) {
       args["rule_name"] = argvs[i+1];
     }
   }
+
+  setDefaultArgs(args);
 
   if (args.find("provenance_file")==args.end() || args.find("observe_file")==args.end()) {
     cout << "missing input of provenance and observe" << endl;
