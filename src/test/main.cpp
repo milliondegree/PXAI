@@ -342,9 +342,6 @@ int main(int argc, char* argv[]) {
     if (argvs[i]=="-q" || argvs[i]=="-query_name") {
       args["query_name"] = argvs[i+1];
     }
-    else if (argvs[i]=="-t" || argvs[i]=="-target_name") {
-      args["target_name"] = argvs[i+1];
-    }
     else if (argvs[i]=="-o" || argvs[i]=="-observe_file") {
       args["observe_file"] = argvs[i+1];
     }
