@@ -25,7 +25,9 @@
 #define ALPHA 0.5
 #define BETA 0.5
 
-enum VertexType {Input, Derived, Parameter, Sum, Mul, Div, Scale, NodeToClique, CliqueToNode, BeliefPropagation};
+namespace CProvGraph {
+
+enum VertexType {Input, Derived, Parameter, Sum, Mul, Div, Scale, Softmax, InnerProduct, NodeToClique, CliqueToNode, BeliefPropagation};
 
 inline std::ostream& operator<<(std::ostream& out, const VertexType value){
   const char* s = 0;
@@ -38,6 +40,8 @@ inline std::ostream& operator<<(std::ostream& out, const VertexType value){
       PROCESS_VAL(Mul)
       PROCESS_VAL(Div)
       PROCESS_VAL(Scale)
+      PROCESS_VAL(Softmax)
+      PROCESS_VAL(InnerProduct)
       PROCESS_VAL(NodeToClique)
       PROCESS_VAL(CliqueToNode)
       PROCESS_VAL(BeliefPropagation)
@@ -56,6 +60,8 @@ inline std::string vertexTypeToString(VertexType vt) {
     case(Mul): s = "mul"; break;
     case(Div): s = "div"; break;
     case(Scale): s = "scale"; break;
+    case(Softmax): s = "softmax"; break;
+    case(InnerProduct): s = "innerproduct"; break;
     case(NodeToClique): s = "nodetoclique"; break;
     case(CliqueToNode): s = "cliquetonode"; break;
     case(BeliefPropagation): s = "beliefpropagation"; break;
@@ -110,9 +116,9 @@ struct my_edge_writer {
   void operator()(std::ostream& out, Edge e) {
     out << " [color=purple]" << std::endl;
     out << " [label=\"";
-    if (abs(g[e].contribution)>1e-6&&abs(g[e].contribution)<1) {
-      out << "Con: " << g[e].contribution << ' ';
-    }
+    // if (abs(g[e].contribution)>1e-6&&abs(g[e].contribution)<1) {
+    //   out << "Con: " << g[e].contribution << ' ';
+    // }
     if (abs(g[e].derivative)>1e-6&&abs(g[e].derivative)<1) {
       out << "Dev: " << g[e].derivative;
     }
@@ -394,6 +400,7 @@ private:
       case Mul: DFSComputeMulDerivative(v_operator, g[s].derivative, visited); break;
       case Div: DFSComputeDivDerivative(v_operator, g[s].derivative, visited); break;
       case Scale: DFSComputeScaleDerivative(v_operator, g[s].derivative, visited); break;
+      case Softmax: DFSComputeSoftmaxDerivative(v_operator, g[s].derivative, visited); break;
       default: std::cout << "this is not an operator vertex\n"; exit(1);
     }
   }
@@ -531,6 +538,46 @@ private:
     }
   }
 
+  void DFSComputeSoftmaxDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited) {
+    float denominator = 0;
+    float numerator = 0; 
+    adjacency_tier ai, ai_end;
+    for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+      vertex_t v = *ai;
+      denominator += std::exp(g[v].value);
+      if (g[v].name==g[s].params["numerator_name"])
+        numerator = std::exp(g[v].value);
+    }
+    for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+      vertex_t v = *ai;
+      edge_t e = boost::edge(s, v, g).first;
+      if (g[v].name==g[s].params["numerator_name"]) {
+        g[e].derivative = d*(numerator/denominator)*(1-numerator/denominator);
+      }
+      else {
+        g[e].derivative = -d*(std::exp(g[v].value)*numerator/std::pow(denominator, 2));
+      }
+      visited.insert(edgeToString(e));
+      bool all_visited = true;
+      in_edge_iter ei, ei_end;
+      for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
+        if (visited.find(edgeToString(*ei))==visited.end()) {
+          all_visited = false;
+          break;
+        }
+      }
+      if (all_visited) {
+        g[v].derivative = 0.0;
+        for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
+          g[v].derivative += g[*ei].derivative;
+        // std::cout << "derivative of " << g[v].name << " is " << g[v].derivative << std::endl;
+        DFSComputeDerivative(v, visited);
+      }
+    }
+  }
+
+  
+
 public:
   void computeContributions(const std::string& name) {
     ASSERT_EX(checkVertexExistByName(name), std::cout << name+" does not exist" << std::endl);
@@ -639,6 +686,7 @@ private:
       case Mul: ret = DFSComputeMul(v_operator, visited); break;
       case Div: ret = DFSComputeDiv(v_operator, visited); break;
       case Scale: ret = DFSComputeScale(v_operator, visited); break;
+      case Softmax: ret = DFSComputeSoftmax(v_operator, visited); break;
       default: std::cout << "this is not an operator vertex\n"; exit(1);
     }
     // std::cout << "finish " << g[s].name << std::endl;
@@ -716,6 +764,21 @@ private:
         else ret = numerator/denominator;
         break;
       }
+      case Softmax: {
+        float denominator = 0, numerator = 0; 
+        adjacency_tier ai, ai_end;
+        for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
+          vertex_t v = *ai;
+          float tmp = DFSComputeVariableNoEDB(v, visited);
+          if (g[v].name==g[v_operator].params["numerator_name"]) {
+            numerator = std::exp(tmp);
+          }
+          denominator += std::exp(tmp);
+        }
+        if (denominator==0) ret = 0;
+        else ret = numerator/denominator;
+        break;
+      }
       default: std::cout << "this is not an operator vertex\n"; exit(1);
     }
     g[s].value = ret;
@@ -771,6 +834,22 @@ private:
         numerator = tmp;
       }
       denominator += tmp;
+    }
+    if (denominator==0) return 0;
+    return numerator/denominator;
+  }
+
+  float DFSComputeSoftmax(vertex_t s, std::unordered_set<vertex_t>& visited) {
+    float denominator = 0;
+    float numerator = 0; 
+    adjacency_tier ai, ai_end;
+    for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+      vertex_t v = *ai;
+      float tmp = DFSComputeVariable(v, visited);
+      if (g[v].name==g[s].params["numerator_name"]) {
+        numerator = std::exp(tmp);
+      }
+      denominator += std::exp(tmp);
     }
     if (denominator==0) return 0;
     return numerator/denominator;
@@ -1115,6 +1194,8 @@ private:
   std::string save_path = "/home/jz598/MLNInfer/data/CProv/raw/test.dot";
   std::unordered_map<std::string, vertex_t> vertex_set;
   std::unordered_map<std::string, float> changedEDBs;
+};
+
 };
 
 #endif

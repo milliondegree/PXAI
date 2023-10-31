@@ -1,11 +1,14 @@
 #include "MLN.h"
 // #include "CProvGraph.h"
 
-/* rules to define varaible names:
+/* 
+rules to define varaible names:
 potential: potential_cliqueNumber_truthValue
 nodeMsg: nodeMsg_literal_cliqueNumber_truthValue_iteration_iterationNumber
 cliqueMsg: cliqueMsg_cliqueNumber_literal_truthValue_iteration_iterationNumber
 */
+
+using namespace CProvGraph;
 
 
 void enumerateTruthWithProv(Clique& c, 

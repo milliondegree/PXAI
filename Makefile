@@ -13,12 +13,14 @@ MAINFILE := $(SRC)/main.cpp
 TARGET := $(BIN)/pxai
 TEST_1 := $(BIN)/cprov-approx-ice-counter-overhead
 TEST_2 := $(BIN)/cprov-maintain-query-overhead
+TEST_3 := $(BIN)/iris-test
 BUILD := build
 
 # Library search directories and flags
 EXT_LIB :=
 LDFLAGS :=
-LDPATHS := $(addprefix -L,$(LIB) $(EXT_LIB))
+# LDPATHS := $(addprefix -L,$(LIB) $(EXT_LIB))
+LDPATHS := 
 
 # Include directories
 INC_DIRS := $(INC) $(shell find $(SRC) -type d) 
@@ -27,7 +29,7 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 # Construct build output and dependency filenames
 SRCS := $(shell find $(SRC) -name *.cpp)
 # SRCS := $(wildcard src/*.cpp src/*/*.cpp)
-OBJS := build/ApproximateSubGraph.o build/Clique.o build/Grader.o build/Load.o build/LoopyBP.o build/LoopyBPProv.o build/MLN.o build/Parser.o build/mcsat.o build/BPInfluence.o 
+OBJS := build/ApproximateSubGraph.o build/Clique.o build/Grader.o build/Load.o build/LoopyBP.o build/LoopyBPProv.o build/MLN.o build/Parser.o build/mcsat.o build/BPInfluence.o build/MLP.o
 DEPS := $(OBJS:.o=.d)
 
 ARGS := -o ./data/hypertext-class/sample7/sample71.obs -p ./data/hypertext-class/sample7/prov/sample71.txt -q topic_Department_29 -i all 
@@ -41,7 +43,7 @@ run: build
 build: clean all
 
 # Main task
-all: $(TARGET) $(TEST_1) $(TEST_2)
+all: $(TARGET) $(TEST_1) $(TEST_2) $(TEST_3)
 
 # Task producing target from built files
 $(TARGET): $(OBJS) build/test/main.o
@@ -58,6 +60,11 @@ $(TEST_2): $(OBJS) build/test/cprov-maintain-query-overhead.o
 	@echo "🚧 Building..."
 	mkdir -p $(dir $@)
 	$(CXX) $(OBJS) build/test/cprov-maintain-query-overhead.o -o $@ $(LDPATHS) $(LDFLAGS)
+
+$(TEST_3): $(OBJS) build/test/iris-test.o
+	@echo "🚧 Building..."
+	mkdir -p $(dir $@)
+	$(CXX) $(OBJS) build/test/iris-test.o -o $@ $(LDPATHS) $(LDFLAGS)
 
 # Compile all cpp files
 $(BUILD)/%.o: $(SRC)/%.cpp
