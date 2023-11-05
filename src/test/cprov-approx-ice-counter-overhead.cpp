@@ -19,7 +19,7 @@ void enumerateTruthTest(Clique& c,
 }
 
 
-double computeInfluence(MLN& mln, CProvGraph& query_of_output, string& output_variable_name, string& literal) {
+double computeInfluence(MLN& mln, CProvGraph::CProvGraph& query_of_output, string& output_variable_name, string& literal) {
   unordered_map<string, float> changedEDBs;
   double prev_value = query_of_output.getVertexValueByName(output_variable_name);
   mln.prob[literal] = 1-mln.prob[literal];
@@ -102,7 +102,7 @@ int main(int argc, char* argv[]) {
     for (string query : mln.queries) {
       if (Parser::isVariable(query)) {
         string output_variable_name = query+"_iteration_"+to_string(round-1);
-        CProvGraph query_of_output = mln.provG.ProvenanceQuery(output_variable_name);
+        CProvGraph::CProvGraph query_of_output = mln.provG.ProvenanceQuery(output_variable_name);
 
         MLN mmln = mln.getMinimalMLN(query);
 
@@ -117,8 +117,8 @@ int main(int argc, char* argv[]) {
         /* start to compute approx subgraph*/
         t1 = clock();
         // MLN amln = mmln.approximateSubGraph(query, mln.prob[query], 1, 0.001);
-        // CProvGraph approx_subgraph = query_of_output.ApproximateSubGraphQuery(output_variable_name, 0.01, 0.01);
-        CProvGraph approx_subgraph = query_of_output.ApproximateSubGraphQueryPrune(output_variable_name, 0.01, 0.01);
+        // CProvGraph::CProvGraph approx_subgraph = query_of_output.ApproximateSubGraphQuery(output_variable_name, 0.01, 0.01);
+        CProvGraph::CProvGraph approx_subgraph = query_of_output.ApproximateSubGraphQueryPrune(output_variable_name, 0.01, 0.01);
         // approx_subgraph.saveGraph();
         t2 = clock();
         approx_time_sum += (t2-t1)*1.0/CLOCKS_PER_SEC;
