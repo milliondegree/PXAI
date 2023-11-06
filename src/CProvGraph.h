@@ -27,7 +27,7 @@
 
 namespace CProvGraph {
 
-enum VertexType {Input, Derived, Parameter, Sum, Mul, Div, Scale, Softmax, InnerProduct, NodeToClique, CliqueToNode, BeliefPropagation};
+enum VertexType {Input, Derived, Parameter, Sum, Mul, Div, Scale, Softmax, Sigmoid, InnerProduct, NodeToClique, CliqueToNode, BeliefPropagation};
 
 inline std::ostream& operator<<(std::ostream& out, const VertexType value){
   const char* s = 0;
@@ -41,6 +41,7 @@ inline std::ostream& operator<<(std::ostream& out, const VertexType value){
       PROCESS_VAL(Div)
       PROCESS_VAL(Scale)
       PROCESS_VAL(Softmax)
+      PROCESS_VAL(Sigmoid)
       PROCESS_VAL(InnerProduct)
       PROCESS_VAL(NodeToClique)
       PROCESS_VAL(CliqueToNode)
@@ -61,6 +62,7 @@ inline std::string vertexTypeToString(VertexType vt) {
     case(Div): s = "div"; break;
     case(Scale): s = "scale"; break;
     case(Softmax): s = "softmax"; break;
+    case(Sigmoid): s = "sigmoid"; break;
     case(InnerProduct): s = "innerproduct"; break;
     case(NodeToClique): s = "nodetoclique"; break;
     case(CliqueToNode): s = "cliquetonode"; break;
@@ -401,6 +403,7 @@ private:
       case Div: DFSComputeDivDerivative(v_operator, g[s].derivative, visited); break;
       case Scale: DFSComputeScaleDerivative(v_operator, g[s].derivative, visited); break;
       case Softmax: DFSComputeSoftmaxDerivative(v_operator, g[s].derivative, visited); break;
+      case Sigmoid: DFSComputeSigmoidDerivative(v_operator, g[s].derivative, visited); break;
       default: std::cout << "this is not an operator vertex\n"; exit(1);
     }
   }
@@ -576,6 +579,31 @@ private:
     }
   }
 
+  void DFSComputeSigmoidDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited) {
+    adjacency_tier ai, ai_end;
+    for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+      vertex_t v = *ai;
+      edge_t e = boost::edge(s, v, g).first;
+      g[e].derivative = g[v].value*(1-g[v].value)*d;
+      visited.insert(edgeToString(e));
+      bool all_visited = true;
+      in_edge_iter ei, ei_end;
+      for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
+        if (visited.find(edgeToString(*ei))==visited.end()) {
+          all_visited = false;
+          break;
+        }
+      }
+      if (all_visited) {
+        g[v].derivative = 0.0;
+        for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
+          g[v].derivative += g[*ei].derivative;
+        // std::cout << "derivative of " << g[v].name << " is " << g[v].derivative << std::endl;
+        DFSComputeDerivative(v, visited);
+      }
+    }
+  }
+
   
 
 public:
@@ -687,6 +715,7 @@ private:
       case Div: ret = DFSComputeDiv(v_operator, visited); break;
       case Scale: ret = DFSComputeScale(v_operator, visited); break;
       case Softmax: ret = DFSComputeSoftmax(v_operator, visited); break;
+      case Sigmoid: ret = DFSComputeSigmoid(v_operator, visited); break;
       default: std::cout << "this is not an operator vertex\n"; exit(1);
     }
     // std::cout << "finish " << g[s].name << std::endl;
@@ -779,6 +808,16 @@ private:
         else ret = numerator/denominator;
         break;
       }
+      case Sigmoid: {
+        ret = 0;
+        adjacency_tier ai, ai_end;
+        for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
+          vertex_t v = *ai;
+          float value = DFSComputeVariableNoEDB(v, visited);
+          ret += 1/(1+std::exp(-value));
+        }
+        break;
+      }
       default: std::cout << "this is not an operator vertex\n"; exit(1);
     }
     g[s].value = ret;
@@ -855,6 +894,16 @@ private:
     return numerator/denominator;
   }
 
+  float DFSComputeSigmoid(vertex_t s, std::unordered_set<vertex_t>& visited) {
+    float ret = 0;
+    adjacency_tier ai, ai_end;
+    for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+      vertex_t v = *ai;
+      float value = DFSComputeVariable(v, visited);
+      ret += 1/(1+std::exp(-value));
+    }
+    return ret;
+  } 
 
 
 

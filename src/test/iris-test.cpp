@@ -161,7 +161,7 @@ int main(int argc, char *argv[]) {
 
     std::string to_query = "softmax_0";
     CProvGraph::CProvGraph query_output = my_mlp.provG.ProvenanceQuery(to_query);
-    // std::cout << query_output.computeVariable(to_query) << std::endl;
+    std::cout << query_output.computeVariable(to_query) << std::endl;
     query_output.computeDerivative(to_query);
     // query_output.computeContributions(to_query);
     

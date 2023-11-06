@@ -112,12 +112,44 @@ public:
     *output = activation_function(inner_prod);
   }
 
-  void GetOutputAfterActivationFunctionWithProv(const std::vector<double> &input,
+  void GetOutputAfterActivationFunctionWithProv(const std::vector<double>& input,
                                                 std::function<double(double)> activation_function,
-                                                double * output) const {
+                                                double * output,
+                                                std::vector<std::string>& input_names,
+                                                int layer_num,
+                                                int node_num,
+                                                const std::string& m_activation_function_str,
+                                                CProvGraph::CProvGraph& provG) {
     double inner_prod = 0.0;
     GetInputInnerProdWithWeights(input, &inner_prod);
+
+    // build provenance for inner product
+    std::vector<std::string> sum_input_names;
+    for (int j=0; j<m_weights.size(); j++) {
+      std::vector<std::string> input_names_tmp;
+      std::string weight_name = "weight_"+std::to_string(layer_num)+"_"+std::to_string(node_num)+"_"+std::to_string(j);
+      provG.addVariableVertex(CProvGraph::Parameter, weight_name, m_weights[j]);
+      input_names_tmp.push_back(weight_name);
+      input_names_tmp.push_back(input_names[j]);
+      std::string tmp_name = "input_"+std::to_string(layer_num+1)+"_"+std::to_string(node_num)+"_"+std::to_string(j);
+      provG.addComputingSubgraph(tmp_name, input[j]*m_weights[j], CProvGraph::Mul, input_names_tmp);
+      sum_input_names.push_back(tmp_name);
+    }
+    std::string sum_output_name = "input_"+std::to_string(layer_num+1)+"_"+std::to_string(node_num)+"_no_act";
+    provG.addComputingSubgraph(sum_output_name, inner_prod, CProvGraph::Sum, sum_input_names);
+
     *output = activation_function(inner_prod);
+
+    // build provenance for activation function
+    std::string act_output_name = "input_"+std::to_string(layer_num+1)+"_"+std::to_string(node_num);
+    std::vector<std::string> act_input_names;
+    act_input_names.push_back(sum_output_name);
+    if (m_activation_function_str=="sigmoid") {
+      provG.addComputingSubgraph(act_output_name, *output, CProvGraph::Sigmoid, act_input_names);
+    }
+    else if (m_activation_function_str=="linear") {
+      provG.addComputingSubgraph(act_output_name, *output, CProvGraph::Sum, act_input_names);
+    }
   }
 
   void GetBooleanOutput(const std::vector<double> &input,

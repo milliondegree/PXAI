@@ -102,20 +102,12 @@ public:
     for (size_t i = 0; i < m_num_nodes; ++i) {
       m_nodes[i].GetOutputAfterActivationFunctionWithProv(input,
                                                           m_activation_function,
-                                                          &((*output)[i]));
-      for (int j=0; j<m_nodes[i].GetWeights().size(); j++) {
-        std::vector<std::string> input_names_tmp;
-        std::string weight_name = "weight_"+std::to_string(layer_num)+"_"+std::to_string(i)+"_"+std::to_string(j);
-        provG.addVariableVertex(CProvGraph::Parameter, weight_name, m_nodes[i].GetWeights()[j]);
-        input_names_tmp.push_back(weight_name);
-        input_names_tmp.push_back(input_names[j]);
-        provG.addComputingSubgraph("input_"+std::to_string(layer_num+1)+"_"+std::to_string(i)+"_"+std::to_string(j), input[j]*m_nodes[i].GetWeights()[j], CProvGraph::Mul, input_names_tmp);
-      }
-      std::vector<std::string> input_names_tmp;
-      for (int j=0; j<m_nodes[i].GetWeights().size(); j++) {
-        input_names_tmp.push_back("input_"+std::to_string(layer_num+1)+"_"+std::to_string(i)+"_"+std::to_string(j));
-      }
-      provG.addComputingSubgraph("input_"+std::to_string(layer_num+1)+"_"+std::to_string(i), (*output)[i], CProvGraph::Sum, input_names_tmp);
+                                                          &((*output)[i]),
+                                                          input_names,
+                                                          layer_num,
+                                                          i,
+                                                          m_activation_function_str,
+                                                          provG);
     }
   }
 
