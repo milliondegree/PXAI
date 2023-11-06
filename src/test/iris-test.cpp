@@ -159,11 +159,23 @@ int main(int argc, char *argv[]) {
     my_mlp.provG.setSavePath(cprov_save_path);
     std::cout << "With provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
-    std::string to_query = "softmax_0";
+    std::string to_query = "softmax_0"; 
     CProvGraph::CProvGraph query_output = my_mlp.provG.ProvenanceQuery(to_query);
+    
+    t1 = clock();
     std::cout << query_output.computeVariable(to_query) << std::endl;
+    t2 = clock();
+    std::cout << "Provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+
+    query_output.computeContributions(to_query); 
     query_output.computeDerivative(to_query);
-    // query_output.computeContributions(to_query);
+
+    t1 = clock();
+    CProvGraph::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPrune(to_query, 0.01, 10);
+    t2 = clock();
+    std::cout << "Approx prune time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    approx_output.computeDerivative(to_query);
+    approx_output.saveGraph();
     
     query_output.saveGraph();
   }
