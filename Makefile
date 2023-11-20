@@ -13,7 +13,8 @@ MAINFILE := $(SRC)/main.cpp
 TARGET := $(BIN)/pxai
 TEST_1 := $(BIN)/cprov-approx-ice-counter-overhead
 TEST_2 := $(BIN)/cprov-maintain-query-overhead
-TEST_3 := $(BIN)/iris-test
+TEST_3 := $(BIN)/iris-mlp-test
+TEST_4 := $(BIN)/iris-kmeans-test
 BUILD := build
 
 # Library search directories and flags
@@ -43,7 +44,7 @@ run: build
 build: clean all
 
 # Main task
-all: $(TARGET) $(TEST_1) $(TEST_2) $(TEST_3)
+all: $(TARGET) $(TEST_1) $(TEST_2) $(TEST_3) $(TEST_4)
 
 # Task producing target from built files
 $(TARGET): $(OBJS) build/test/main.o
@@ -61,10 +62,15 @@ $(TEST_2): $(OBJS) build/test/cprov-maintain-query-overhead.o
 	mkdir -p $(dir $@)
 	$(CXX) $(OBJS) build/test/cprov-maintain-query-overhead.o -o $@ $(LDPATHS) $(LDFLAGS)
 
-$(TEST_3): $(OBJS) build/test/iris-test.o
+$(TEST_3): $(OBJS) build/test/iris-mlp-test.o
 	@echo "🚧 Building..."
 	mkdir -p $(dir $@)
-	$(CXX) $(OBJS) build/test/iris-test.o -o $@ $(LDPATHS) $(LDFLAGS)
+	$(CXX) $(OBJS) build/test/iris-mlp-test.o -o $@ $(LDPATHS) $(LDFLAGS)
+
+$(TEST_4): $(OBJS) build/test/iris-kmeans-test.o
+	@echo "🚧 Building..."
+	mkdir -p $(dir $@)
+	$(CXX) $(OBJS) build/test/iris-kmeans-test.o -o $@ $(LDPATHS) $(LDFLAGS)
 
 # Compile all cpp files
 $(BUILD)/%.o: $(SRC)/%.cpp
