@@ -28,7 +28,7 @@
 
 namespace CProvGraph {
 
-enum VertexType {Input, Derived, Parameter, Sum, Mul, Div, Scale, Softmax, Sigmoid, InnerProduct, NodeToClique, CliqueToNode, BeliefPropagation};
+enum VertexType {Input, Derived, Parameter, Sum, Mul, Div, Scale, Softmax, Sigmoid, InnerProduct, VectorMean, NodeToClique, CliqueToNode, BeliefPropagation};
 
 inline std::ostream& operator<<(std::ostream& out, const VertexType value){
   const char* s = 0;
@@ -44,6 +44,7 @@ inline std::ostream& operator<<(std::ostream& out, const VertexType value){
       PROCESS_VAL(Softmax)
       PROCESS_VAL(Sigmoid)
       PROCESS_VAL(InnerProduct)
+      PROCESS_VAL(VectorMean)
       PROCESS_VAL(NodeToClique)
       PROCESS_VAL(CliqueToNode)
       PROCESS_VAL(BeliefPropagation)
@@ -65,6 +66,7 @@ inline std::string vertexTypeToString(VertexType vt) {
     case(Softmax): s = "softmax"; break;
     case(Sigmoid): s = "sigmoid"; break;
     case(InnerProduct): s = "innerproduct"; break;
+    case(VectorMean): s = "vectormean"; break;
     case(NodeToClique): s = "nodetoclique"; break;
     case(CliqueToNode): s = "cliquetonode"; break;
     case(BeliefPropagation): s = "beliefpropagation"; break;
@@ -1245,6 +1247,9 @@ public:
 
 
  /* class members */
+public:
+ std::vector<std::vector<double> > auxilary_data;
+
 private:
   Graph g;
   std::string save_path = "/home/jz598/MLNInfer/data/CProv/raw/test.dot";

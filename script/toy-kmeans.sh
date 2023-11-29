@@ -1,0 +1,1 @@
+dot -Tpng ./data/toy-kmeans/cprov/test.dot -o ./data/toy-kmeans/cprov/test.png

@@ -6,16 +6,16 @@
 
 
 const int number_classes = 3;
-const int number_features = 4;
-const int number_points = 150;
-const char *iris_dataset = "./data/iris/iris.data";
-const std::string cprov_save_path = "./data/iris-kmeans/cprov/test.dot";
+const int number_features = 2;
+const int number_points = 6;
+const char *toy_kmeans_dataset = "./data/toy-kmeans/toy-kmeans.data";
+const std::string cprov_save_path = "./data/toy-kmeans/cprov/test.dot";
 const std::array<std::string, number_classes> class_names =
-{ "Iris-setosa", "Iris-versicolor", "Iris-virginica" };
+{ "Class-1", "Class-2", "Class-3" };
 
 
 void load_data(vector<Point>& points) {
-  ifstream ofin(iris_dataset);
+  ifstream ofin(toy_kmeans_dataset);
   string line;
 
   int n = 0;
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 
   int K, max_iterations;
 
-  K = 10;
+  K = 4;
   max_iterations = 100;
 
   vector<Point> points;
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
   t2 = clock();
   std::cout << "Without provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
-  t1 = clock();
+  t1 = clock(); 
   kmeans_prov.runWithProv(points);
   t2 = clock();
   std::cout << "With provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;

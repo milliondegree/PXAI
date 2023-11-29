@@ -1,0 +1,1 @@
+dot -Tpng ./data/iris-kmeans/cprov/test.dot -o ./data/iris-kmeans/cprov/test.png

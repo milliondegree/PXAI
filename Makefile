@@ -15,6 +15,7 @@ TEST_1 := $(BIN)/cprov-approx-ice-counter-overhead
 TEST_2 := $(BIN)/cprov-maintain-query-overhead
 TEST_3 := $(BIN)/iris-mlp-test
 TEST_4 := $(BIN)/iris-kmeans-test
+TEST_5 := $(BIN)/toy-kmeans-test
 BUILD := build
 
 # Library search directories and flags
@@ -44,7 +45,7 @@ run: build
 build: clean all
 
 # Main task
-all: $(TARGET) $(TEST_1) $(TEST_2) $(TEST_3) $(TEST_4)
+all: $(TARGET) $(TEST_1) $(TEST_2) $(TEST_3) $(TEST_4) $(TEST_5)
 
 # Task producing target from built files
 $(TARGET): $(OBJS) build/test/main.o
@@ -71,6 +72,11 @@ $(TEST_4): $(OBJS) build/test/iris-kmeans-test.o
 	@echo "🚧 Building..."
 	mkdir -p $(dir $@)
 	$(CXX) $(OBJS) build/test/iris-kmeans-test.o -o $@ $(LDPATHS) $(LDFLAGS)
+
+$(TEST_5): $(OBJS) build/test/toy-kmeans-test.o
+	@echo "🚧 Building..."
+	mkdir -p $(dir $@)
+	$(CXX) $(OBJS) build/test/toy-kmeans-test.o -o $@ $(LDPATHS) $(LDFLAGS)
 
 # Compile all cpp files
 $(BUILD)/%.o: $(SRC)/%.cpp

@@ -53,6 +53,11 @@ public:
 		return values[index];
 	}
 
+	vector<double> getValues() 
+	{
+		return values;
+	}
+
 	int getTotalValues()
 	{
 		return total_values;
@@ -322,6 +327,12 @@ public:
 			}
 		}
 
+		// initialize variables
+		for (int i=0; i<this->total_points; i++) {
+			provG.addVariableVertex(CProvGraph::Input, "input_"+to_string(i), i);
+			provG.auxilary_data.push_back(points[i].getValues());
+		}
+
 		int iter = 1;
 
 		while(true)
@@ -329,10 +340,12 @@ public:
 			bool done = true;
 
 			// associates each point to the nearest center
+			vector<vector<string> > input_names (K, vector<string> (0));
 			for(int i = 0; i < total_points; i++)
 			{
 				int id_old_cluster = points[i].getCluster();
 				int id_nearest_center = getIDNearestCenter(points[i]);
+				input_names[id_nearest_center].push_back("input_"+to_string(i));
 
 				if(id_old_cluster != id_nearest_center)
 				{
@@ -346,8 +359,10 @@ public:
 			}
 
 			// recalculating the center of each cluster
+			
 			for(int i = 0; i < K; i++)
 			{
+				vector<double> centroid;
 				for(int j = 0; j < total_values; j++)
 				{
 					int total_points_cluster = clusters[i].getTotalPoints();
@@ -358,8 +373,13 @@ public:
 						for(int p = 0; p < total_points_cluster; p++)
 							sum += clusters[i].getPoint(p).getValue(j);
 						clusters[i].setCentralValue(j, sum / total_points_cluster);
+						centroid.push_back(sum / total_points_cluster);
 					}
 				}
+				// add provenance subgraph
+				provG.auxilary_data.push_back(centroid);
+				string centroid_name = "centroid_"+to_string(iter)+"_"+to_string(i);
+				provG.addComputingSubgraph(centroid_name, provG.auxilary_data.size()-1, CProvGraph::VectorMean, input_names[i]);
 			}
 
 			if(done == true || iter >= max_iterations)
