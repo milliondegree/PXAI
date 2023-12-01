@@ -378,7 +378,7 @@ public:
 				}
 				// add provenance subgraph
 				provG.auxilary_data.push_back(centroid);
-				string centroid_name = "centroid_"+to_string(iter)+"_"+to_string(i);
+				string centroid_name = "centroid_"+to_string(i)+"_"+to_string(iter);
 				provG.addComputingSubgraph(centroid_name, provG.auxilary_data.size()-1, CProvGraph::VectorMean, input_names[i]);
 			}
 

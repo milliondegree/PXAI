@@ -8,7 +8,7 @@
 const int number_classes = 3;
 const int number_features = 4;
 const int number_points = 150;
-const char *iris_dataset = "./data/iris/iris.data";
+const char *iris_dataset = "./data/iris-kmeans/iris.data";
 const std::string cprov_save_path = "./data/iris-kmeans/cprov/test.dot";
 const std::array<std::string, number_classes> class_names =
 { "Iris-setosa", "Iris-versicolor", "Iris-virginica" };
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 
   int K, max_iterations;
 
-  K = 10;
+  K = 3;
   max_iterations = 100;
 
   vector<Point> points;

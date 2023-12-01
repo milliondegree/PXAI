@@ -29,7 +29,7 @@ const std::string iris_mlp_weights = "../../data/iris.mlp";
 #else
 const char *iris_dataset = "./data/iris/iris.data";
 const std::string iris_mlp_weights = "./data/iris/iris.mlp";
-const std::string cprov_save_path = "data/iris/cprov/test.dot";
+const std::string cprov_save_path = "./data/iris/cprov/test.dot";
 #endif
 const std::array<std::string, number_classes> class_names =
 { "Iris-setosa", "Iris-versicolor", "Iris-virginica" };

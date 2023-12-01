@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 
   int K, max_iterations;
 
-  K = 4;
+  K = 3;
   max_iterations = 100;
 
   vector<Point> points;

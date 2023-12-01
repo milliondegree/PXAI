@@ -9,45 +9,43 @@ digraph G {
 7 [label="vectormean_centroid_1_0", shape=box, color=tomato];
 8 [label="centroid_1_1: 7, d: 0", shape=oval, color=limegreen];
 9 [label="vectormean_centroid_1_1", shape=box, color=tomato];
-10 [label="centroid_2_0: 8, d: 0", shape=oval, color=limegreen];
-11 [label="vectormean_centroid_2_0", shape=box, color=tomato];
-12 [label="centroid_2_1: 9, d: 0", shape=oval, color=limegreen];
-13 [label="vectormean_centroid_2_1", shape=box, color=tomato];
-14 [label="centroid_3_0: 10, d: 0", shape=oval, color=limegreen];
-15 [label="vectormean_centroid_3_0", shape=box, color=tomato];
-16 [label="centroid_3_1: 11, d: 0", shape=oval, color=limegreen];
-17 [label="vectormean_centroid_3_1", shape=box, color=tomato];
+10 [label="centroid_1_2: 8, d: 0", shape=oval, color=limegreen];
+11 [label="vectormean_centroid_1_2", shape=box, color=tomato];
+12 [label="centroid_2_0: 9, d: 0", shape=oval, color=limegreen];
+13 [label="vectormean_centroid_2_0", shape=box, color=tomato];
+14 [label="centroid_2_1: 10, d: 0", shape=oval, color=limegreen];
+15 [label="vectormean_centroid_2_1", shape=box, color=tomato];
+16 [label="centroid_2_2: 11, d: 0", shape=oval, color=limegreen];
+17 [label="vectormean_centroid_2_2", shape=box, color=tomato];
+18 [label="centroid_3_0: 12, d: 0", shape=oval, color=limegreen];
+19 [label="vectormean_centroid_3_0", shape=box, color=tomato];
+20 [label="centroid_3_1: 13, d: 0", shape=oval, color=limegreen];
+21 [label="vectormean_centroid_3_1", shape=box, color=tomato];
+22 [label="centroid_3_2: 14, d: 0", shape=oval, color=limegreen];
+23 [label="vectormean_centroid_3_2", shape=box, color=tomato];
 6->7  [color=purple]
  [label=""];
-7->1  [color=purple]
+7->3  [color=purple]
  [label=""];
-7->2  [color=purple]
+7->4  [color=purple]
  [label=""];
 8->9  [color=purple]
  [label=""];
 9->0  [color=purple]
  [label=""];
-9->3  [color=purple]
+9->1  [color=purple]
  [label=""];
-9->4  [color=purple]
- [label=""];
-9->5  [color=purple]
+9->2  [color=purple]
  [label=""];
 10->11  [color=purple]
  [label=""];
-11->0  [color=purple]
- [label=""];
-11->1  [color=purple]
- [label=""];
-11->2  [color=purple]
- [label=""];
-11->3  [color=purple]
+11->5  [color=purple]
  [label=""];
 12->13  [color=purple]
  [label=""];
-13->4  [color=purple]
+13->2  [color=purple]
  [label=""];
-13->5  [color=purple]
+13->3  [color=purple]
  [label=""];
 14->15  [color=purple]
  [label=""];
@@ -55,14 +53,28 @@ digraph G {
  [label=""];
 15->1  [color=purple]
  [label=""];
-15->2  [color=purple]
- [label=""];
-15->3  [color=purple]
- [label=""];
 16->17  [color=purple]
  [label=""];
 17->4  [color=purple]
  [label=""];
 17->5  [color=purple]
+ [label=""];
+18->19  [color=purple]
+ [label=""];
+19->2  [color=purple]
+ [label=""];
+19->3  [color=purple]
+ [label=""];
+20->21  [color=purple]
+ [label=""];
+21->0  [color=purple]
+ [label=""];
+21->1  [color=purple]
+ [label=""];
+22->23  [color=purple]
+ [label=""];
+23->4  [color=purple]
+ [label=""];
+23->5  [color=purple]
  [label=""];
 }
