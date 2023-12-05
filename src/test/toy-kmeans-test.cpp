@@ -7,9 +7,9 @@
 
 const int number_classes = 3;
 const int number_features = 2;
-const int number_points = 6;
-const char *toy_kmeans_dataset = "./data/toy-kmeans/toy-kmeans.data";
-const std::string cprov_save_path = "./data/toy-kmeans/cprov/test.dot";
+const int number_points = 3;
+const char *toy_kmeans_dataset = "./data/toy-kmeans/toy-kmeans-3-points.data";
+const std::string cprov_save_path = "./data/toy-kmeans/cprov/test-3-points.dot";
 const std::array<std::string, number_classes> class_names =
 { "Class-1", "Class-2", "Class-3" };
 

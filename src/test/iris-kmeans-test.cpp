@@ -30,7 +30,7 @@ void load_data(vector<Point>& points) {
         values.push_back(stod(split[i]));
       }
       string class_name = split[number_features];
-      Point p(n, values, class_name);
+      Point p(n, values, class_name); 
       points.push_back(p);
       n++;
     }

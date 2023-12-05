@@ -331,7 +331,7 @@ public:
 
 					// add initial cluster centrold to provG
 					provG.auxilary_data.push_back(points[index_point].getValues());
-					provG.addVariableVertex(CProvGraph::Input, "centroid_"+to_string(i)+"_"+to_string(0), provG.auxilary_data.size());
+					provG.addVariableVertex(CProvGraph::Parameter, "centroid_"+to_string(i)+"_"+to_string(0), provG.auxilary_data.size());
 
 					break;
 				}
