@@ -47,9 +47,9 @@ int main(int argc, char *argv[])
   K = 3;
   max_iterations = 100;
 
-  vector<Point> points;
+  vector<Point> points; 
   load_data(points);
-
+ 
   KMeans kmeans(K, number_points, number_features, max_iterations);
   KMeans kmeans_prov(K, number_points, number_features, max_iterations);
 
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
   t1 = clock();
   kmeans.run(points);
   t2 = clock();
-  std::cout << "Without provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+  std::cout << "Without provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl; 
 
   t1 = clock(); 
   kmeans_prov.runWithProv(points);

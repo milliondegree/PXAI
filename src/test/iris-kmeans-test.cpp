@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 {
   srand (time(NULL));
 
-  int K, max_iterations;
+  int K, max_iterations; 
 
   K = 3;
   max_iterations = 100;

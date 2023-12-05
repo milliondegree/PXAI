@@ -306,6 +306,12 @@ public:
 		if(K > total_points)
 			return;
 
+		// initialize variables
+		for (int i=0; i<this->total_points; i++) {
+			provG.addVariableVertex(CProvGraph::Input, "point_"+to_string(i)+"_"+to_string(0), i);
+			provG.auxilary_data.push_back(points[i].getValues());
+		}
+
 		vector<int> prohibited_indexes;
 
 		// choose K distinct values for the centers of the clusters
@@ -322,17 +328,17 @@ public:
 					points[index_point].setCluster(i);
 					Cluster cluster(i, points[index_point]);
 					clusters.push_back(cluster);
+
+					// add initial cluster centrold to provG
+					provG.auxilary_data.push_back(points[index_point].getValues());
+					provG.addVariableVertex(CProvGraph::Input, "centroid_"+to_string(i)+"_"+to_string(0), provG.auxilary_data.size());
+
 					break;
 				}
 			}
 		}
 
-		// initialize variables
-		for (int i=0; i<this->total_points; i++) {
-			provG.addVariableVertex(CProvGraph::Input, "input_"+to_string(i), i);
-			provG.auxilary_data.push_back(points[i].getValues());
-		}
-
+		
 		int iter = 1;
 
 		while(true)
@@ -345,7 +351,17 @@ public:
 			{
 				int id_old_cluster = points[i].getCluster();
 				int id_nearest_center = getIDNearestCenter(points[i]);
-				input_names[id_nearest_center].push_back("input_"+to_string(i));
+
+				// record input names of points
+				input_names[id_nearest_center].push_back("point_"+to_string(i)+"_"+to_string(iter));
+				
+				// from centroids to points
+				vector<string> centroid_input_names;
+				for (int j=0; j<clusters.size(); j++) {
+					centroid_input_names.push_back("centroid_"+to_string(j)+"_"+to_string(iter-1));
+				}
+				centroid_input_names.push_back("point_"+to_string(i)+"_"+to_string(iter-1));
+				provG.addComputingSubgraph("point_"+to_string(i)+"_"+to_string(iter), i, CProvGraph::NearestCentroid, centroid_input_names);
 
 				if(id_old_cluster != id_nearest_center)
 				{
@@ -359,7 +375,6 @@ public:
 			}
 
 			// recalculating the center of each cluster
-			
 			for(int i = 0; i < K; i++)
 			{
 				vector<double> centroid;

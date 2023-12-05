@@ -28,7 +28,7 @@
 
 namespace CProvGraph {
 
-enum VertexType {Input, Derived, Parameter, Sum, Mul, Div, Scale, Softmax, Sigmoid, InnerProduct, VectorMean, NodeToClique, CliqueToNode, BeliefPropagation};
+enum VertexType {Input, Derived, Parameter, Sum, Mul, Div, Scale, Softmax, Sigmoid, InnerProduct, VectorMean, NearestCentroid, NodeToClique, CliqueToNode, BeliefPropagation};
 
 inline std::ostream& operator<<(std::ostream& out, const VertexType value){
   const char* s = 0;
@@ -45,6 +45,7 @@ inline std::ostream& operator<<(std::ostream& out, const VertexType value){
       PROCESS_VAL(Sigmoid)
       PROCESS_VAL(InnerProduct)
       PROCESS_VAL(VectorMean)
+      PROCESS_VAL(NearestCentroid)
       PROCESS_VAL(NodeToClique)
       PROCESS_VAL(CliqueToNode)
       PROCESS_VAL(BeliefPropagation)
@@ -66,7 +67,8 @@ inline std::string vertexTypeToString(VertexType vt) {
     case(Softmax): s = "softmax"; break;
     case(Sigmoid): s = "sigmoid"; break;
     case(InnerProduct): s = "innerproduct"; break;
-    case(VectorMean): s = "vectormean"; break;
+    case(VectorMean): s = "vectorMean"; break;
+    case(NearestCentroid): s = "nearestCentroid"; break;
     case(NodeToClique): s = "nodetoclique"; break;
     case(CliqueToNode): s = "cliquetonode"; break;
     case(BeliefPropagation): s = "beliefpropagation"; break;
