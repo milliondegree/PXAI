@@ -123,14 +123,17 @@ struct my_edge_writer {
   void operator()(std::ostream& out, Edge e) {
     out << " [color=purple]" << std::endl;
     out << " [label=\"";
-    if (abs(g[e].contribution)>0.001) {
-      out << "Con: " << g[e].contribution << ' ';
+    vertex_t v_target = boost::target(e, g);
+    if (g[v_target].vt!=Derived && g[v_target].vt!=Input && g[v_target].vt!=Parameter) {
+      if (abs(g[e].contribution)>0.001) {
+        out << "Con: " << g[e].contribution << ' ';
+      }
+      if (abs(g[e].derivative)>0.001) {
+        out << "Dev: " << g[e].derivative;
+      }
+      // out << "Con: " << g[e].contribution << ' ';
+      // out << "Dev: " << g[e].derivative;
     }
-    if (abs(g[e].derivative)>0.001) {
-      out << "Dev: " << g[e].derivative;
-    }
-    // out << "Con: " << g[e].contribution << ' ';
-    // out << "Dev: " << g[e].derivative;
     out << "\"]";
   };
   Graph g;
