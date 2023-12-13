@@ -1,0 +1,1 @@
+dot -Tpng ./data/iris/cprov/test-softmax_0.dot -o ./data/iris/cprov/test-softmax_0.png

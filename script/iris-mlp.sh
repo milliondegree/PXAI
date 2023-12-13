@@ -1,0 +1,1 @@
+dot -Tpng ./data/iris/cprov/test.dot -o ./data/iris/cprov/test.png

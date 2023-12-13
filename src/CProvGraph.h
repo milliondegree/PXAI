@@ -23,7 +23,7 @@
 
 #define MAX_NUM_OF_SEARCH 100
 #define ALPHA 0.5
-#define BETA 0.5
+#define BETA 0.1
 #define PRUNE_STEP 10
 
 namespace CProvGraph {
@@ -123,12 +123,14 @@ struct my_edge_writer {
   void operator()(std::ostream& out, Edge e) {
     out << " [color=purple]" << std::endl;
     out << " [label=\"";
-    if (abs(g[e].contribution)>1e-6) {
+    if (abs(g[e].contribution)>0.001) {
       out << "Con: " << g[e].contribution << ' ';
     }
-    if (abs(g[e].derivative)>1e-6) {
+    if (abs(g[e].derivative)>0.001) {
       out << "Dev: " << g[e].derivative;
     }
+    // out << "Con: " << g[e].contribution << ' ';
+    // out << "Dev: " << g[e].derivative;
     out << "\"]";
   };
   Graph g;
@@ -340,7 +342,8 @@ public:
     vertex_t v = getVertexByName(name);
     
     // initialize CProvGraph of the queried vertex
-    std::string new_save_path = save_path.substr(0, save_path.find("."));
+    std::string new_save_path = save_path.substr(0, save_path.find_last_of("."));
+    // std::cout << save_path << ' ' << new_save_path << std::endl;
     new_save_path += "-"+name+".dot";
     CProvGraph subProvG(new_save_path);
 
@@ -1152,7 +1155,7 @@ private:
       std::string edb = it.first;
       ret += std::pow(std::abs(target_derivatives[edb]-it.second), 2);
     }
-    return std::pow(ret, 0.5);
+    return std::pow(ret, 0.5) / approx_derivatives.size();
   }
 
 
@@ -1185,7 +1188,7 @@ public:
     int count = 0;
     // int step = edge_list.size()/15;
     int step = 1;
-    std::cout << edge_list.size() << ' ' << step << std::endl;
+    std::cout << "number of edges: " << edge_list.size() << ", prune step: " << step << std::endl;
     CProvGraph ret = *this;
     for (edge_t e : edge_list) {
       vertex_t v_source = boost::source(e, g);
@@ -1196,22 +1199,24 @@ public:
         CProvGraph approxSubProvG = ProvenanceQuery(name);
         float approxiValue = approxSubProvG.computeVariable(name);
         float value_diff = std::abs(target-approxSubProvG.getVertexValueByName(name));
-        // std::cout << value_diff << std::endl;
         approxSubProvG.computeDerivative(name);
         std::unordered_map<std::string, float> approx_derivatives;
         for (std::string edb : approxSubProvG.getVertexEBDsByName(name)) {
           approx_derivatives[edb] = approxSubProvG.getVertexDerivativeByName(edb);
         }
         float derivative_diff = computeDerivativeDiff(target_derivatives, approx_derivatives);
-        std::cout << value_diff << ' ' << derivative_diff << std::endl;
-        if (value_diff>epsilon||derivative_diff>lambda) break;
+        // std::cout << "value diff: " << value_diff << ", derivative diff: " << derivative_diff << std::endl;
+        if (value_diff>epsilon||derivative_diff>lambda) {
+          std::cout << "value diff: " << value_diff << ", derivative diff: " << derivative_diff << std::endl;
+          break;
+        }
         ret = approxSubProvG;
       }
     }
-    std::string new_save_path = save_path.substr(0, save_path.find("."));
+    std::string new_save_path = save_path.substr(0, save_path.find_last_of("."));
     new_save_path += "-approx.dot";
     ret.setSavePath(new_save_path);
-    std::cout << count << std::endl;
+    std::cout << "pruned edges: " << count << std::endl;
     return ret;
   }
   
@@ -1241,6 +1246,7 @@ public:
 
   void saveGraph() {
     std::ofstream fout(save_path);
+    // std::cout << save_path << std::endl;
     write_graphviz (fout, g, my_node_writer(g), my_edge_writer(g));
     fout.close();
   }

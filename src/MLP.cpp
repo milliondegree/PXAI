@@ -264,6 +264,7 @@ void MLP::Train(const std::vector<TrainingSample> &training_sample_set_with_bias
         temp_training << "]";
 	
         // LOG(INFO) << temp_training.str();
+        std::cout << temp_training.str() << std::endl;
 	
       }
 

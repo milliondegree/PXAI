@@ -27,8 +27,8 @@ const int number_classes = 3;
 const char *iris_dataset = "../../data/iris.data";
 const std::string iris_mlp_weights = "../../data/iris.mlp";
 #else
-const char *iris_dataset = "./data/iris/iris.data";
-const std::string iris_mlp_weights = "./data/iris/iris.mlp";
+const char *iris_dataset = "./data/iris/iris_normal.data";
+const std::string iris_mlp_weights = "./data/iris/iris_normal.mlp";
 const std::string cprov_save_path = "./data/iris/cprov/test.dot";
 #endif
 const std::array<std::string, number_classes> class_names =
@@ -157,6 +157,7 @@ int main(int argc, char *argv[]) {
     my_mlp.GetOutputWithProv(training_sample_set_with_bias[j].input_vector(), &guess);
     t2 = clock();
     my_mlp.provG.setSavePath(cprov_save_path);
+    my_mlp.provG.saveGraph();
     std::cout << "With provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
     std::string to_query = "softmax_0"; 
@@ -166,18 +167,23 @@ int main(int argc, char *argv[]) {
     std::cout << query_output.computeVariable(to_query) << std::endl;
     t2 = clock();
     std::cout << "Provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
-
+    
     query_output.computeContributions(to_query); 
     query_output.computeDerivative(to_query);
+    query_output.saveGraph();
 
     t1 = clock();
-    CProvGraph::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPrune(to_query, 0.01, 10);
+    CProvGraph::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPrune(to_query, 0.01, 0.1);
     t2 = clock();
     std::cout << "Approx prune time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+
+    t1 = clock();
+    std::cout << approx_output.computeVariable(to_query) << std::endl;
+    t2 = clock();
+    std::cout << "Approximate provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+
     approx_output.computeDerivative(to_query);
     approx_output.saveGraph();
-    
-    query_output.saveGraph();
   }
 
   return 0;

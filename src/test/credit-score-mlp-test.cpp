@@ -21,61 +21,58 @@
 // Disclaimer: This is NOT an example of good machine learning practices
 //              regarding training/testing dataset partitioning.
 
-const int input_size = 4;
+const int input_size = 46;
 const int number_classes = 3;
-#if defined(_WIN32)
-const char *iris_dataset = "../../data/iris.data";
-const std::string iris_mlp_weights = "../../data/iris.mlp";
-#else
-const char *iris_dataset = "./data/credit-score/iris.data";
-const std::string iris_mlp_weights = "./data/credit-score/iris.mlp";
+const char *credit_score_dataset = "./data/credit-score/train.csv";
+const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal.mlp";
 const std::string cprov_save_path = "./data/credit-score/cprov/test.dot";
-#endif
 const std::array<std::string, number_classes> class_names =
-{ "Iris-setosa", "Iris-versicolor", "Iris-virginica" };
+{ "Good", "Standard", "Poor" };
 
 
 bool load_data(int *samples,
   std::vector<double>  *input,
-  std::vector<double> *iris_class) {
-  // Load the iris data-set. 
-  FILE *in = fopen(iris_dataset, "r");
+  std::vector<double> *credit_score_class) {
+  // Load the credit_score data-set. 
+  FILE *in = fopen(credit_score_dataset, "r");
   if (!in) {
     std::cout << "Could not open file" << std::endl;
   }
-//   if (!in) {
-//     LOG(ERROR) << "Could not open file: " << iris_dataset << ".";
-//     return false;
-//   }
 
   // Loop through the data to get a count.
-  char line[1024];
+  char line[2048];
   while (!feof(in) && fgets(line, 1024, in)) {
     ++(*samples);
   }
   fseek(in, 0, SEEK_SET);
 
-//   LOG(INFO) << "Loading " << (*samples)
-//     << " data points from " << iris_dataset << ".";
+  (*samples) = 1000;
   std::cout << "Loading " << (*samples)
-    << " data points from " << iris_dataset << "." << std::endl;
+    << " data points from " << credit_score_dataset << "." << std::endl;
   // Allocate memory for input and output data.
   input->resize((*samples) * input_size);
-  iris_class->resize((*samples) * number_classes);
+  credit_score_class->resize((*samples) * number_classes);
 
   // Read the file into our arrays. 
   int i, j;
+  int if_first_line = 0;
   for (i = 0; i < (*samples); ++i) {
+
+    fgets(line, 2048, in);
+    if (if_first_line==0) {
+      i--;
+      if_first_line++;
+      continue;
+    }
+
     double *p = &((*input)[0]) + i * input_size;
-    double *c = &((*iris_class)[0]) + i * number_classes;
+    double *c = &((*credit_score_class)[0]) + i * number_classes;
     for (int k = 0; k < number_classes; k++) {
       c[i] = 0.0;
     }
 
-    fgets(line, 1024, in);
-
     char *split = strtok(line, ",");
-    for (j = 0; j < 4; ++j) {
+    for (j = 0; j < input_size; ++j) {
       p[j] = atof(split);
       split = strtok(NULL, ",");
     }
@@ -95,9 +92,7 @@ bool load_data(int *samples,
       c[2] = 1.0;
     }
     else {
-      std::cout << "Unknown iris_class" << split << "." << std::endl;
-    //   LOG(ERROR) << "Unknown iris_class " << split
-    //     << ".";
+      std::cout << "Unknown credit_score_class" << split << "." << std::endl;
       return false;
     }
   }
@@ -110,11 +105,10 @@ bool load_data(int *samples,
 int main(int argc, char *argv[]) {
   int samples = 0;
   std::vector<double> input;
-  std::vector<double> iris_class;
+  std::vector<double> credit_score_class;
 
   // Load the data from file.
-  if (!load_data(&samples, &input, &iris_class)) {
-    // LOG(ERROR) << "Error processing input file.";
+  if (!load_data(&samples, &input, &credit_score_class)) {
     std::cout << "Error processing input file." << std::endl;
     return -1;
   }
@@ -123,12 +117,12 @@ int main(int argc, char *argv[]) {
   for (int j = 0; j < samples; ++j) {
     std::vector<double> training_set_input;
     std::vector<double> training_set_output;
-    training_set_input.reserve(4);
-    for (int i = 0; i < 4; i++)
-      training_set_input.push_back(*(&(input[0]) + j * 4 + i));
-    training_set_output.reserve(3);
-    for (int i = 0; i < 3; i++)
-      training_set_output.push_back(*(&(iris_class[0]) + j * 3 + i));
+    training_set_input.reserve(input_size);
+    for (int i = 0; i < input_size; i++)
+      training_set_input.push_back(*(&(input[0]) + j * input_size + i));
+    training_set_output.reserve(number_classes);
+    for (int i = 0; i < number_classes; i++)
+      training_set_output.push_back(*(&(credit_score_class[0]) + j * 3 + i));
     training_set.emplace_back(std::move(training_set_input),
       std::move(training_set_output));
   }
@@ -140,7 +134,7 @@ int main(int argc, char *argv[]) {
   }
   
   //Destruction/Construction of a MLP object to show off saving and loading a trained model
-  MLP my_mlp(iris_mlp_weights);
+  MLP my_mlp(credit_score_mlp_weights);
 
   int correct = 0;
   samples = 1;
@@ -157,6 +151,7 @@ int main(int argc, char *argv[]) {
     my_mlp.GetOutputWithProv(training_sample_set_with_bias[j].input_vector(), &guess);
     t2 = clock();
     my_mlp.provG.setSavePath(cprov_save_path);
+    my_mlp.provG.saveGraph();
     std::cout << "With provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
     std::string to_query = "softmax_0"; 
@@ -166,18 +161,23 @@ int main(int argc, char *argv[]) {
     std::cout << query_output.computeVariable(to_query) << std::endl;
     t2 = clock();
     std::cout << "Provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
-
-    query_output.computeContributions(to_query); 
-    query_output.computeDerivative(to_query);
+    
+    // query_output.computeContributions(to_query); 
+    // query_output.computeDerivative(to_query);
+    query_output.saveGraph();
 
     t1 = clock();
-    CProvGraph::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPrune(to_query, 0.01, 10);
+    CProvGraph::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPrune(to_query, 0.01, 0.1);
     t2 = clock();
     std::cout << "Approx prune time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+
+    t1 = clock();
+    std::cout << approx_output.computeVariable(to_query) << std::endl;
+    t2 = clock();
+    std::cout << "Approximate provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+
     approx_output.computeDerivative(to_query);
     approx_output.saveGraph();
-    
-    query_output.saveGraph();
   }
 
   return 0;

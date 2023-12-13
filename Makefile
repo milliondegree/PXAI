@@ -17,6 +17,8 @@ TEST_3 := $(BIN)/iris-mlp-test
 TEST_4 := $(BIN)/iris-kmeans-test
 TEST_5 := $(BIN)/toy-kmeans-test
 TEST_6 := $(BIN)/iris-mlp-train
+TEST_7 := $(BIN)/credit-score-mlp-train
+TEST_8 := $(BIN)/credit-score-mlp-test
 BUILD := build
 
 # Library search directories and flags
@@ -46,7 +48,7 @@ run: build
 build: clean all
 
 # Main task
-all: $(TARGET) $(TEST_1) $(TEST_2) $(TEST_3) $(TEST_4) $(TEST_5) $(TEST_6)
+all: $(TARGET) $(TEST_1) $(TEST_2) $(TEST_3) $(TEST_4) $(TEST_5) $(TEST_6) $(TEST_7) $(TEST_8)
 
 # Task producing target from built files
 $(TARGET): $(OBJS) build/test/main.o
@@ -83,6 +85,16 @@ $(TEST_6): $(OBJS) build/test/iris-mlp-train.o
 	@echo "🚧 Building..."
 	mkdir -p $(dir $@)
 	$(CXX) $(OBJS) build/test/iris-mlp-train.o -o $@ $(LDPATHS) $(LDFLAGS)
+
+$(TEST_7): $(OBJS) build/test/credit-score-mlp-train.o
+	@echo "🚧 Building..."
+	mkdir -p $(dir $@)
+	$(CXX) $(OBJS) build/test/credit-score-mlp-train.o -o $@ $(LDPATHS) $(LDFLAGS)
+
+$(TEST_8): $(OBJS) build/test/credit-score-mlp-test.o
+	@echo "🚧 Building..."
+	mkdir -p $(dir $@)
+	$(CXX) $(OBJS) build/test/credit-score-mlp-test.o -o $@ $(LDPATHS) $(LDFLAGS)
 
 # Compile all cpp files
 $(BUILD)/%.o: $(SRC)/%.cpp
