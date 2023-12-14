@@ -48,7 +48,7 @@ public:
   void SetLayerWeights( size_t layer_i, std::vector<std::vector<double>> & weights );
 
 public:
-  CProvGraph::CProvGraph provG;
+  cpg::CProvGraph provG;
 
 protected:
   void UpdateWeights(const std::vector<std::vector<double>> & all_layers_activations,

@@ -121,7 +121,7 @@ inline void Softmax(std::vector<double> *output) {
   }
 }
 
-inline void SoftmaxWithProv(std::vector<double> *output, std::vector<std::string>& input_names, CProvGraph::CProvGraph& provG) {
+inline void SoftmaxWithProv(std::vector<double> *output, std::vector<std::string>& input_names, cpg::CProvGraph& provG) {
   size_t num_elements = output->size();
   std::vector<double> exp_output(num_elements);
   double exp_total = 0.0;
@@ -133,7 +133,7 @@ inline void SoftmaxWithProv(std::vector<double> *output, std::vector<std::string
     std::string output_name = "softmax_"+std::to_string(i);
     (*output)[i] = exp_output[i] / exp_total;
     std::unordered_map<std::string, std::string> params = {{"numerator_name", input_names[i]}};
-    provG.addComputingSubgraph(output_name, (float)(*output)[i], CProvGraph::Softmax, input_names, params);
+    provG.addComputingSubgraph(output_name, (float)(*output)[i], cpg::Softmax, input_names, params);
   }
 }
 

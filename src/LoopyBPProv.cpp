@@ -8,7 +8,7 @@ nodeMsg: nodeMsg_literal_cliqueNumber_truthValue_iteration_iterationNumber
 cliqueMsg: cliqueMsg_cliqueNumber_literal_truthValue_iteration_iterationNumber
 */
 
-using namespace CProvGraph;
+using namespace cpg;
 
 
 void enumerateTruthWithProv(Clique& c, 

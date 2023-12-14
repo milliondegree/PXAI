@@ -299,7 +299,7 @@ public:
 	}
 
 
-    CProvGraph::CProvGraph provG;
+    cpg::CProvGraph provG;
 
 	void runWithProv(vector<Point> & points)
 	{
@@ -308,7 +308,7 @@ public:
 
 		// initialize variables
 		for (int i=0; i<this->total_points; i++) {
-			provG.addVariableVertex(CProvGraph::Input, "point_"+to_string(i)+"_"+to_string(0), i);
+			provG.addVariableVertex(cpg::Input, "point_"+to_string(i)+"_"+to_string(0), i);
 			provG.auxilary_data.push_back(points[i].getValues());
 		}
 
@@ -331,7 +331,7 @@ public:
 
 					// add initial cluster centrold to provG
 					provG.auxilary_data.push_back(points[index_point].getValues());
-					provG.addVariableVertex(CProvGraph::Parameter, "centroid_"+to_string(i)+"_"+to_string(0), provG.auxilary_data.size());
+					provG.addVariableVertex(cpg::Parameter, "centroid_"+to_string(i)+"_"+to_string(0), provG.auxilary_data.size());
 
 					break;
 				}
@@ -361,7 +361,7 @@ public:
 					centroid_input_names.push_back("centroid_"+to_string(j)+"_"+to_string(iter-1));
 				}
 				centroid_input_names.push_back("point_"+to_string(i)+"_"+to_string(iter-1));
-				provG.addComputingSubgraph("point_"+to_string(i)+"_"+to_string(iter), i, CProvGraph::NearestCentroid, centroid_input_names);
+				provG.addComputingSubgraph("point_"+to_string(i)+"_"+to_string(iter), i, cpg::NearestCentroid, centroid_input_names);
 
 				if(id_old_cluster != id_nearest_center)
 				{
@@ -394,7 +394,7 @@ public:
 				// add provenance subgraph
 				provG.auxilary_data.push_back(centroid);
 				string centroid_name = "centroid_"+to_string(i)+"_"+to_string(iter);
-				provG.addComputingSubgraph(centroid_name, provG.auxilary_data.size()-1, CProvGraph::VectorMean, input_names[i]);
+				provG.addComputingSubgraph(centroid_name, provG.auxilary_data.size()-1, cpg::VectorMean, input_names[i]);
 			}
 
 			if(done == true || iter >= max_iterations)

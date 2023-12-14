@@ -93,7 +93,7 @@ public:
                                                 std::vector<double> * output,
                                                 std::vector<std::string>& input_names,
                                                 int layer_num,
-                                                CProvGraph::CProvGraph& provG
+                                                cpg::CProvGraph& provG
                                                 ) {
     assert(input.size() == m_num_inputs_per_node);
 

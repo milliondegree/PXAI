@@ -59,7 +59,7 @@ int main(int argc, char* argv[]) {
       if (Parser::isVariable(query)) {
         string output_variable_name = query+"_iteration_"+to_string(round-1);
         t1 = clock();
-        CProvGraph::CProvGraph query_of_output = mln.provG.ProvenanceQuery(output_variable_name);
+        cpg::CProvGraph query_of_output = mln.provG.ProvenanceQuery(output_variable_name);
         t2 = clock();
         count += 1;
         query_time_sum += (t2-t1)*1.0/CLOCKS_PER_SEC;
@@ -93,7 +93,7 @@ int main(int argc, char* argv[]) {
       if (Parser::isVariable(query)) {
         string output_variable_name = query+"_iteration_"+to_string(round-1);
         t1 = clock();
-        CProvGraph::CProvGraph query_of_output = mln.provG.ProvenanceQuery(output_variable_name);
+        cpg::CProvGraph query_of_output = mln.provG.ProvenanceQuery(output_variable_name);
         t2 = clock();
         count += 1;
         query_coarse_time_sum += (t2-t1)*1.0/CLOCKS_PER_SEC;

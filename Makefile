@@ -34,7 +34,7 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 # Construct build output and dependency filenames
 SRCS := $(shell find $(SRC) -name *.cpp)
 # SRCS := $(wildcard src/*.cpp src/*/*.cpp)
-OBJS := build/ApproximateSubGraph.o build/Clique.o build/Grader.o build/Load.o build/LoopyBP.o build/LoopyBPProv.o build/MLN.o build/Parser.o build/mcsat.o build/BPInfluence.o build/MLP.o
+OBJS := build/CProvGraph.o build/ApproximateSubGraph.o build/Clique.o build/Grader.o build/Load.o build/LoopyBP.o build/LoopyBPProv.o build/MLN.o build/Parser.o build/mcsat.o build/BPInfluence.o build/MLP.o 
 DEPS := $(OBJS:.o=.d)
 
 ARGS := -o ./data/hypertext-class/sample7/sample71.obs -p ./data/hypertext-class/sample7/prov/sample71.txt -q topic_Department_29 -i all 

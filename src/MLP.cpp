@@ -146,7 +146,7 @@ void MLP::GetOutputWithProv(const std::vector<double> &input,
   std::vector<std::string> input_names;
   for (int i=0; i<input.size(); i++) {
     std::string input_name = "input_0_"+std::to_string(i);
-    this->provG.addVariableVertex(CProvGraph::Input, input_name, input[i]);
+    this->provG.addVariableVertex(cpg::Input, input_name, input[i]);
     input_names.push_back(input_name);
   }
 

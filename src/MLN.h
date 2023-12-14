@@ -54,7 +54,7 @@ public:
   map<string, vector<int> > c_map;
   unordered_map<string, unordered_map<string, double> > pd;
 
-  CProvGraph::CProvGraph provG;
+  cpg::CProvGraph provG;
 
   friend class Parser;
   friend class Grader;
