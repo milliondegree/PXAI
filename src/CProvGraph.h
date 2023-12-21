@@ -578,8 +578,9 @@ private:
 
  /* contribution functions */
 public:
-  void computeContributions(const std::string& name);
-
+  void computeContribution(const std::string& name);
+  void computeContribution_v2(const std::string& name);
+  void DFSComputeContribution(vertex_t s, std::unordered_set<std::string>& visited);
 
 
 
@@ -637,85 +638,17 @@ private:
 
   float DFSComputeVariableNoEDB(vertex_t s, std::unordered_set<vertex_t>& visited);
 
-  inline float DFSComputeSum(vertex_t s, std::unordered_set<vertex_t>& visited) {
-    float ret = 0;
-    adjacency_tier ai, ai_end;
-    for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
-      vertex_t v = *ai;
-      ret += DFSComputeVariable(v, visited);
-    }
-    return ret;
-  }
+  inline float DFSComputeSum(vertex_t s, std::unordered_set<vertex_t>& visited);
 
-  inline float DFSComputeMul(vertex_t s, std::unordered_set<vertex_t>& visited) {
-    float ret = 1;
-    adjacency_tier ai, ai_end;
-    for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
-      vertex_t v = *ai;
-      ret *= DFSComputeVariable(v, visited);
-    }
-    return ret;
-  }
+  inline float DFSComputeMul(vertex_t s, std::unordered_set<vertex_t>& visited);
 
-  inline float DFSComputeDiv(vertex_t s, std::unordered_set<vertex_t>& visited) {
-    float numerator=0, denominator=0;
-    adjacency_tier ai, ai_end;
-    for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
-      vertex_t v = *ai;
-      float tmp = DFSComputeVariable(v, visited);
-      if (g[v].name==g[s].params["numerator_name"]) {
-        numerator = tmp;
-      }
-      else {
-        denominator = tmp;
-      }
-    }
-    if (denominator==0) return 0;
-    return numerator/denominator;
-  }
+  inline float DFSComputeDiv(vertex_t s, std::unordered_set<vertex_t>& visited);
 
-  inline float DFSComputeScale(vertex_t s, std::unordered_set<vertex_t>& visited) {
-    float denominator = 0;
-    float numerator = 0; 
-    adjacency_tier ai, ai_end;
-    for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
-      vertex_t v = *ai;
-      float tmp = DFSComputeVariable(v, visited);
-      if (g[v].name==g[s].params["numerator_name"]) {
-        numerator = tmp;
-      }
-      denominator += tmp;
-    }
-    if (denominator==0) return 0;
-    return numerator/denominator;
-  }
+  inline float DFSComputeScale(vertex_t s, std::unordered_set<vertex_t>& visited);
 
-  inline float DFSComputeSoftmax(vertex_t s, std::unordered_set<vertex_t>& visited) {
-    float denominator = 0;
-    float numerator = 0; 
-    adjacency_tier ai, ai_end;
-    for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
-      vertex_t v = *ai;
-      float tmp = DFSComputeVariable(v, visited);
-      if (g[v].name==g[s].params["numerator_name"]) {
-        numerator = std::exp(tmp);
-      }
-      denominator += std::exp(tmp);
-    }
-    if (denominator==0) return 0;
-    return numerator/denominator;
-  }
+  inline float DFSComputeSoftmax(vertex_t s, std::unordered_set<vertex_t>& visited);
 
-  inline float DFSComputeSigmoid(vertex_t s, std::unordered_set<vertex_t>& visited) {
-    float ret = 0;
-    adjacency_tier ai, ai_end;
-    for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
-      vertex_t v = *ai;
-      float value = DFSComputeVariable(v, visited);
-      ret += 1/(1+std::exp(-value));
-    }
-    return ret;
-  } 
+  inline float DFSComputeSigmoid(vertex_t s, std::unordered_set<vertex_t>& visited);
 
 
 

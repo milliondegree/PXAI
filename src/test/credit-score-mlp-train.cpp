@@ -24,7 +24,7 @@
 const int input_size = 46;
 const int number_classes = 3;
 const char *credit_score_dataset = "./data/credit-score/train.csv";
-const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal.mlp";
+const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_10_layer.mlp";
 const std::array<std::string, number_classes> class_names =
 { "Good", "Standard", "Poor" };
 
@@ -63,7 +63,7 @@ bool load_data(int *samples,
       if_first_line++;
       continue;
     }
-    std::cout << i << std::endl;
+    // std::cout << i << std::endl;
 
     double *p = &((*input)[0]) + i * input_size;
     double *c = &((*credit_score_class)[0]) + i * number_classes;
@@ -135,7 +135,9 @@ int main(int argc, char *argv[]) {
     // 4 inputs + 1 bias.
     // 1 hidden layer(s) of 4 neurons.
     // 3 outputs (1 per credit_score_class)
-    MLP my_mlp({ input_size + 1, 100 ,number_classes }, { "sigmoid", "linear" }, false);
+    // MLP my_mlp({ input_size + 1, 100, number_classes }, { "sigmoid", "linear" }, false);
+    // MLP my_mlp({ input_size + 1, 100 , 100, 100, 100, number_classes }, { "sigmoid", "sigmoid", "sigmoid", "sigmoid", "linear" }, false);
+    MLP my_mlp({ input_size + 1, 100, 100, 100, 100, 100, 100, 100, 100, 100, number_classes }, { "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "linear" }, false);
 
     int loops = 100;
 

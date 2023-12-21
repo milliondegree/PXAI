@@ -175,7 +175,7 @@ int main(int argc, char *argv[]) {
     t2 = clock();
     std::cout << "Recompute with changed EDBs time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
     
-    query_output.computeContributions(to_query); 
+    query_output.computeContribution(to_query); 
     query_output.computeDerivative(to_query);
     query_output.saveGraph();
 
@@ -194,6 +194,7 @@ int main(int argc, char *argv[]) {
     t2 = clock();
     std::cout << "Recompute with changed EDBs time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
+    approx_output.computeContribution(to_query);
     approx_output.computeDerivative(to_query);
     approx_output.saveGraph();
   }

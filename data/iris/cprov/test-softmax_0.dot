@@ -227,7 +227,7 @@ digraph G {
 1->2  [color=purple]
  [label="Con: 0.999848 Dev: 0.000151969"];
 3->4  [color=purple]
- [label="Con: 0.993795 Dev: 0.000151969"];
+ [label="Con: 0.999848 Dev: 0.000151969"];
 5->6  [color=purple]
  [label="Con: -6.55651e-07 Dev: 0.000151969"];
 7->8  [color=purple]
@@ -235,7 +235,7 @@ digraph G {
 7->9  [color=purple]
  [label="Con: 0.243345 Dev: -0.00116446"];
 10->11  [color=purple]
- [label="Con: -5.36442e-07 Dev: 0.055187"];
+ [label="Con: 0.0475146 Dev: 0.055187"];
 12->13  [color=purple]
  [label="Con: 2.06232e-05 Dev: 0.055187"];
 14->15  [color=purple]
@@ -273,7 +273,7 @@ digraph G {
 34->36  [color=purple]
  [label="Con: -2.98023e-07 Dev: 0.000869896"];
 37->38  [color=purple]
- [label="Con: 0.00593197 Dev: -0.0309751"];
+ [label="Con: -1.78814e-07 Dev: -0.0309751"];
 39->40  [color=purple]
  [label="Con: 0.000298738 Dev: -0.0309751"];
 41->42  [color=purple]
@@ -311,7 +311,7 @@ digraph G {
 56->58  [color=purple]
  [label="Con: 0.868713 Dev: -0.00163299"];
 59->60  [color=purple]
- [label="Con: -1.22786e-05 Dev: 0.0686198"];
+ [label="Con: 0.995652 Dev: 0.0686198"];
 61->62  [color=purple]
  [label="Con: 5.56707e-05 Dev: 0.0686198"];
 63->64  [color=purple]
@@ -349,7 +349,7 @@ digraph G {
 78->80  [color=purple]
  [label="Con: 0 Dev: 0.00125198"];
 81->82  [color=purple]
- [label="Con: 0.0262402 Dev: -0.0825785"];
+ [label="Con: 0 Dev: -0.0825785"];
 83->84  [color=purple]
  [label="Con: 0.000141442 Dev: -0.0825785"];
 85->86  [color=purple]
@@ -383,7 +383,7 @@ digraph G {
 1->99  [color=purple]
  [label="Con: -0.000151992 Dev: -0.000151966"];
 100->101  [color=purple]
- [label="Con: -0.000151038 Dev: -0.000151966"];
+ [label="Con: -0.000151992 Dev: -0.000151966"];
 102->103  [color=purple]
  [label="Con: 1.19209e-07 Dev: -0.000151966"];
 104->105  [color=purple]
@@ -411,7 +411,7 @@ digraph G {
 1->115  [color=purple]
  [label="Con: 0 Dev: -2.3905e-15"];
 116->117  [color=purple]
- [label="Con: 9.53674e-07 Dev: -2.3905e-15"];
+ [label="Con: 0 Dev: -2.3905e-15"];
 118->119  [color=purple]
  [label="Con: 0 Dev: -2.3905e-15"];
 120->121  [color=purple]

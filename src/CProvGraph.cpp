@@ -50,7 +50,7 @@ void CProvGraph::DFSProvQuery(vertex_t s, CProvGraph& subProvG) {
   return;
 }
 
-void CProvGraph::computeContributions(const std::string& name) {
+void CProvGraph::computeContribution(const std::string& name) {
   ASSERT_EX(checkVertexExistByName(name), std::cout << name+" does not exist" << std::endl);
   vertex_t v = getVertexByName(name);
   float previous_value = g[v].value;
@@ -67,6 +67,105 @@ void CProvGraph::computeContributions(const std::string& name) {
       float new_value = computeVariable(name);
       addProvEdge(v_source, v_target, previous_value-new_value);
     }
+  }
+}
+
+void CProvGraph::computeContribution_v2(const std::string& name) {
+  ASSERT_EX(checkVertexExistByName(name), std::cout << name+" does not exist" << std::endl);
+  vertex_t v = getVertexByName(name);
+  
+  // insert derivative of the source vertex
+  g[v].contribution = g[v].value;
+  
+  // std::cout << "start to compute derivative" << std::endl;
+  std::unordered_set<std::string> visited;
+  DFSComputeContribution(v, visited);
+}
+
+void CProvGraph::DFSComputeContribution(vertex_t s, std::unordered_set<std::string>& visited) {
+  if (g[s].vt==Input || g[s].vt==Parameter) return;
+  adjacency_tier ai, ai_end;
+  boost::tie(ai, ai_end) = boost::adjacent_vertices(s, g);
+  vertex_t v_operator = *ai;
+  float c = g[s].contribution;
+  switch (g[v_operator].vt) {
+    case Sum: {
+      adjacency_tier ai, ai_end;
+      for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+        vertex_t v = *ai;
+        edge_t e = boost::edge(s, v, g).first;
+        g[e].contribution = g[v].value / g[s].value * c;
+        visited.insert(edgeToString(e));
+        bool all_visited = true;
+        in_edge_iter ei, ei_end;
+        for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
+          if (visited.find(edgeToString(*ei))==visited.end()) {
+            all_visited = false;
+            break;
+          }
+        }
+        if (all_visited) {
+          g[v].contribution = 0.0;
+          for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
+            g[v].contribution += g[*ei].contribution;
+          DFSComputeContribution(v, visited);
+        }
+      }
+      break;
+    }
+    case Mul: {
+      adjacency_tier ai, ai_end;
+      for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+        vertex_t v = *ai;
+        edge_t e = boost::edge(s, v, g).first;
+        g[e].contribution = g[s].value / g[v].value ;
+        visited.insert(edgeToString(e));
+        bool all_visited = true;
+        in_edge_iter ei, ei_end;
+        for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
+          if (visited.find(edgeToString(*ei))==visited.end()) {
+            all_visited = false;
+            break;
+          }
+        }
+        if (all_visited) {
+          g[v].contribution = 0.0;
+          for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
+            g[v].contribution += g[*ei].contribution;
+          DFSComputeContribution(v, visited);
+        }
+      }
+      break;
+    }
+    case Softmax: {
+      
+      break;
+    }
+    case Sigmoid: {
+      adjacency_tier ai, ai_end;
+      for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+        vertex_t v = *ai;
+        edge_t e = boost::edge(s, v, g).first;
+        g[e].contribution = c;
+        visited.insert(edgeToString(e));
+        bool all_visited = true;
+        in_edge_iter ei, ei_end;
+        for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
+          if (visited.find(edgeToString(*ei))==visited.end()) {
+            all_visited = false;
+            break;
+          }
+        }
+        if (all_visited) {
+          g[v].contribution = 0.0;
+          for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
+            g[v].contribution += g[*ei].contribution;
+          DFSComputeContribution(v, visited);
+        }
+      }
+      break;
+    }
+    default: std::cout << "this is not an operator vertex\n"; exit(1);
   }
 }
 
@@ -169,7 +268,7 @@ CProvGraph CProvGraph::ApproximateSubGraphQuery(std::string& name, float epsilon
 }
 
 CProvGraph CProvGraph::ApproximateSubGraphQueryPrune(std::string& name, float epsilon, float lambda) {
-  computeContributions(name);
+  computeContribution(name);
   computeDerivative(name);
 
   vertex_t v = getVertexByName(name);
@@ -272,103 +371,194 @@ float CProvGraph::DFSComputeVariable(vertex_t s, std::unordered_set<vertex_t>& v
   return ret;
 }
 
+inline float CProvGraph::DFSComputeSum(vertex_t s, std::unordered_set<vertex_t>& visited) {
+  float ret = 0;
+  adjacency_tier ai, ai_end;
+  boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g);
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    ret += DFSComputeVariable(v, visited);
+  }
+  return ret;
+}
+
+inline float CProvGraph::DFSComputeMul(vertex_t s, std::unordered_set<vertex_t>& visited) {
+  float ret = 1;
+  adjacency_tier ai, ai_end;
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    ret *= DFSComputeVariable(v, visited);
+  }
+  return ret;
+}
+
+inline float CProvGraph::DFSComputeDiv(vertex_t s, std::unordered_set<vertex_t>& visited) {
+  float numerator=0, denominator=0;
+  adjacency_tier ai, ai_end;
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    float tmp = DFSComputeVariable(v, visited);
+    if (g[v].name==g[s].params["numerator_name"]) {
+      numerator = tmp;
+    }
+    else {
+      denominator = tmp;
+    }
+  }
+  if (denominator==0) return 0;
+  return numerator/denominator;
+}
+
+inline float CProvGraph::DFSComputeScale(vertex_t s, std::unordered_set<vertex_t>& visited) {
+  float denominator = 0;
+  float numerator = 0; 
+  adjacency_tier ai, ai_end;
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    float tmp = DFSComputeVariable(v, visited);
+    if (g[v].name==g[s].params["numerator_name"]) {
+      numerator = tmp;
+    }
+    denominator += tmp;
+  }
+  if (denominator==0) return 0;
+  return numerator/denominator;
+}
+
+inline float CProvGraph::DFSComputeSoftmax(vertex_t s, std::unordered_set<vertex_t>& visited) {
+  float denominator = 0;
+  float numerator = 0; 
+  adjacency_tier ai, ai_end;
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    float tmp = DFSComputeVariable(v, visited);
+    if (g[v].name==g[s].params["numerator_name"]) {
+      numerator = std::exp(tmp);
+    }
+    denominator += std::exp(tmp);
+  }
+  if (denominator==0) return 0;
+  return numerator/denominator;
+}
+
+inline float CProvGraph::DFSComputeSigmoid(vertex_t s, std::unordered_set<vertex_t>& visited) {
+  float ret = 0;
+  adjacency_tier ai, ai_end;
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    float value = DFSComputeVariable(v, visited);
+    ret += 1/(1+std::exp(-value));
+  }
+  return ret;
+} 
+
 float CProvGraph::DFSComputeVariableNoEDB(vertex_t s, std::unordered_set<vertex_t>& visited) {
-    if (visited.find(s)!=visited.end()) return g[s].value;
-    if (g[s].vt==Input) {
-      visited.insert(s);
-      return g[s].value;
+  if (visited.find(s)!=visited.end()) return g[s].value;
+  if (g[s].vt==Input) {
+    visited.insert(s);
+    return g[s].value;
+  }
+  else if (g[s].vt==Parameter) {
+    visited.insert(s);
+    return g[s].value;
+  }
+  // if the current vertex is a derived veriable that depends on changed inputs
+  float ret;
+  adjacency_tier ai, ai_end;
+  boost::tie(ai, ai_end) = boost::adjacent_vertices(s, g);
+  vertex_t v_operator = *ai;
+  if (boost::out_degree(v_operator, g)==0) {
+    g[s].value = 0.0/0.0;
+    return g[s].value;
+  }
+  int nan_cnt = 0;
+  switch (g[v_operator].vt) {
+    case Sum: {
+      ret = 0;
+      adjacency_tier ai, ai_end;
+      for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
+        vertex_t v = *ai;
+        float value = DFSComputeVariableNoEDB(v, visited);
+        if (!std::isnan(value)) ret += DFSComputeVariableNoEDB(v, visited);
+        else nan_cnt++;
+      }
+      break;
     }
-    else if (g[s].vt==Parameter) {
-      visited.insert(s);
-      return g[s].value;
+    case Mul: {
+      ret = 1;
+      adjacency_tier ai, ai_end;
+      for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
+        vertex_t v = *ai;
+        float value = DFSComputeVariableNoEDB(v, visited);
+        if (!std::isnan(value)) ret *= DFSComputeVariableNoEDB(v, visited);
+        else nan_cnt++;
+      }
+      break;
     }
-    // if the current vertex is a derived veriable that depends on changed inputs
-    float ret;
-    adjacency_tier ai, ai_end;
-    boost::tie(ai, ai_end) = boost::adjacent_vertices(s, g);
-    vertex_t v_operator = *ai;
-    if (boost::out_degree(v_operator, g)==0) {
-      g[s].value = 0;
-      return 0;
+    case Div: {
+      float numerator = 0, denominator = 1;
+      adjacency_tier ai, ai_end;
+      for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
+        vertex_t v = *ai;
+        if (g[v].name==g[v_operator].params["numerator_name"]) {
+          numerator = DFSComputeVariableNoEDB(v, visited);
+        }
+        else {
+          denominator = DFSComputeVariableNoEDB(v, visited);
+        }
+      }
+      if (denominator==0) ret = 0;
+      else ret = numerator/denominator;
+      break;
     }
-    switch (g[v_operator].vt) {
-      case Sum: {
-        ret = 0;
-        adjacency_tier ai, ai_end;
-        for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
-          vertex_t v = *ai;
-          ret += DFSComputeVariableNoEDB(v, visited);
+    case Scale: {
+      float denominator = 0, numerator = 0; 
+      adjacency_tier ai, ai_end;
+      for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
+        vertex_t v = *ai;
+        float tmp = DFSComputeVariableNoEDB(v, visited);
+        if (g[v].name==g[v_operator].params["numerator_name"]) {
+          numerator = tmp;
         }
-        break;
+        denominator += tmp;
       }
-      case Mul: {
-        ret = 1;
-        adjacency_tier ai, ai_end;
-        for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
-          vertex_t v = *ai;
-          ret *= DFSComputeVariableNoEDB(v, visited);
-        }
-        break;
-      }
-      case Div: {
-        float numerator = 0, denominator = 1;
-        adjacency_tier ai, ai_end;
-        for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
-          vertex_t v = *ai;
-          if (g[v].name==g[v_operator].params["numerator_name"]) {
-            numerator = DFSComputeVariableNoEDB(v, visited);
-          }
-          else {
-            denominator = DFSComputeVariableNoEDB(v, visited);
-          }
-        }
-        if (denominator==0) ret = 0;
-        else ret = numerator/denominator;
-        break;
-      }
-      case Scale: {
-        float denominator = 0, numerator = 0; 
-        adjacency_tier ai, ai_end;
-        for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
-          vertex_t v = *ai;
-          float tmp = DFSComputeVariableNoEDB(v, visited);
-          if (g[v].name==g[v_operator].params["numerator_name"]) {
-            numerator = tmp;
-          }
-          denominator += tmp;
-        }
-        if (denominator==0) ret = 0;
-        else ret = numerator/denominator;
-        break;
-      }
-      case Softmax: {
-        float denominator = 0, numerator = 0; 
-        adjacency_tier ai, ai_end;
-        for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
-          vertex_t v = *ai;
-          float tmp = DFSComputeVariableNoEDB(v, visited);
+      if (denominator==0) ret = 0;
+      else ret = numerator/denominator;
+      break;
+    }
+    case Softmax: {
+      float denominator = 0, numerator = 0; 
+      adjacency_tier ai, ai_end;
+      for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
+        vertex_t v = *ai;
+        float tmp = DFSComputeVariableNoEDB(v, visited);
+        if (!std::isnan(tmp)) {
           if (g[v].name==g[v_operator].params["numerator_name"]) {
             numerator = std::exp(tmp);
           }
           denominator += std::exp(tmp);
         }
-        if (denominator==0) ret = 0;
-        else ret = numerator/denominator;
-        break;
+        else nan_cnt++;
       }
-      case Sigmoid: {
-        ret = 0;
-        adjacency_tier ai, ai_end;
-        for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
-          vertex_t v = *ai;
-          float value = DFSComputeVariableNoEDB(v, visited);
-          ret += 1.0/(1+std::exp(-value));
-        }
-        break;
-      }
-      default: std::cout << "this is not an operator vertex\n"; exit(1);
+      if (denominator==0) ret = 0;
+      else ret = numerator/denominator;
+      break;
     }
-    g[s].value = ret;
-    visited.insert(s);
-    return ret;
+    case Sigmoid: {
+      ret = 0;
+      adjacency_tier ai, ai_end;
+      for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
+        vertex_t v = *ai;
+        float value = DFSComputeVariableNoEDB(v, visited);
+        if (!std::isnan(value)) ret += 1.0/(1+std::exp(-value));
+        else nan_cnt++;
+      }
+      break;
+    }
+    default: std::cout << "this is not an operator vertex\n"; exit(1);
   }
+  if (boost::out_degree(v_operator, g)==nan_cnt) ret = 0.0/0.0;
+  g[s].value = ret;
+  visited.insert(s);
+  return ret;
+}
