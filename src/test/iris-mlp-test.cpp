@@ -169,9 +169,9 @@ int main(int argc, char *argv[]) {
     std::cout << "Provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
     std::unordered_map<std::string, float> changedEDBs;
-    changedEDBs["input_0_2"] = 1.0;
+    changedEDBs["input_0_2"] = changedEDBs["input_0_2"];
     t1 = clock();
-    std::cout << query_output.computeVariableWithChangedEDBs(to_query, changedEDBs) << std::endl;
+    query_output.computeVariableWithChangedEDBs(to_query, changedEDBs);
     t2 = clock();
     std::cout << "Recompute with changed EDBs time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
     
@@ -190,7 +190,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Approximate provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
     t1 = clock();
-    std::cout << approx_output.computeVariableWithChangedEDBs(to_query, changedEDBs) << std::endl;
+    approx_output.computeVariableWithChangedEDBs(to_query, changedEDBs);
     t2 = clock();
     std::cout << "Recompute with changed EDBs time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
