@@ -2,6 +2,125 @@
 
 using namespace cpg;
 
+inline vertex_t CProvGraph::addVariableVertex(const VertexType vt, const std::string& name, float value) {
+  ASSERT_EX(!checkVertexExistByName(name), std::cout << name+" already exists" << std::endl);
+  vertex_t v = boost::add_vertex(g);
+  vertex_set.insert(std::make_pair(name, v));
+  g[v].vt = vt;
+  g[v].name = name;
+  g[v].value = value;
+  return v;
+}
+
+inline vertex_t CProvGraph::addOperatorVertex(const VertexType vt, const std::string& name) {
+  ASSERT_EX(!checkVertexExistByName(name), std::cout << name+" already exists" << std::endl);
+  vertex_t v = boost::add_vertex(g);
+  vertex_set.insert(std::make_pair(name, v));
+  g[v].vt = vt;
+  g[v].name = name;
+  return v;
+}
+
+inline vertex_t CProvGraph::addOperatorVertex(const VertexType vt, const std::string& name, const std::unordered_map<std::string, std::string>& params) {
+  ASSERT_EX(!checkVertexExistByName(name), std::cout << name+" already exists" << std::endl);
+  vertex_t v = boost::add_vertex(g);
+  vertex_set.insert(std::make_pair(name, v));
+  g[v].vt = vt;
+  g[v].name = name;
+  g[v].params.insert(params.begin(), params.end());
+  return v;
+}
+
+inline vertex_t CProvGraph::addOperatorVertex(const VertexType vt, const std::string& name, const std::unordered_map<std::string, float>& weights) {
+  ASSERT_EX(!checkVertexExistByName(name), std::cout << name+" already exists" << std::endl);
+  vertex_t v = boost::add_vertex(g);
+  vertex_set.insert(std::make_pair(name, v));
+  g[v].vt = vt;
+  g[v].name = name;
+  g[v].weights.insert(weights.begin(), weights.end());
+  return v;
+}
+
+inline vertex_t CProvGraph::addOperatorVertex(const VertexType vt, const std::string& name, const std::unordered_map<std::string, std::string>& params, const std::unordered_map<std::string, float>& weights) {
+  ASSERT_EX(!checkVertexExistByName(name), std::cout << name+" already exists" << std::endl);
+  vertex_t v = boost::add_vertex(g);
+  vertex_set.insert(std::make_pair(name, v));
+  g[v].vt = vt;
+  g[v].name = name;
+  g[v].params.insert(params.begin(), params.end());
+  g[v].weights.insert(weights.begin(), weights.end());
+  return v;
+}
+
+void CProvGraph::addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names) {
+  /* add subgraph of computing provenance, it is based on an asumption that every output only relies on one operator 
+    output_name: name of the output variable
+    value: value of output variable
+    vt: vertex type of operator
+    input_names: names of the input variables that are connected to the operator vertex
+  */
+  vertex_t v_output, v_operator;
+  if (checkVertexExistByName(output_name)) {
+    v_output = getVertexByName(output_name);
+    v_operator = getVertexByName(vertexTypeToString(vt)+"_"+output_name);
+    g[v_output].value = value;
+  }
+  else {
+    v_output = addVariableVertex(Derived, output_name, value);
+    v_operator = addOperatorVertex(vt, vertexTypeToString(vt)+"_"+output_name);
+    addProvEdge(v_output, v_operator);
+  }
+  for (auto s : input_names) {
+    addProvEdge(v_operator, getVertexByName(s));
+  }
+}
+
+void CProvGraph::addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names, const std::unordered_map<std::string, std::string>& params) {
+  /* add subgraph of computing provenance, it is based on an asumption that every output only relies on one operator 
+    output_name: name of the output variable
+    value: value of output variable
+    vt: vertex type of operator
+    input_names: names of the input variables that are connected to the operator vertex
+  */
+  vertex_t v_output, v_operator;
+  if (checkVertexExistByName(output_name)) {
+    v_output = getVertexByName(output_name);
+    v_operator = getVertexByName(vertexTypeToString(vt)+"_"+output_name);
+    g[v_output].value = value;
+  }
+  else {
+    v_output = addVariableVertex(Derived, output_name, value);
+    v_operator = addOperatorVertex(vt, vertexTypeToString(vt)+"_"+output_name, params);
+    addProvEdge(v_output, v_operator);
+  }
+  for (auto s : input_names) {
+    addProvEdge(v_operator, getVertexByName(s));
+  }
+}
+
+void CProvGraph::addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names, const std::unordered_map<std::string, float>& weights) {
+  /* add subgraph of computing provenance, it is based on an asumption that every output only relies on one operator 
+    output_name: name of the output variable
+    value: value of output variable
+    vt: vertex type of operator
+    input_names: names of the input variables that are connected to the operator vertex
+  */
+  vertex_t v_output, v_operator;
+  if (checkVertexExistByName(output_name)) {
+    v_output = getVertexByName(output_name);
+    v_operator = getVertexByName(vertexTypeToString(vt)+"_"+output_name);
+    g[v_output].value = value;
+  }
+  else {
+    v_output = addVariableVertex(Derived, output_name, value);
+    v_operator = addOperatorVertex(vt, vertexTypeToString(vt)+"_"+output_name, weights);
+    addProvEdge(v_output, v_operator);
+  }
+  for (auto s : input_names) {
+    addProvEdge(v_operator, getVertexByName(s));
+  }
+}
+
 CProvGraph CProvGraph::ProvenanceQuery(const std::string& name) {
   ASSERT_EX(checkVertexExistByName(name), std::cout << name+" does not exist" << std::endl);
   vertex_t v = getVertexByName(name);
@@ -31,7 +150,7 @@ void CProvGraph::DFSProvQuery(vertex_t s, CProvGraph& subProvG) {
   adjacency_tier ai, ai_end;
   boost::tie(ai, ai_end) = boost::adjacent_vertices(s, g);
   vertex_t v_operator = *ai;
-  vertex_t a_operator = subProvG.addOperatorVertex(g[v_operator].vt, g[v_operator].name, g[v_operator].params);
+  vertex_t a_operator = subProvG.addOperatorVertex(g[v_operator].vt, g[v_operator].name, g[v_operator].params, g[v_operator].weights);
   subProvG.addProvEdge(parent, a_operator);
   for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
     vertex_t v = *ai;
@@ -57,17 +176,22 @@ void CProvGraph::computeContribution(const std::string& name) {
   edge_iter ei_begin, ei_end, ei;
   boost::tie(ei_begin, ei_end) = boost::edges(g);
   std::vector<edge_t> edge_list;
-  for (edge_iter ei=ei_begin; ei!=ei_end; ei++) edge_list.push_back(*ei);
+  for (edge_iter ei=ei_begin; ei!=ei_end; ei++) {
+    vertex_t v_source = boost::source(*ei, g);
+    if (g[v_source].vt!=Derived) edge_list.push_back(*ei);
+  }
+  int count = 1;
   for (edge_t e : edge_list) {
     vertex_t v_source, v_target;
     v_source = boost::source(e, g);
     v_target = boost::target(e, g);
-    if (g[v_source].vt!=Derived) {
-      boost::remove_edge(v_source, v_target, g);
-      float new_value = computeVariable(name);
-      addProvEdge(v_source, v_target, previous_value-new_value);
-    }
+    boost::remove_edge(v_source, v_target, g);
+    float new_value = computeVariable(name);
+    addProvEdge(v_source, v_target, previous_value-new_value);
+    std::cout << "\r"+std::to_string(count)+"/"+std::to_string(edge_list.size()) << "     ";
+    count += 1;
   }
+  std::cout << "\n";
 }
 
 void CProvGraph::computeContribution_v2(const std::string& name) {
@@ -280,24 +404,29 @@ CProvGraph CProvGraph::ApproximateSubGraphQueryPrune(std::string& name, float ep
 
   edge_iter ei_begin, ei_end, ei;
   boost::tie(ei_begin, ei_end) = boost::edges(g);
-  std::vector<edge_t> edge_list;
+  // std::vector<edge_t> edge_list;
+  edge_comparer ec(&g, true);
+  std::priority_queue<edge_t, std::vector<edge_t>, edge_comparer> edge_queue(ec);
+  int e_count = 0;
   for (edge_iter ei=ei_begin; ei!=ei_end; ei++) {
     vertex_t v_source = boost::source(*ei, g);
     vertex_t v_target = boost::target(*ei, g);
     if (g[v_source].vt!=Derived) {
       // std::cout << abs(g[*ei].contribution) << ' ' << std::abs(g[*ei].derivative) << std::endl;
       g[*ei].importance = ALPHA*std::abs(g[*ei].contribution)+BETA*std::abs(g[*ei].derivative);
-      edge_list.push_back(*ei);
+      edge_queue.push(*ei);
     }
   }
-  edge_comparer ec(g);
-  std::sort(edge_list.begin(), edge_list.end(), ec);
+  
   int count = 0;
   // int step = edge_list.size()/15;
-  int step = 1;
-  std::cout << "number of edges: " << edge_list.size() << ", prune step: " << step << std::endl;
+  int step = 10;
+  std::cout << "number of edges: " << edge_queue.size() << ", prune step: " << step << std::endl;
   CProvGraph ret = *this;
-  for (edge_t e : edge_list) {
+  // for (edge_t e : edge_list) {
+  while (!edge_queue.empty()) {
+    edge_t e = edge_queue.top();
+    edge_queue.pop();
     vertex_t v_source = boost::source(e, g);
     vertex_t v_target = boost::target(e, g);
     boost::remove_edge(v_source, v_target, g);
@@ -363,6 +492,7 @@ float CProvGraph::DFSComputeVariable(vertex_t s, std::unordered_set<vertex_t>& v
     case Scale: ret = DFSComputeScale(v_operator, visited); break;
     case Softmax: ret = DFSComputeSoftmax(v_operator, visited); break;
     case Sigmoid: ret = DFSComputeSigmoid(v_operator, visited); break;
+    case InnerProduct: ret = DFSComputeInnerProduct(v_operator, visited); break;
     default: std::cout << "this is not an operator vertex\n"; exit(1);
   }
   // std::cout << "finish " << g[s].name << std::endl;
@@ -371,13 +501,46 @@ float CProvGraph::DFSComputeVariable(vertex_t s, std::unordered_set<vertex_t>& v
   return ret;
 }
 
+inline bool CProvGraph::hasIntersection(const std::unordered_set<std::string>& l_set, const std::unordered_set<std::string>& r_set) {
+  if (l_set.size()<r_set.size()) {
+    for (std::string EDB : l_set) {
+      if (r_set.find(EDB)!=r_set.end()) 
+        return true;
+    }
+  }
+  else {
+    for (std::string EDB : r_set) {
+      if (l_set.find(EDB)!=l_set.end()) 
+        return true;
+    }
+  }
+  return false;
+}
+
+inline bool CProvGraph::hasIntersection(const std::unordered_map<std::string, float>& l_map, const std::unordered_set<std::string>& r_set) {
+  if (l_map.size()<r_set.size()) {
+    for (auto it=l_map.begin(); it!=l_map.end(); it++) {
+      if (r_set.find(it->first)!=r_set.end()) 
+        return true;
+    }
+  }
+  else {
+    for (auto it : r_set) {
+      if (l_map.find(it)!=l_map.end()) 
+        return true;
+    }
+  }
+  return false;
+}
+
 inline float CProvGraph::DFSComputeSum(vertex_t s, std::unordered_set<vertex_t>& visited) {
   float ret = 0;
   adjacency_tier ai, ai_end;
   boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g);
   for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
     vertex_t v = *ai;
-    ret += DFSComputeVariable(v, visited);
+    float value = DFSComputeVariable(v, visited);
+    if (!std::isnan(value)) ret += value;
   }
   return ret;
 }
@@ -387,7 +550,8 @@ inline float CProvGraph::DFSComputeMul(vertex_t s, std::unordered_set<vertex_t>&
   adjacency_tier ai, ai_end;
   for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
     vertex_t v = *ai;
-    ret *= DFSComputeVariable(v, visited);
+    float value = DFSComputeVariable(v, visited);
+    if (!std::isnan(value)) ret *= value;
   }
   return ret;
 }
@@ -397,12 +561,10 @@ inline float CProvGraph::DFSComputeDiv(vertex_t s, std::unordered_set<vertex_t>&
   adjacency_tier ai, ai_end;
   for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
     vertex_t v = *ai;
-    float tmp = DFSComputeVariable(v, visited);
-    if (g[v].name==g[s].params["numerator_name"]) {
-      numerator = tmp;
-    }
-    else {
-      denominator = tmp;
+    float value = DFSComputeVariable(v, visited);
+    if (!std::isnan(value)) {
+      if (g[v].name==g[s].params["numerator_name"]) numerator = value;
+      else denominator = value;
     }
   }
   if (denominator==0) return 0;
@@ -415,11 +577,13 @@ inline float CProvGraph::DFSComputeScale(vertex_t s, std::unordered_set<vertex_t
   adjacency_tier ai, ai_end;
   for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
     vertex_t v = *ai;
-    float tmp = DFSComputeVariable(v, visited);
-    if (g[v].name==g[s].params["numerator_name"]) {
-      numerator = tmp;
+    float value = DFSComputeVariable(v, visited);
+    if (!std::isnan(value)) {
+      if (g[v].name==g[s].params["numerator_name"]) {
+        numerator = value;
+      }
+      denominator += value;
     }
-    denominator += tmp;
   }
   if (denominator==0) return 0;
   return numerator/denominator;
@@ -431,11 +595,13 @@ inline float CProvGraph::DFSComputeSoftmax(vertex_t s, std::unordered_set<vertex
   adjacency_tier ai, ai_end;
   for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
     vertex_t v = *ai;
-    float tmp = DFSComputeVariable(v, visited);
-    if (g[v].name==g[s].params["numerator_name"]) {
-      numerator = std::exp(tmp);
+    float value = DFSComputeVariable(v, visited);
+    if (!std::isnan(value)) {
+      if (g[v].name==g[s].params["numerator_name"]) {
+        numerator = std::exp(value);
+      }
+      denominator += std::exp(value);
     }
-    denominator += std::exp(tmp);
   }
   if (denominator==0) return 0;
   return numerator/denominator;
@@ -447,18 +613,25 @@ inline float CProvGraph::DFSComputeSigmoid(vertex_t s, std::unordered_set<vertex
   for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
     vertex_t v = *ai;
     float value = DFSComputeVariable(v, visited);
-    ret += 1/(1+std::exp(-value));
+    if (!std::isnan(value)) ret += 1/(1+std::exp(-value));
+  }
+  return ret;
+} 
+
+inline float CProvGraph::DFSComputeInnerProduct(vertex_t s, std::unordered_set<vertex_t>& visited) {
+  float ret = 0;
+  adjacency_tier ai, ai_end;
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    float value = DFSComputeVariable(v, visited);
+    if (!std::isnan(value)) ret += g[s].weights[g[v].name] * value;
   }
   return ret;
 } 
 
 float CProvGraph::DFSComputeVariableNoEDB(vertex_t s, std::unordered_set<vertex_t>& visited) {
   if (visited.find(s)!=visited.end()) return g[s].value;
-  if (g[s].vt==Input) {
-    visited.insert(s);
-    return g[s].value;
-  }
-  else if (g[s].vt==Parameter) {
+  if (g[s].vt==Input || g[s].vt==Parameter) {
     visited.insert(s);
     return g[s].value;
   }
@@ -555,10 +728,258 @@ float CProvGraph::DFSComputeVariableNoEDB(vertex_t s, std::unordered_set<vertex_
       }
       break;
     }
+    case InnerProduct: {
+      ret = 0;
+      adjacency_tier ai, ai_end;
+      for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
+        vertex_t v = *ai;
+        float value = DFSComputeVariableNoEDB(v, visited);
+        if (!std::isnan(value)) ret += g[v_operator].weights[g[v].name] * value;
+        else nan_cnt++;
+      }
+      break;
+    }
     default: std::cout << "this is not an operator vertex\n"; exit(1);
   }
   if (boost::out_degree(v_operator, g)==nan_cnt) ret = 0.0/0.0;
   g[s].value = ret;
   visited.insert(s);
   return ret;
+}
+
+void CProvGraph::DFSComputeDerivative(vertex_t s, std::unordered_set<std::string>& visited) {
+  if (g[s].vt==Input || g[s].vt==Parameter) return;
+  adjacency_tier ai, ai_end;
+  boost::tie(ai, ai_end) = boost::adjacent_vertices(s, g);
+  vertex_t v_operator = *ai;
+  switch (g[v_operator].vt) {
+    case Sum: DFSComputeSumDerivative(v_operator, g[s].derivative, visited); break;
+    case Mul: DFSComputeMulDerivative(v_operator, g[s].derivative, visited); break;
+    case Div: DFSComputeDivDerivative(v_operator, g[s].derivative, visited); break;
+    case Scale: DFSComputeScaleDerivative(v_operator, g[s].derivative, visited); break;
+    case Softmax: DFSComputeSoftmaxDerivative(v_operator, g[s].derivative, visited); break;
+    case Sigmoid: DFSComputeSigmoidDerivative(v_operator, g[s].derivative, visited); break;
+    case InnerProduct: DFSComputeInnerProductDerivative(v_operator, g[s].derivative, visited); break;
+    default: std::cout << "this is not an operator vertex\n"; exit(1);
+  }
+}
+
+void CProvGraph::DFSComputeSumDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited) {
+  adjacency_tier ai, ai_end;
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    edge_t e = boost::edge(s, v, g).first;
+    g[e].derivative = 1.0*d;
+    visited.insert(edgeToString(e));
+    bool all_visited = true;
+    in_edge_iter ei, ei_end;
+    for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
+      if (visited.find(edgeToString(*ei))==visited.end()) {
+        all_visited = false;
+        break;
+      }
+    }
+    if (all_visited) {
+      g[v].derivative = 0.0;
+      for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
+        g[v].derivative += g[*ei].derivative;
+      DFSComputeDerivative(v, visited);
+    }
+  }
+}
+
+void CProvGraph::DFSComputeMulDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited) {
+  adjacency_tier ai, ai_end;
+  float value = 1.0;
+  int count = 0;
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    value *= g[v].value;
+    count += 1;
+  }
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    edge_t e = boost::edge(s, v, g).first;
+    if (count==1) g[e].derivative = d;
+    else g[e].derivative = d*value/g[v].value;
+    visited.insert(edgeToString(e));
+    bool all_visited = true;
+    in_edge_iter ei, ei_end;
+    for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
+      if (visited.find(edgeToString(*ei))==visited.end()) {
+        all_visited = false;
+        break;
+      }
+    }
+    if (all_visited) {
+      g[v].derivative = 0.0;
+      for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
+        g[v].derivative += g[*ei].derivative;
+      DFSComputeDerivative(v, visited);
+    }
+  }
+}
+
+void CProvGraph::DFSComputeDivDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited) {
+  adjacency_tier ai, ai_end;
+  float numerator = 0;
+  float denominator = 1;
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    if (!std::isnan(g[v].value)) {
+      if (g[v].name==g[s].params["numerator_name"]) 
+        numerator = g[v].value;
+      else 
+        denominator = g[v].value;
+    }
+  }
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    edge_t e = boost::edge(s, v, g).first;
+    if (g[v].name==g[s].params["numerator_name"]) 
+      g[e].derivative = d*(1.0/denominator);
+    else 
+      g[e].derivative = d*(-1.0*numerator/std::pow(denominator, 2));
+    visited.insert(edgeToString(e));
+    bool all_visited = true;
+    in_edge_iter ei, ei_end;
+    for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
+      if (visited.find(edgeToString(*ei))==visited.end()) {
+        all_visited = false;
+        break;
+      }
+    }
+    if (all_visited) {
+      g[v].derivative = 0.0;
+      for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
+        g[v].derivative += g[*ei].derivative;
+      DFSComputeDerivative(v, visited);
+    }
+  }
+}
+
+void CProvGraph::DFSComputeScaleDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited) {
+  float denominator = 0;
+  float numerator = 0; 
+  adjacency_tier ai, ai_end;
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    if (!std::isnan(g[v].value)) {
+      denominator += g[v].value;
+      if (g[v].name==g[s].params["numerator_name"])
+        numerator = g[v].value;
+    }
+  }
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    edge_t e = boost::edge(s, v, g).first;
+    if (g[v].name==g[s].params["numerator_name"]) {
+      g[e].derivative = d*((1.0/denominator)-(numerator/std::pow(denominator, 2)));
+    }
+    else {
+      g[e].derivative = d*(-1.0*numerator/std::pow(denominator, 2));
+    }
+    visited.insert(edgeToString(e));
+    bool all_visited = true;
+    in_edge_iter ei, ei_end;
+    for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
+      if (visited.find(edgeToString(*ei))==visited.end()) {
+        all_visited = false;
+        break;
+      }
+    }
+    if (all_visited) {
+      g[v].derivative = 0.0;
+      for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
+        g[v].derivative += g[*ei].derivative;
+      DFSComputeDerivative(v, visited);
+    }
+  }
+}
+
+void CProvGraph::DFSComputeSoftmaxDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited) {
+  float denominator = 0;
+  float numerator = 0; 
+  adjacency_tier ai, ai_end;
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    if (!std::isnan(g[v].value)) {
+      denominator += std::exp(g[v].value);
+      if (g[v].name==g[s].params["numerator_name"])
+        numerator = std::exp(g[v].value);
+    }
+  }
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    edge_t e = boost::edge(s, v, g).first;
+    if (g[v].name==g[s].params["numerator_name"]) {
+      g[e].derivative = d*(numerator/denominator)*(1-numerator/denominator);
+    }
+    else {
+      g[e].derivative = -d*(std::exp(g[v].value)*numerator/std::pow(denominator, 2));
+    }
+    visited.insert(edgeToString(e));
+    bool all_visited = true;
+    in_edge_iter ei, ei_end;
+    for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
+      if (visited.find(edgeToString(*ei))==visited.end()) {
+        all_visited = false;
+        break;
+      }
+    }
+    if (all_visited) {
+      g[v].derivative = 0.0;
+      for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
+        g[v].derivative += g[*ei].derivative;
+      DFSComputeDerivative(v, visited);
+    }
+  }
+}
+
+void CProvGraph::DFSComputeSigmoidDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited) {
+  adjacency_tier ai, ai_end;
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    edge_t e = boost::edge(s, v, g).first;
+    g[e].derivative = g[v].value*(1-g[v].value)*d;
+    visited.insert(edgeToString(e));
+    bool all_visited = true;
+    in_edge_iter ei, ei_end;
+    for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
+      if (visited.find(edgeToString(*ei))==visited.end()) {
+        all_visited = false;
+        break;
+      }
+    }
+    if (all_visited) {
+      g[v].derivative = 0.0;
+      for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
+        g[v].derivative += g[*ei].derivative;
+      DFSComputeDerivative(v, visited);
+    }
+  }
+}
+
+void CProvGraph::DFSComputeInnerProductDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited) {
+  adjacency_tier ai, ai_end;
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    edge_t e = boost::edge(s, v, g).first;
+    g[e].derivative = g[s].weights[g[v].name] * d;
+    visited.insert(edgeToString(e));
+    bool all_visited = true;
+    in_edge_iter ei, ei_end;
+    for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
+      if (visited.find(edgeToString(*ei))==visited.end()) {
+        all_visited = false;
+        break;
+      }
+    }
+    if (all_visited) {
+      g[v].derivative = 0.0;
+      for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
+        g[v].derivative += g[*ei].derivative;
+      DFSComputeDerivative(v, visited);
+    }
+  }
 }

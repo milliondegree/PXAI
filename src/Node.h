@@ -124,19 +124,30 @@ public:
     GetInputInnerProdWithWeights(input, &inner_prod);
 
     // build provenance for inner product
-    std::vector<std::string> sum_input_names;
+    // std::vector<std::string> sum_input_names;
+    // for (int j=0; j<m_weights.size(); j++) {
+    //   std::vector<std::string> input_names_tmp;
+    //   std::string weight_name = "weight_"+std::to_string(layer_num)+"_"+std::to_string(node_num)+"_"+std::to_string(j);
+    //   provG.addVariableVertex(cpg::Parameter, weight_name, m_weights[j]);
+    //   input_names_tmp.push_back(weight_name);
+    //   input_names_tmp.push_back(input_names[j]);
+    //   std::string tmp_name = "input_"+std::to_string(layer_num+1)+"_"+std::to_string(node_num)+"_"+std::to_string(j);
+    //   provG.addComputingSubgraph(tmp_name, input[j]*m_weights[j], cpg::Mul, input_names_tmp);
+    //   sum_input_names.push_back(tmp_name);
+    // }
+    std::unordered_map<std::string, float> weights;
     for (int j=0; j<m_weights.size(); j++) {
-      std::vector<std::string> input_names_tmp;
-      std::string weight_name = "weight_"+std::to_string(layer_num)+"_"+std::to_string(node_num)+"_"+std::to_string(j);
-      provG.addVariableVertex(cpg::Parameter, weight_name, m_weights[j]);
-      input_names_tmp.push_back(weight_name);
-      input_names_tmp.push_back(input_names[j]);
-      std::string tmp_name = "input_"+std::to_string(layer_num+1)+"_"+std::to_string(node_num)+"_"+std::to_string(j);
-      provG.addComputingSubgraph(tmp_name, input[j]*m_weights[j], cpg::Mul, input_names_tmp);
-      sum_input_names.push_back(tmp_name);
+      weights[input_names[j]] = m_weights[j];
     }
-    std::string sum_output_name = "input_"+std::to_string(layer_num+1)+"_"+std::to_string(node_num)+"_no_act";
-    provG.addComputingSubgraph(sum_output_name, inner_prod, cpg::Sum, sum_input_names);
+    std::string sum_output_name;
+    if (m_activation_function_str=="linear") {
+      *output = activation_function(inner_prod);
+      sum_output_name = "input_"+std::to_string(layer_num+1)+"_"+std::to_string(node_num);
+      provG.addComputingSubgraph(sum_output_name, *output, cpg::InnerProduct, input_names, weights);
+      return;
+    }
+    else sum_output_name = "input_"+std::to_string(layer_num+1)+"_"+std::to_string(node_num)+"_no_act";
+    provG.addComputingSubgraph(sum_output_name, inner_prod, cpg::InnerProduct, input_names, weights);
 
     *output = activation_function(inner_prod);
 
@@ -146,9 +157,6 @@ public:
     act_input_names.push_back(sum_output_name);
     if (m_activation_function_str=="sigmoid") {
       provG.addComputingSubgraph(act_output_name, *output, cpg::Sigmoid, act_input_names);
-    }
-    else if (m_activation_function_str=="linear") {
-      provG.addComputingSubgraph(act_output_name, *output, cpg::Sum, act_input_names);
     }
   }
 
