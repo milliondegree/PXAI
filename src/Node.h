@@ -165,7 +165,10 @@ public:
     }
     int pos = provG.auxilary_data.size()-1;
     provG.auxilary_data[pos].push_back(*output);
-    provG.addComputingSubgraph(output_name, float(pos), cpg::InnerProductAct, input_names, m_weights);
+    
+    std::unordered_map<std::string, std::string> params;
+    params["act"] = m_activation_function_str;
+    provG.addComputingSubgraph(output_name, float(pos), cpg::InnerProductAct, input_names, params, m_weights, node_num);
   }
 
   void GetBooleanOutput(const std::vector<double> &input,

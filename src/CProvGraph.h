@@ -261,6 +261,8 @@ public:
 
   void addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names, const std::vector<double>& weights);
 
+  void addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names, const std::unordered_map<std::string, std::string>& params, const std::vector<double>& weights, int number_of_op);
+
   inline void addProvEdge(vertex_t v1, vertex_t v2, bool reverse) {
     if (!reverse) boost::add_edge(v1, v2, g);
     else boost::add_edge(v2, v2, g);
@@ -296,6 +298,7 @@ public:
   /* provenance query functions */
 public:
   CProvGraph ProvenanceQuery(const std::string& name);
+
   void DFSProvQuery(vertex_t s, CProvGraph& subProvG);
 
 
@@ -352,9 +355,9 @@ private:
 
   /* provenance-enabled model inference */
 public: 
-  inline float computeVariableWithChangedEDBs(const std::string& name, const std::unordered_map<std::string, float>& EDBs);
+  float computeVariableWithChangedEDBs(const std::string& name, const std::unordered_map<std::string, float>& EDBs);
 
-  inline float computeVariable(const std::string& name);
+  float computeVariable(const std::string& name);
 
 private:
   inline bool hasIntersection(const std::unordered_set<std::string>& l_set, const std::unordered_set<std::string>& r_set);

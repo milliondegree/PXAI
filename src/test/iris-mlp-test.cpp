@@ -163,10 +163,10 @@ int main(int argc, char *argv[]) {
     std::string to_query = "input_2"; 
     cpg::CProvGraph query_output = my_mlp.provG.ProvenanceQuery(to_query);
     
-    // t1 = clock();
-    // std::cout << query_output.computeVariable(to_query) << std::endl;
-    // t2 = clock();
-    // std::cout << "Provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    t1 = clock();
+    std::cout << query_output.computeVariable(to_query) << std::endl;
+    t2 = clock();
+    std::cout << "Provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
     
     // query_output.computeContribution_v2(to_query); 
     // query_output.computeDerivative(to_query);
