@@ -143,12 +143,9 @@ void MLP::GetOutputWithProv(const std::vector<double> &input,
   temp_in = input;
 
   // initialize input variables
-  std::vector<std::string> input_names;
-  for (int i=0; i<input.size(); i++) {
-    std::string input_name = "input_0_"+std::to_string(i);
-    this->provG.addVariableVertex(cpg::Input, input_name, input[i]);
-    input_names.push_back(input_name);
-  }
+  std::string input_name = "input_0";
+  this->provG.auxilary_data.push_back(input);
+  this->provG.addVariableVertex(cpg::Input, input_name, 0);
 
   for (size_t i = 0; i < m_layers.size(); ++i) {
     if (i > 0) {
@@ -162,20 +159,18 @@ void MLP::GetOutputWithProv(const std::vector<double> &input,
       temp_out.resize(m_layers[i].GetOutputSize());
     }
     std::vector<std::string> input_names;
-    for (int j=0; j<temp_in.size(); j++) {
-      input_names.push_back("input_"+std::to_string(i)+"_"+std::to_string(j));
-    }
+    input_names.push_back("input_"+std::to_string(i));
     m_layers[i].GetOutputAfterActivationFunctionWithProv(temp_in, &temp_out, input_names, i, provG);
   }
 
-  std::vector<std::string> softmax_input_names;
-  for (int i=0; i<temp_out.size(); i++) {
-    softmax_input_names.push_back("input_"+std::to_string(m_layers.size())+"_"+std::to_string(i));
-  }
-  if (temp_out.size() > 1)
-    // utils::Softmax(&temp_out);
-    utils::SoftmaxWithProv(&temp_out, softmax_input_names, this->provG);
-  *output = temp_out;
+  // std::vector<std::string> softmax_input_names;
+  // for (int i=0; i<temp_out.size(); i++) {
+  //   softmax_input_names.push_back("input_"+std::to_string(m_layers.size())+"_"+std::to_string(i));
+  // }
+  // if (temp_out.size() > 1)
+  //   // utils::Softmax(&temp_out);
+  //   utils::SoftmaxWithProv(&temp_out, softmax_input_names, this->provG);
+  // *output = temp_out;
 
   //Add last layer activation
   if (all_layers_activations != nullptr)

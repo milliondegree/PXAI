@@ -29,7 +29,7 @@ const std::string iris_mlp_weights = "../../data/iris.mlp";
 #else
 const char *iris_dataset = "./data/iris/iris_normal.data";
 const std::string iris_mlp_weights = "./data/iris/iris_normal.mlp";
-const std::string cprov_save_path = "./data/iris/cprov/test.dot";
+const std::string cprov_save_path = "./data/iris/cprov/test2.dot";
 #endif
 const std::array<std::string, number_classes> class_names =
 { "Iris-setosa", "Iris-versicolor", "Iris-virginica" };
@@ -160,43 +160,43 @@ int main(int argc, char *argv[]) {
     my_mlp.provG.saveGraph();
     std::cout << "With provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
-    std::string to_query = "softmax_0"; 
+    std::string to_query = "input_2"; 
     cpg::CProvGraph query_output = my_mlp.provG.ProvenanceQuery(to_query);
     
-    t1 = clock();
-    std::cout << query_output.computeVariable(to_query) << std::endl;
-    t2 = clock();
-    std::cout << "Provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
-
-    std::unordered_map<std::string, float> changedEDBs;
-    changedEDBs["input_0_2"] = changedEDBs["input_0_2"];
-    t1 = clock();
-    query_output.computeVariableWithChangedEDBs(to_query, changedEDBs);
-    t2 = clock();
-    std::cout << "Recompute with changed EDBs time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    // t1 = clock();
+    // std::cout << query_output.computeVariable(to_query) << std::endl;
+    // t2 = clock();
+    // std::cout << "Provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
     
-    query_output.computeContribution(to_query); 
-    query_output.computeDerivative(to_query);
+    // query_output.computeContribution_v2(to_query); 
+    // query_output.computeDerivative(to_query);
     query_output.saveGraph();
 
-    t1 = clock();
-    cpg::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPrune(to_query, 0.01, 0.1);
-    t2 = clock();
-    std::cout << "Approx prune time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    // std::unordered_map<std::string, float> changedEDBs;
+    // changedEDBs["input_0_2"] = changedEDBs["input_0_2"];
+    // t1 = clock();
+    // query_output.computeVariableWithChangedEDBs(to_query, changedEDBs);
+    // t2 = clock();
+    // std::cout << "Recompute with changed EDBs time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
-    t1 = clock();
-    std::cout << approx_output.computeVariable(to_query) << std::endl;
-    t2 = clock();
-    std::cout << "Approximate provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    // t1 = clock();
+    // cpg::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPrune(to_query, 0.01, 0.1);
+    // t2 = clock();
+    // std::cout << "Approx prune time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
-    t1 = clock();
-    approx_output.computeVariableWithChangedEDBs(to_query, changedEDBs);
-    t2 = clock();
-    std::cout << "Recompute with changed EDBs time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    // t1 = clock();
+    // std::cout << approx_output.computeVariable(to_query) << std::endl;
+    // t2 = clock();
+    // std::cout << "Approximate provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
-    approx_output.computeContribution(to_query);
-    approx_output.computeDerivative(to_query);
-    approx_output.saveGraph();
+    // t1 = clock();
+    // approx_output.computeVariableWithChangedEDBs(to_query, changedEDBs);
+    // t2 = clock();
+    // std::cout << "Recompute with changed EDBs time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+
+    // approx_output.computeContribution(to_query);
+    // approx_output.computeDerivative(to_query);
+    // approx_output.saveGraph();
   }
 
   return 0;

@@ -23,12 +23,18 @@
 
 #define MAX_NUM_OF_SEARCH 100
 #define ALPHA 0.5
-#define BETA 0.1
+#define BETA 0.05
 #define PRUNE_STEP 10
 
 namespace cpg {
 
-enum VertexType {Input, Derived, Parameter, Sum, Mul, Div, Scale, Softmax, Sigmoid, InnerProduct, VectorMean, NearestCentroid, NodeToClique, CliqueToNode, BeliefPropagation};
+enum VertexType {
+                Input, Derived, Parameter,  // variables
+                Sum, Mul, Div, Scale,  // basics
+                Softmax, Sigmoid, InnerProduct, InnerProductAct, // MLP
+                VectorMean, NearestCentroid, // K-Means
+                NodeToClique, CliqueToNode, BeliefPropagation // PGM
+                };
 
 inline std::ostream& operator<<(std::ostream& out, const VertexType value){
   const char* s = 0;
@@ -44,6 +50,7 @@ inline std::ostream& operator<<(std::ostream& out, const VertexType value){
       PROCESS_VAL(Softmax)
       PROCESS_VAL(Sigmoid)
       PROCESS_VAL(InnerProduct)
+      PROCESS_VAL(InnerProductAct)
       PROCESS_VAL(VectorMean)
       PROCESS_VAL(NearestCentroid)
       PROCESS_VAL(NodeToClique)
@@ -66,7 +73,8 @@ inline std::string vertexTypeToString(VertexType vt) {
     case(Scale): s = "scale"; break;
     case(Softmax): s = "softmax"; break;
     case(Sigmoid): s = "sigmoid"; break;
-    case(InnerProduct): s = "innerproduct"; break;
+    case(InnerProduct): s = "innerProduct"; break;
+    case(InnerProductAct): s = "innerProductAct"; break;
     case(VectorMean): s = "vectorMean"; break;
     case(NearestCentroid): s = "nearestCentroid"; break;
     case(NodeToClique): s = "nodetoclique"; break;
@@ -83,7 +91,7 @@ struct ProvVertex {
   float contribution;
   float derivative;
   std::unordered_map<std::string, std::string> params;
-  std::unordered_map<std::string, float> weights;
+  std::vector<double> weights;
   std::unordered_set<std::string> EDBs;
 };
 
@@ -243,15 +251,15 @@ public:
 
   inline vertex_t addOperatorVertex(const VertexType vt, const std::string& name, const std::unordered_map<std::string, std::string>& params);
 
-  inline vertex_t addOperatorVertex(const VertexType vt, const std::string& name, const std::unordered_map<std::string, float>& weights);
+  inline vertex_t addOperatorVertex(const VertexType vt, const std::string& name, const std::vector<double>& weights);
 
-  inline vertex_t addOperatorVertex(const VertexType vt, const std::string& name, const std::unordered_map<std::string, std::string>& params, const std::unordered_map<std::string, float>& weights);
+  inline vertex_t addOperatorVertex(const VertexType vt, const std::string& name, const std::unordered_map<std::string, std::string>& params, const std::vector<double>& weights);
 
   void addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names);
 
   void addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names, const std::unordered_map<std::string, std::string>& params);
 
-  void addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names, const std::unordered_map<std::string, float>& weights);
+  void addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names, const std::vector<double>& weights);
 
   inline void addProvEdge(vertex_t v1, vertex_t v2, bool reverse) {
     if (!reverse) boost::add_edge(v1, v2, g);
@@ -331,26 +339,22 @@ public:
 
   void computeContribution_v2(const std::string& name);
 
+private:
   void DFSComputeContribution(vertex_t s, std::unordered_set<std::string>& visited);
+
+  void DFSComputeSoftmaxContribution(vertex_t s, float s_value, float c, std::unordered_set<std::string>& visited);
+
+  void DFSComputeInnerProductContribution(vertex_t s, float s_value, float c, std::unordered_set<std::string>& visited);
+
+  void DFSComputeSigmoidContribution(vertex_t s, float s_value, float c, std::unordered_set<std::string>& visited);
 
 
 
   /* provenance-enabled model inference */
 public: 
-  inline float computeVariableWithChangedEDBs(const std::string& name, const std::unordered_map<std::string, float>& EDBs) {
-    ASSERT_EX(checkVertexExistByName(name), std::cout << name+" does not exist" << std::endl);
-    vertex_t v = getVertexByName(name);
-    changedEDBs = EDBs;
-    std::unordered_set<vertex_t> visited;
-    return DFSComputeVariable(v, visited);
-  }
+  inline float computeVariableWithChangedEDBs(const std::string& name, const std::unordered_map<std::string, float>& EDBs);
 
-  inline float computeVariable(const std::string& name) {
-    ASSERT_EX(checkVertexExistByName(name), std::cout << name+" does not exist" << std::endl);
-    vertex_t v = getVertexByName(name);
-    std::unordered_set<vertex_t> visited;
-    return DFSComputeVariableNoEDB(v, visited);
-  }
+  inline float computeVariable(const std::string& name);
 
 private:
   inline bool hasIntersection(const std::unordered_set<std::string>& l_set, const std::unordered_set<std::string>& r_set);

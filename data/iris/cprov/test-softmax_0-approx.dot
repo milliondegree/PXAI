@@ -1,33 +1,31 @@
 digraph G {
-0 [label="softmax_0: 0.97723, d: 1", shape=oval, color=limegreen];
+0 [label="softmax_0: 0.998901, d: 1", shape=oval, color=limegreen];
 1 [label="softmax_softmax_0", shape=box, color=tomato];
-2 [label="input_2_0: 9.97505, d: 0.0222514", shape=oval, color=limegreen];
+2 [label="input_2_0: 9.97411, d: 0.00109754", shape=oval, color=limegreen];
 3 [label="innerproduct_input_2_0", shape=box, color=tomato];
-4 [label="input_1_0: 0.0440872, d: -0.129066", shape=oval, color=limegreen];
+4 [label="input_1_0: 0.0442094, d: -0.00636612", shape=oval, color=limegreen];
 5 [label="sigmoid_input_1_0", shape=box, color=tomato];
-6 [label="input_1_0_no_act: -3.0765, d: 1.61866", shape=oval, color=limegreen];
+6 [label="input_1_0_no_act: -3.0736, d: 0.0797078", shape=oval, color=limegreen];
 7 [label="innerproduct_input_1_0_no_act", shape=box, color=tomato];
-8 [label="input_0_0: 1, d: -89.6859", shape=oval, color=dodgerblue];
-9 [label="input_0_1: 0.222222, d: -16.1212", shape=oval, color=dodgerblue];
-10 [label="input_0_2: 0, d: -29.825", shape=oval, color=dodgerblue];
-11 [label="input_0_3: 0.0677966, d: 98.1088", shape=oval, color=dodgerblue];
-12 [label="input_0_4: 0.0416667, d: 78.025", shape=oval, color=dodgerblue];
-13 [label="input_1_1: 0.998661, d: 0.0822612", shape=oval, color=limegreen];
-14 [label="sigmoid_input_1_1", shape=box, color=tomato];
-15 [label="input_1_1_no_act: 6.61455, d: -3.05499", shape=oval, color=limegreen];
-16 [label="innerproduct_input_1_1_no_act", shape=box, color=tomato];
-17 [label="input_1_2: 0.338742, d: -0.319201", shape=oval, color=limegreen];
+8 [label="input_0_0: 1, d: -4.42325", shape=oval, color=dodgerblue];
+9 [label="input_0_2: 0, d: -1.47054", shape=oval, color=dodgerblue];
+10 [label="input_0_3: 0.0677966, d: 4.83837", shape=oval, color=dodgerblue];
+11 [label="input_0_4: 0.0416667, d: 3.84804", shape=oval, color=dodgerblue];
+12 [label="input_1_1: 0.998661, d: 0.00405751", shape=oval, color=limegreen];
+13 [label="sigmoid_input_1_1", shape=box, color=tomato];
+14 [label="input_1_1_no_act: 6.61455, d: -0.150686", shape=oval, color=limegreen];
+15 [label="innerproduct_input_1_1_no_act", shape=box, color=tomato];
+16 [label="input_0_1: 0.222222, d: -0.79413", shape=oval, color=dodgerblue];
+17 [label="input_1_2: 0.338742, d: -0.0157444", shape=oval, color=limegreen];
 18 [label="sigmoid_input_1_2", shape=box, color=tomato];
-19 [label="input_1_2_no_act: -0.668904, d: 0.356335", shape=oval, color=limegreen];
+19 [label="input_1_2_no_act: -0.668904, d: 0.0175761", shape=oval, color=limegreen];
 20 [label="innerproduct_input_1_2_no_act", shape=box, color=tomato];
-21 [label="input_1_3: 0.999751, d: 0.115346", shape=oval, color=limegreen];
+21 [label="input_1_3: 0.999751, d: 0.00568939", shape=oval, color=limegreen];
 22 [label="sigmoid_input_1_3", shape=box, color=tomato];
-23 [label="input_1_3_no_act: 8.29696, d: -6.98333", shape=oval, color=limegreen];
+23 [label="input_1_3_no_act: 8.29696, d: -0.34445", shape=oval, color=limegreen];
 24 [label="innerproduct_input_1_3_no_act", shape=box, color=tomato];
-25 [label="input_2_1: 6.21576, d: -0.0222513", shape=oval, color=limegreen];
+25 [label="input_2_1: 3.16162, d: -0.00109753", shape=oval, color=limegreen];
 26 [label="innerproduct_input_2_1", shape=box, color=tomato];
-27 [label="input_2_2: -6.69143, d: -5.51866e-08", shape=oval, color=limegreen];
-28 [label="innerproduct_input_2_2", shape=box, color=tomato];
 0->1  [color=purple]
  [label=""];
 2->3  [color=purple]
@@ -36,9 +34,9 @@ digraph G {
  [label=""];
 6->7  [color=purple]
  [label=""];
-13->14  [color=purple]
+12->13  [color=purple]
  [label=""];
-15->16  [color=purple]
+14->15  [color=purple]
  [label=""];
 17->18  [color=purple]
  [label=""];
@@ -50,84 +48,70 @@ digraph G {
  [label=""];
 25->26  [color=purple]
  [label=""];
-27->28  [color=purple]
- [label=""];
 1->2  [color=purple]
- [label="Con: 0.97723 Dev: 0.0222514"];
+ [label="Con: 0.977214 Dev: 0.00109754"];
 3->4  [color=purple]
- [label="Con: -0.00642079 Dev: -0.170501"];
+ [label="Con: -0.00644022 Dev: -0.00840994"];
 5->6  [color=purple]
- [label="Con: -0.00504678 Dev: 1.61866"];
+ [label="Con: -0.00506252 Dev: 0.0797078"];
 7->8  [color=purple]
- [label="Con: 0.404297 Dev: -5.922"];
+ [label="Con: 0.405227 Dev: -0.291618"];
 7->9  [color=purple]
- [label="Con: 1.57356e-05 Dev: -0.0211059"];
+ [label="Con: 0 Dev: -0.346872"];
 7->10  [color=purple]
- [label="Con: 0 Dev: -7.04406"];
+ [label="Con: -0.00182545 Dev: 0.493943"];
 7->11  [color=purple]
- [label="Con: -0.00181955 Dev: 10.0307"];
-7->12  [color=purple]
- [label="Con: -0.000817597 Dev: 6.40435"];
-3->13  [color=purple]
- [label="Con: 0.853462 Dev: 0.127371"];
-14->15  [color=purple]
- [label="Con: 0.460395 Dev: -3.05499"];
-16->8  [color=purple]
- [label="Con: 0.159151 Dev: -21.5939"];
-16->9  [color=purple]
- [label="Con: 3.96371e-05 Dev: -4.23427"];
-16->10  [color=purple]
- [label="Con: 0 Dev: -4.05551"];
-16->11  [color=purple]
- [label="Con: -4.32134e-05 Dev: 22.4712"];
-16->12  [color=purple]
- [label="Con: -2.54512e-05 Dev: 19.2971"];
+ [label="Con: -0.00082022 Dev: 0.315371"];
+3->12  [color=purple]
+ [label="Con: 0.853523 Dev: 0.00628254"];
+13->14  [color=purple]
+ [label="Con: 0.460556 Dev: -0.150686"];
+15->8  [color=purple]
+ [label="Con: 0.159241 Dev: -1.06511"];
+15->16  [color=purple]
+ [label="Con: 3.97563e-05 Dev: -0.208854"];
+15->9  [color=purple]
+ [label="Con: 0 Dev: -0.200036"];
+15->10  [color=purple]
+ [label="Con: -4.32134e-05 Dev: 1.10838"];
+15->11  [color=purple]
+ [label="Con: -2.54512e-05 Dev: 0.951821"];
 3->17  [color=purple]
- [label="Con: -0.0221585 Dev: -0.239103"];
+ [label="Con: -0.0221738 Dev: -0.0117937"];
 18->19  [color=purple]
- [label="Con: -0.0225891 Dev: 0.356335"];
+ [label="Con: -0.0226047 Dev: 0.0175761"];
 20->8  [color=purple]
- [label="Con: 0.807613 Dev: -0.560054"];
+ [label="Con: 0.807698 Dev: -0.0276244"];
+20->16  [color=purple]
+ [label="Con: -0.0146748 Dev: 0.0274974"];
 20->9  [color=purple]
- [label="Con: -0.0146648 Dev: 0.557477"];
+ [label="Con: 0 Dev: -0.0784554"];
 20->10  [color=purple]
- [label="Con: 0 Dev: -1.59059"];
+ [label="Con: -0.0140998 Dev: 0.0837678"];
 20->11  [color=purple]
- [label="Con: -0.0140902 Dev: 1.6983"];
-20->12  [color=purple]
- [label="Con: -0.0115062 Dev: 1.98425"];
+ [label="Con: -0.011514 Dev: 0.0978722"];
 3->21  [color=purple]
- [label="Con: 0.965991 Dev: 0.183315"];
+ [label="Con: 0.965983 Dev: 0.00904199"];
 22->23  [color=purple]
- [label="Con: 0.783066 Dev: -6.98333"];
+ [label="Con: 0.783153 Dev: -0.34445"];
 24->8  [color=purple]
- [label="Con: 0.354065 Dev: -61.6099"];
+ [label="Con: 0.354216 Dev: -3.03889"];
+24->16  [color=purple]
+ [label="Con: 1.39475e-05 Dev: -0.612773"];
 24->9  [color=purple]
- [label="Con: 1.38879e-05 Dev: -12.4233"];
+ [label="Con: 0 Dev: -0.845172"];
 24->10  [color=purple]
- [label="Con: 0 Dev: -17.1349"];
+ [label="Con: -1.32322e-05 Dev: 3.15228"];
 24->11  [color=purple]
- [label="Con: -1.33514e-05 Dev: 63.9087"];
-24->12  [color=purple]
- [label="Con: -7.51019e-06 Dev: 50.3393"];
+ [label="Con: -7.45058e-06 Dev: 2.48297"];
 1->25  [color=purple]
- [label="Con: -0.0227698 Dev: -0.0222513"];
+ [label="Con: -0.0227855 Dev: -0.00109753"];
 26->4  [color=purple]
- [label="Con: 0.00190014 Dev: 0.0414361"];
-26->13  [color=purple]
- [label="Con: -0.0197025 Dev: -0.0451102"];
+ [label="Con: 0.00190699 Dev: 0.00204381"];
+26->12  [color=purple]
+ [label="Con: -0.0197161 Dev: -0.00222503"];
 26->17  [color=purple]
- [label="Con: -0.0159335 Dev: -0.0800969"];
+ [label="Con: -0.0159444 Dev: -0.00395073"];
 26->21  [color=purple]
- [label="Con: -0.0216719 Dev: -0.0679705"];
-1->27  [color=purple]
- [label="Con: 0 Dev: -5.51866e-08"];
-28->4  [color=purple]
- [label="Con: 0 Dev: -4.89422e-07"];
-28->13  [color=purple]
- [label="Con: 0 Dev: 4.98186e-07"];
-28->17  [color=purple]
- [label="Con: 0 Dev: -3.14884e-07"];
-28->21  [color=purple]
- [label="Con: 5.96046e-08 Dev: 5.95401e-07"];
+ [label="Con: -0.0216868 Dev: -0.0033526"];
 }

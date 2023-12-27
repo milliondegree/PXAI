@@ -135,29 +135,37 @@ public:
     //   provG.addComputingSubgraph(tmp_name, input[j]*m_weights[j], cpg::Mul, input_names_tmp);
     //   sum_input_names.push_back(tmp_name);
     // }
-    std::unordered_map<std::string, float> weights;
-    for (int j=0; j<m_weights.size(); j++) {
-      weights[input_names[j]] = m_weights[j];
-    }
-    std::string sum_output_name;
-    if (m_activation_function_str=="linear") {
-      *output = activation_function(inner_prod);
-      sum_output_name = "input_"+std::to_string(layer_num+1)+"_"+std::to_string(node_num);
-      provG.addComputingSubgraph(sum_output_name, *output, cpg::InnerProduct, input_names, weights);
-      return;
-    }
-    else sum_output_name = "input_"+std::to_string(layer_num+1)+"_"+std::to_string(node_num)+"_no_act";
-    provG.addComputingSubgraph(sum_output_name, inner_prod, cpg::InnerProduct, input_names, weights);
+    // std::unordered_map<std::string, float> weights;
+    // for (int j=0; j<m_weights.size(); j++) {
+    //   weights[input_names[j]] = m_weights[j];
+    // }
+    // std::string sum_output_name;
+    // if (m_activation_function_str=="linear") {
+    //   *output = activation_function(inner_prod);
+    //   sum_output_name = "input_"+std::to_string(layer_num+1)+"_"+std::to_string(node_num);
+    //   provG.addComputingSubgraph(sum_output_name, *output, cpg::InnerProduct, input_names, weights);
+    //   return;
+    // }
+    // else sum_output_name = "input_"+std::to_string(layer_num+1)+"_"+std::to_string(node_num)+"_no_act";
+    // provG.addComputingSubgraph(sum_output_name, inner_prod, cpg::InnerProduct, input_names, weights);
 
     *output = activation_function(inner_prod);
 
     // build provenance for activation function
-    std::string act_output_name = "input_"+std::to_string(layer_num+1)+"_"+std::to_string(node_num);
-    std::vector<std::string> act_input_names;
-    act_input_names.push_back(sum_output_name);
-    if (m_activation_function_str=="sigmoid") {
-      provG.addComputingSubgraph(act_output_name, *output, cpg::Sigmoid, act_input_names);
+    // std::string act_output_name = "input_"+std::to_string(layer_num+1)+"_"+std::to_string(node_num);
+    // std::vector<std::string> act_input_names;
+    // act_input_names.push_back(sum_output_name);
+    // if (m_activation_function_str=="sigmoid") {
+    //   provG.addComputingSubgraph(act_output_name, *output, cpg::Sigmoid, act_input_names);
+    // }
+
+    std::string output_name = "input_"+std::to_string(layer_num+1);
+    if (node_num==0) {
+      provG.auxilary_data.push_back(std::vector<double> (0));
     }
+    int pos = provG.auxilary_data.size()-1;
+    provG.auxilary_data[pos].push_back(*output);
+    provG.addComputingSubgraph(output_name, float(pos), cpg::InnerProductAct, input_names, m_weights);
   }
 
   void GetBooleanOutput(const std::vector<double> &input,
