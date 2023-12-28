@@ -62,6 +62,12 @@ inline double deriv_linear(double x) {
   return 1;
 };
 
+inline double vector_size(std::vector<double>& v) {
+  double ret = 0;
+  for (int i=0; i<v.size(); i++) ret += std::pow(v[i], 2);
+  return std::pow(ret, 0.5)/v.size();
+}
+
 struct ActivationFunctionsManager {
   bool GetActivationFunctionPair(const std::string & activation_name,
                                     std::pair<std::function<double(double)>,

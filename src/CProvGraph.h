@@ -305,17 +305,7 @@ public:
 
  /* derivative functions */
 public:
-  void computeDerivative(const std::string& name) {
-    ASSERT_EX(checkVertexExistByName(name), std::cout << name+" does not exist" << std::endl);
-    vertex_t v = getVertexByName(name);
-
-    // insert derivative of the source vertex
-    g[v].derivative = 1.0;
-    
-    // std::cout << "start to compute derivative" << std::endl;
-    std::unordered_set<std::string> visited;
-    DFSComputeDerivative(v, visited);
-  }
+  void computeDerivative(const std::string& name);
 
 private: 
   void DFSComputeDerivative(vertex_t s, std::unordered_set<std::string>& visited);
@@ -334,7 +324,7 @@ private:
 
   void DFSComputeInnerProductDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited);
 
-  void DFSComputeInnerProductActDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited);
+  void DFSComputeInnerProductActDerivative(vertex_t s, float s_value, float d, std::unordered_set<std::string>& visited);
 
   
 
@@ -352,6 +342,8 @@ private:
   void DFSComputeInnerProductContribution(vertex_t s, float s_value, float c, std::unordered_set<std::string>& visited);
 
   void DFSComputeSigmoidContribution(vertex_t s, float s_value, float c, std::unordered_set<std::string>& visited);
+
+  void DFSComputeInnerProductActContribution(vertex_t s, float s_value, float c, std::unordered_set<std::string>& visited);
 
 
 

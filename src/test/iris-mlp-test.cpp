@@ -28,7 +28,7 @@ const char *iris_dataset = "../../data/iris.data";
 const std::string iris_mlp_weights = "../../data/iris.mlp";
 #else
 const char *iris_dataset = "./data/iris/iris_normal.data";
-const std::string iris_mlp_weights = "./data/iris/iris_normal.mlp";
+const std::string iris_mlp_weights = "./data/iris/iris_normal_3_layer.mlp";
 const std::string cprov_save_path = "./data/iris/cprov/test2.dot";
 #endif
 const std::array<std::string, number_classes> class_names =
@@ -168,7 +168,7 @@ int main(int argc, char *argv[]) {
     t2 = clock();
     std::cout << "Provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
     
-    query_output.computeContribution_v2(to_query); 
+    // query_output.computeContribution_v2(to_query); 
     query_output.computeDerivative(to_query);
     query_output.saveGraph();
 
