@@ -1,4 +1,5 @@
 #include "CProvGraph.h"
+#include "Utils.h"
 
 using namespace cpg;
 
@@ -691,6 +692,7 @@ float CProvGraph::DFSComputeVariableNoEDB(vertex_t s, std::unordered_set<vertex_
   // if the current vertex is a derived veriable that depends on changed inputs
   float ret;
   adjacency_tier ai_v, ai_v_end;
+  int cnt = 0;
   boost::tie(ai_v, ai_v_end) = boost::adjacent_vertices(s, g);
   for (; ai_v!=ai_v_end; ai_v++) {
     vertex_t v_operator = *ai_v;
@@ -782,15 +784,6 @@ float CProvGraph::DFSComputeVariableNoEDB(vertex_t s, std::unordered_set<vertex_
         }
         break;
       }
-      case InnerProductAct: {
-        adjacency_tier ai, ai_end;
-        boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g);
-        vertex_t v = *ai;
-        float value = DFSComputeVariableNoEDB(v, visited);
-        std::inner_product(begin(auxilary_data[value]), end(auxilary_data[value]), begin(g[v_operator].weights), 0.0);
-        ret = g[s].value;
-        break;
-      }
       // case InnerProduct: {
       //   ret = 0;
       //   adjacency_tier ai, ai_end;
@@ -802,6 +795,17 @@ float CProvGraph::DFSComputeVariableNoEDB(vertex_t s, std::unordered_set<vertex_
       //   }
       //   break;
       // }
+      case InnerProductAct: {
+        adjacency_tier ai, ai_end;
+        boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g);
+        vertex_t v = *ai;
+        float value = DFSComputeVariableNoEDB(v, visited);
+        float tmp = std::inner_product(begin(auxilary_data[value]), end(auxilary_data[value]), begin(g[v_operator].weights), 0.0);
+        if (g[v_operator].params["act"]=="sigmoid") tmp = utils::sigmoid(tmp); 
+        auxilary_data[g[s].value][std::stoi(g[v_operator].params["node_num"])] = tmp;
+        ret = g[s].value;
+        break;
+      }
       default: std::cout << "this is not an operator vertex\n"; exit(1);
     }
     if (boost::out_degree(v_operator, g)==nan_cnt) ret = 0.0/0.0;
@@ -824,6 +828,7 @@ void CProvGraph::DFSComputeDerivative(vertex_t s, std::unordered_set<std::string
     case Softmax: DFSComputeSoftmaxDerivative(v_operator, g[s].derivative, visited); break;
     case Sigmoid: DFSComputeSigmoidDerivative(v_operator, g[s].derivative, visited); break;
     // case InnerProduct: DFSComputeInnerProductDerivative(v_operator, g[s].derivative, visited); break;
+    case InnerProductAct: DFSComputeInnerProductActDerivative(v_operator, g[s].derivative, visited); break;
     default: std::cout << "this is not an operator vertex\n"; exit(1);
   }
 }
@@ -1047,3 +1052,26 @@ void CProvGraph::DFSComputeSigmoidDerivative(vertex_t s, float d, std::unordered
 //     }
 //   }
 // }
+
+void CProvGraph::DFSComputeInnerProductActDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited) {
+  adjacency_tier ai, ai_end;
+  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+    vertex_t v = *ai;
+    edge_t e = boost::edge(s, v, g).first;
+    visited.insert(edgeToString(e));
+    bool all_visited = true;
+    in_edge_iter ei, ei_end;
+    for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
+      if (visited.find(edgeToString(*ei))==visited.end()) {
+        all_visited = false;
+        break;
+      }
+    }
+    if (all_visited) {
+      g[v].derivative = 0.0;
+      for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
+        g[v].derivative += g[*ei].derivative;
+      DFSComputeDerivative(v, visited);
+    }
+  }
+}

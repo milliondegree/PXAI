@@ -12,11 +12,11 @@ digraph G {
 0->1  [color=purple]
  [label=""];
 1->2  [color=purple]
- [label="Con: 3.9546e-25 Dev: 4.59135e-41"];
+ [label="Con: 1.17534e-38 Dev: 8.96831e-44"];
 2->3  [color=purple]
  [label=""];
 3->4  [color=purple]
- [label="Con: 3.95451e-25 Dev: 4.59135e-41"];
+ [label="Con: 1.1753e-38 Dev: 8.96831e-44"];
 2->5  [color=purple]
  [label=""];
 5->4  [color=purple]

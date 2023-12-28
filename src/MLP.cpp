@@ -230,6 +230,7 @@ void MLP::Train(const std::vector<TrainingSample> &training_sample_set_with_bias
   double current_iteration_cost_function = 0.0;
 
   for (i = 0; i < max_iterations; i++) {
+    std::cout << "iteration: "+std::to_string(i)+"\n";
     current_iteration_cost_function = 0.0;
     for (auto & training_sample_with_bias : training_sample_set_with_bias) {
 

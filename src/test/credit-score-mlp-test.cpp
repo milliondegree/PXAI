@@ -24,7 +24,7 @@
 const int input_size = 46;
 const int number_classes = 3;
 const char *credit_score_dataset = "./data/credit-score/train.csv";
-const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_10_layer.mlp";
+const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal.mlp";
 const std::string cprov_save_path = "./data/credit-score/cprov/test.dot";
 const std::array<std::string, number_classes> class_names =
 { "Good", "Standard", "Poor" };
@@ -154,7 +154,7 @@ int main(int argc, char *argv[]) {
     my_mlp.provG.saveGraph();
     std::cout << "With provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
-    std::string to_query = "softmax_0"; 
+    std::string to_query = "input_2"; 
     cpg::CProvGraph query_output = my_mlp.provG.ProvenanceQuery(to_query);
     
     t1 = clock();
@@ -169,15 +169,15 @@ int main(int argc, char *argv[]) {
     // t2 = clock();
     // std::cout << "Recompute with changed EDBs time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
-    t1 = clock();
-    cpg::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPrune(to_query, 0.05, 1);
-    t2 = clock();
-    std::cout << "Approx prune time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    // t1 = clock();
+    // cpg::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPrune(to_query, 0.05, 1);
+    // t2 = clock();
+    // std::cout << "Approx prune time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
-    t1 = clock();
-    std::cout << approx_output.computeVariable(to_query) << std::endl;
-    t2 = clock();
-    std::cout << "Approximate provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    // t1 = clock();
+    // std::cout << approx_output.computeVariable(to_query) << std::endl;
+    // t2 = clock();
+    // std::cout << "Approximate provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
     // t1 = clock();
     // approx_output.computeVariableWithChangedEDBs(to_query, changedEDBs);

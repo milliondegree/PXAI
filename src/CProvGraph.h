@@ -334,6 +334,8 @@ private:
 
   void DFSComputeInnerProductDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited);
 
+  void DFSComputeInnerProductActDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited);
+
   
 
  /* contribution functions */
