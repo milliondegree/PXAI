@@ -172,10 +172,12 @@ void CProvGraph::DFSProvQuery(vertex_t s, CProvGraph& subProvG) {
     return;
   }
   // start iterating adjacent vertices
+  if (boost::out_degree(s, g)==0) return;
   adjacency_tier ai_v, ai_v_end;
   boost::tie(ai_v, ai_v_end) = boost::adjacent_vertices(s, g);
   for (; ai_v!=ai_v_end; ai_v++) {
     vertex_t v_operator = *ai_v;
+    if (boost::out_degree(v_operator, g)==0) continue;
     vertex_t a_operator = subProvG.addOperatorVertex(g[v_operator].vt, g[v_operator].name, g[v_operator].params, g[v_operator].weights);
     subProvG.addProvEdge(parent, a_operator);
     adjacency_tier ai, ai_end;
@@ -206,7 +208,7 @@ void CProvGraph::computeContribution(const std::string& name) {
   std::vector<edge_t> edge_list;
   for (edge_iter ei=ei_begin; ei!=ei_end; ei++) {
     vertex_t v_source = boost::source(*ei, g);
-    if (g[v_source].vt!=Derived) edge_list.push_back(*ei);
+    if (g[v_source].vt!=Derived && g[v_source].vt!=Softmax) edge_list.push_back(*ei);
   }
   int count = 1;
   for (edge_t e : edge_list) {
@@ -219,6 +221,7 @@ void CProvGraph::computeContribution(const std::string& name) {
     std::cout << "\r"+std::to_string(count)+"/"+std::to_string(edge_list.size()) << "     ";
     count += 1;
   }
+  computeVariable(name);
   std::cout << "\n";
 }
 
@@ -287,29 +290,29 @@ void CProvGraph::DFSComputeSoftmaxContribution(vertex_t s, float s_value, float 
   }
 }
 
-void CProvGraph::DFSComputeInnerProductContribution(vertex_t s, float s_value, float c, std::unordered_set<std::string>& visited) {
-  adjacency_tier ai, ai_end;
-  for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
-    vertex_t v = *ai;
-    edge_t e = boost::edge(s, v, g).first;
-    g[e].contribution = c;
-    visited.insert(edgeToString(e));
-    bool all_visited = true;
-    in_edge_iter ei, ei_end;
-    for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
-      if (visited.find(edgeToString(*ei))==visited.end()) {
-        all_visited = false;
-        break;
-      }
-    }
-    if (all_visited) {
-      g[v].contribution = 0.0;
-      for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
-        g[v].contribution += g[*ei].contribution;
-      DFSComputeContribution(v, visited);
-    }
-  }
-}
+// void CProvGraph::DFSComputeInnerProductContribution(vertex_t s, float s_value, float c, std::unordered_set<std::string>& visited) {
+//   adjacency_tier ai, ai_end;
+//   for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
+//     vertex_t v = *ai;
+//     edge_t e = boost::edge(s, v, g).first;
+//     g[e].contribution = c;
+//     visited.insert(edgeToString(e));
+//     bool all_visited = true;
+//     in_edge_iter ei, ei_end;
+//     for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
+//       if (visited.find(edgeToString(*ei))==visited.end()) {
+//         all_visited = false;
+//         break;
+//       }
+//     }
+//     if (all_visited) {
+//       g[v].contribution = 0.0;
+//       for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
+//         g[v].contribution += g[*ei].contribution;
+//       DFSComputeContribution(v, visited);
+//     }
+//   }
+// }
 
 void CProvGraph::DFSComputeSigmoidContribution(vertex_t s, float s_value, float c, std::unordered_set<std::string>& visited) {
   adjacency_tier ai, ai_end;
@@ -397,7 +400,7 @@ CProvGraph CProvGraph::ApproximateSubGraphQuery(std::string& name, float epsilon
       approx_derivatives[edb] = approxSubProvG.getVertexDerivativeByName(edb);
     }
     // std::cout << "approx edb size: " << approx_derivatives.size() << std::endl;
-    float derivative_diff = computeDerivativeDiff(target_derivatives, approx_derivatives);
+    float derivative_diff = utils::computeDerivativeDiff(target_derivatives, approx_derivatives);
     ApproxSubGraphDiff asgd(includedEDBs, value_diff, derivative_diff);
     if (asgd.getDiff()<min_diff) {
       min_set = asgd.EDBs;
@@ -440,7 +443,7 @@ CProvGraph CProvGraph::ApproximateSubGraphQuery(std::string& name, float epsilon
         for (std::string edb : approxSubProvG.getVertexEBDsByName(name)) {
           approx_derivatives[edb] = approxSubProvG.getVertexDerivativeByName(edb);
         }
-        float derivative_diff = computeDerivativeDiff(target_derivatives, approx_derivatives);
+        float derivative_diff = utils::computeDerivativeDiff(target_derivatives, approx_derivatives);
         ApproxSubGraphDiff new_asgd(includedEDBs, value_diff, derivative_diff);
         pq.push(new_asgd);
         visited.insert(includedEDBs);
@@ -506,13 +509,75 @@ CProvGraph CProvGraph::ApproximateSubGraphQueryPrune(std::string& name, float ep
       for (std::string edb : approxSubProvG.getVertexEBDsByName(name)) {
         approx_derivatives[edb] = approxSubProvG.getVertexDerivativeByName(edb);
       }
-      float derivative_diff = computeDerivativeDiff(target_derivatives, approx_derivatives);
+      float derivative_diff = utils::computeDerivativeDiff(target_derivatives, approx_derivatives);
       // std::cout << "value diff: " << value_diff << ", derivative diff: " << derivative_diff << std::endl;
       if (value_diff>epsilon||derivative_diff>lambda) {
         std::cout << "value diff: " << value_diff << ", derivative diff: " << derivative_diff << std::endl;
         break;
       }
       ret = approxSubProvG;
+    }
+  }
+  std::string new_save_path = save_path.substr(0, save_path.find_last_of("."));
+  new_save_path += "-approx.dot";
+  ret.setSavePath(new_save_path);
+  std::cout << "pruned edges: " << count << std::endl;
+  return ret;
+}
+
+CProvGraph CProvGraph::ApproximateSubGraphQueryPruneMLP(std::string& name, float epsilon, float lambda) {
+  computeContribution(name);
+  computeDerivative(name);
+
+  vertex_t v = getVertexByName(name);
+  float target = g[v].value;
+  std::vector<double> target_derivatives = auxilary_data[int(g[getVertexByName("input_0")].derivative)];
+  std::cout << "target derivative: " << utils::vector_to_string(target_derivatives) << "\n";
+
+  edge_iter ei_begin, ei_end, ei;
+  boost::tie(ei_begin, ei_end) = boost::edges(g);
+  // std::vector<edge_t> edge_list;
+  edge_comparer ec(&g, true);
+  std::priority_queue<edge_t, std::vector<edge_t>, edge_comparer> edge_queue(ec);
+  int e_count = 0;
+  for (edge_iter ei=ei_begin; ei!=ei_end; ei++) {
+    vertex_t v_source = boost::source(*ei, g);
+    // vertex_t v_target = boost::target(*ei, g);
+    if (g[v_source].vt!=Derived && g[v_source].vt!=Softmax) {
+      // std::cout << abs(g[*ei].contribution) << ' ' << std::abs(g[*ei].derivative) << std::endl;
+      g[*ei].importance = ALPHA*std::abs(g[*ei].contribution)+BETA*std::abs(utils::vector_size(auxilary_data[g[*ei].derivative]));
+      edge_queue.push(*ei);
+    }
+  }
+  
+  int count = 0;
+  // int step = edge_list.size()/15;
+  int step = std::max(1, int(edge_queue.size()/10));
+  std::cout << "number of edges: " << edge_queue.size() << ", prune step: " << step << std::endl;
+  CProvGraph ret = *this;
+  // for (edge_t e : edge_list) {
+  while (!edge_queue.empty()) {
+    edge_t e = edge_queue.top();
+    edge_queue.pop();
+    vertex_t v_source = boost::source(e, g);
+    vertex_t v_target = boost::target(e, g);
+    boost::remove_edge(v_source, v_target, g);
+    count += 1;
+    if (count%step==0) {
+      // 
+      this->computeVariable(name);
+      float value_diff = std::abs(target-this->getVertexValueByName(name));
+      CProvGraph approxSubProvG = ProvenanceQuery(name);
+      approxSubProvG.computeDerivative(name);
+      std::vector<double> approx_derivatives = approxSubProvG.auxilary_data[approxSubProvG.g[approxSubProvG.getVertexByName("input_0")].derivative];
+      std::cout << "approx derivative: " << utils::vector_to_string(approx_derivatives) << "\n";
+      float derivative_diff = utils::computeDerivativeDiff(target_derivatives, approx_derivatives);
+      std::cout << "value diff: " << value_diff << ", derivative diff: " << derivative_diff << std::endl;
+      if (value_diff>epsilon||derivative_diff>lambda) {
+        // std::cout << "value diff: " << value_diff << ", derivative diff: " << derivative_diff << std::endl;
+        break;
+      }
+      else ret = approxSubProvG;
     }
   }
   std::string new_save_path = save_path.substr(0, save_path.find_last_of("."));
@@ -724,7 +789,15 @@ float CProvGraph::DFSComputeVariableNoEDB(vertex_t s, std::unordered_set<vertex_
   for (; ai_v!=ai_v_end; ai_v++) {
     vertex_t v_operator = *ai_v;
     if (boost::out_degree(v_operator, g)==0) {
-      g[s].value = 0.0/0.0;
+      if (g[v_operator].vt==InnerProductAct) {
+        auxilary_data[g[s].value][std::stoi(g[v_operator].params["node_num"])] = 0;
+        continue;
+      }
+      else if (g[v_operator].vt==Softmax) {
+        g[s].value = 0;
+        continue;
+      }
+      else g[s].value = 0.0/0.0;
       return g[s].value;
     }
     int nan_cnt = 0;
@@ -787,14 +860,18 @@ float CProvGraph::DFSComputeVariableNoEDB(vertex_t s, std::unordered_set<vertex_
         adjacency_tier ai, ai_end;
         for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
           vertex_t v = *ai;
-          float tmp = DFSComputeVariableNoEDB(v, visited);
-          if (!std::isnan(tmp)) {
-            if (g[v].name==g[v_operator].params["numerator_name"]) {
-              numerator = std::exp(tmp);
+          float value = DFSComputeVariableNoEDB(v, visited);
+          for (int i=0; i<auxilary_data[int(value)].size(); i++) {
+            float tmp = auxilary_data[int(value)][i];
+            if (!std::isnan(tmp)) {
+              if (i==std::stoi(g[v_operator].params["numerator_pos"])) {
+                numerator = std::exp(tmp);
+              }
+              denominator += std::exp(tmp);
             }
-            denominator += std::exp(tmp);
+            else nan_cnt++;
           }
-          else nan_cnt++;
+          
         }
         if (denominator==0) ret = 0;
         else ret = numerator/denominator;
@@ -848,8 +925,8 @@ void CProvGraph::computeDerivative(const std::string& name) {
 
   // insert derivative of the source vertex
   auxilary_data.push_back(std::vector<double> (auxilary_data[int(g[v].value)].size(), 1.0));
-  g[v].derivative = auxilary_data.size()-1;
-  // g[v].derivative = 1.0;
+  // g[v].derivative = auxilary_data.size()-1;
+  g[v].derivative = 1.0;
   
   // std::cout << "start to compute derivative" << std::endl;
   std::unordered_set<std::string> visited;
@@ -1015,36 +1092,33 @@ void CProvGraph::DFSComputeSoftmaxDerivative(vertex_t s, float d, std::unordered
   adjacency_tier ai, ai_end;
   for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
     vertex_t v = *ai;
-    if (!std::isnan(g[v].value)) {
-      denominator += std::exp(g[v].value);
-      if (g[v].name==g[s].params["numerator_name"])
-        numerator = std::exp(g[v].value);
+    int pos = g[v].value;
+    for (int i=0; i<auxilary_data[pos].size(); i++) {
+      float value = auxilary_data[g[v].value][i];
+      if (!std::isnan(value)) {
+        denominator += std::exp(value);
+        if (i==std::stoi(g[s].params["numerator_pos"]))
+          numerator = std::exp(value);
+      }
     }
   }
   for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
     vertex_t v = *ai;
     edge_t e = boost::edge(s, v, g).first;
-    if (g[v].name==g[s].params["numerator_name"]) {
-      g[e].derivative = d*(numerator/denominator)*(1-numerator/denominator);
+    auxilary_data.push_back(std::vector<double> (0));
+    int pos = auxilary_data.size()-1;
+    for (int i=0; i<auxilary_data[g[v].value].size(); i++) {
+      if (i==std::stoi(g[s].params["numerator_pos"])) 
+        auxilary_data[pos].push_back( d*(numerator/denominator)*(1-numerator/denominator) );
+      else 
+        auxilary_data[pos].push_back( -d*(std::exp(g[v].value)*numerator/std::pow(denominator, 2)) );
     }
-    else {
-      g[e].derivative = -d*(std::exp(g[v].value)*numerator/std::pow(denominator, 2));
-    }
+    g[e].derivative = pos;
     visited.insert(edgeToString(e));
-    bool all_visited = true;
-    in_edge_iter ei, ei_end;
-    for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
-      if (visited.find(edgeToString(*ei))==visited.end()) {
-        all_visited = false;
-        break;
-      }
-    }
-    if (all_visited) {
-      g[v].derivative = 0.0;
-      for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) 
-        g[v].derivative += g[*ei].derivative;
-      DFSComputeDerivative(v, visited);
-    }
+    g[v].derivative = pos;
+    // std::cout << utils::vector_to_string(auxilary_data[g[v].derivative]) << "\n";
+    // std::exit(0);
+    DFSComputeDerivative(v, visited);
   }
 }
 
@@ -1096,20 +1170,23 @@ void CProvGraph::DFSComputeSigmoidDerivative(vertex_t s, float d, std::unordered
 //   }
 // }
 
-void CProvGraph::DFSComputeInnerProductActDerivative(vertex_t s, float s_value, float d, std::unordered_set<std::string>& visited) {
+void CProvGraph::DFSComputeInnerProductActDerivative(vertex_t s, int value_pos, int derivative_pos, std::unordered_set<std::string>& visited) {
   adjacency_tier ai, ai_end;
   for (boost::tie(ai, ai_end)=boost::adjacent_vertices(s, g); ai!=ai_end; ai++) {
     vertex_t v = *ai;
     edge_t e = boost::edge(s, v, g).first;
     int node_num = std::stoi(g[s].params["node_num"]);
-    float previous_d = auxilary_data[int(d)][node_num];
-    float previous_value = auxilary_data[int(s_value)][node_num];
+    float previous_d = auxilary_data[derivative_pos][node_num];
+    float previous_value = auxilary_data[value_pos][node_num];
     auxilary_data.push_back(std::vector<double> (0));
     int pos = auxilary_data.size()-1;
     for (int i=0; i<g[s].weights.size(); i++) {
-      auxilary_data[pos].push_back(previous_d*utils::deriv_sigmoid(previous_value)*g[s].weights[i]);
+      float derivative;
+      if (g[s].params["act"]=="sigmoid") derivative = previous_d*utils::deriv_sigmoid(previous_value)*g[s].weights[i];
+      else derivative = previous_d*g[s].weights[i];
+      auxilary_data[pos].push_back(derivative);
     }
-    g[e].derivative = utils::vector_size(auxilary_data[pos]);
+    g[e].derivative = pos;
     visited.insert(edgeToString(e));
     bool all_visited = true;
     in_edge_iter ei, ei_end;
@@ -1120,13 +1197,15 @@ void CProvGraph::DFSComputeInnerProductActDerivative(vertex_t s, float s_value, 
       }
     }
     if (all_visited) {
-      auxilary_data.push_back(std::vector<double> (auxilary_data[int(s_value)].size(), 0.0));
+      auxilary_data.push_back(std::vector<double> (auxilary_data[g[v].value].size(), 0.0));
       int pos = auxilary_data.size()-1;
       for (boost::tie(ei, ei_end)=boost::in_edges(v, g); ei!=ei_end; ei++) {
         for (int i=0; i<auxilary_data[pos].size(); i++) 
+          // auxilary_data[pos][i] += auxilary_data[g[*ei].derivative][i] / auxilary_data[value_pos].size();
           auxilary_data[pos][i] += auxilary_data[g[*ei].derivative][i];
       }
       g[v].derivative = pos;
+      // std::cout << g[v].name << ": " << auxilary_data[g[v].derivative].size() << " " << utils::vector_to_string(auxilary_data[g[v].derivative]) << "\n";
       DFSComputeDerivative(v, visited);
     }
   }

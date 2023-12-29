@@ -163,14 +163,12 @@ void MLP::GetOutputWithProv(const std::vector<double> &input,
     m_layers[i].GetOutputAfterActivationFunctionWithProv(temp_in, &temp_out, input_names, i, provG);
   }
 
-  // std::vector<std::string> softmax_input_names;
-  // for (int i=0; i<temp_out.size(); i++) {
-  //   softmax_input_names.push_back("input_"+std::to_string(m_layers.size())+"_"+std::to_string(i));
-  // }
-  // if (temp_out.size() > 1)
-  //   // utils::Softmax(&temp_out);
-  //   utils::SoftmaxWithProv(&temp_out, softmax_input_names, this->provG);
-  // *output = temp_out;
+  std::vector<std::string> softmax_input_names;
+  softmax_input_names.push_back("input_"+std::to_string(m_layers.size()));
+  if (temp_out.size() > 1)
+    // utils::Softmax(&temp_out);
+    utils::SoftmaxWithProv(&temp_out, softmax_input_names, this->provG);
+  *output = temp_out;
 
   //Add last layer activation
   if (all_layers_activations != nullptr)

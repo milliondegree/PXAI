@@ -23,7 +23,7 @@
 
 #define MAX_NUM_OF_SEARCH 100
 #define ALPHA 0.5
-#define BETA 0.05
+#define BETA 0.5
 #define PRUNE_STEP 10
 
 namespace cpg {
@@ -324,7 +324,7 @@ private:
 
   void DFSComputeInnerProductDerivative(vertex_t s, float d, std::unordered_set<std::string>& visited);
 
-  void DFSComputeInnerProductActDerivative(vertex_t s, float s_value, float d, std::unordered_set<std::string>& visited);
+  void DFSComputeInnerProductActDerivative(vertex_t s, int value_pos, int derivative_pos, std::unordered_set<std::string>& visited);
 
   
 
@@ -516,21 +516,12 @@ private:
     return numerator/sum;
   }
 
-  float computeDerivativeDiff(std::unordered_map<std::string, float>& target_derivatives, std::unordered_map<std::string, float>& approx_derivatives) {
-    float ret = 0;
-    for (auto it : approx_derivatives) {
-      std::string edb = it.first;
-      ret += std::pow(std::abs(target_derivatives[edb]-it.second), 2);
-    }
-    return std::pow(ret, 0.5) / approx_derivatives.size();
-  }
-
 
  /* provenance prune */
 public:
   CProvGraph ApproximateSubGraphQueryPrune(std::string& name, float epsilon, float lambda);
   
-
+  CProvGraph ApproximateSubGraphQueryPruneMLP(std::string& name, float epsilon, float lambda);
 
 
  /* print and save functions */

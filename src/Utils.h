@@ -138,7 +138,7 @@ inline void SoftmaxWithProv(std::vector<double> *output, std::vector<std::string
   for (size_t i = 0; i < num_elements; i++) {
     std::string output_name = "softmax_"+std::to_string(i);
     (*output)[i] = exp_output[i] / exp_total;
-    std::unordered_map<std::string, std::string> params = {{"numerator_name", input_names[i]}};
+    std::unordered_map<std::string, std::string> params = {{"numerator_pos", std::to_string(i)}};
     provG.addComputingSubgraph(output_name, (float)(*output)[i], cpg::Softmax, input_names, params);
   }
 }
@@ -148,5 +148,31 @@ inline void  GetIdMaxElement(const std::vector<double> &output, size_t * class_i
                             std::max_element(output.begin(),
                                              output.end()));
 }
+
+inline float computeDerivativeDiff(std::unordered_map<std::string, float>& target_derivatives, std::unordered_map<std::string, float>& approx_derivatives) {
+  float ret = 0;
+  for (auto it : approx_derivatives) {
+    std::string edb = it.first;
+    ret += std::pow(std::abs(target_derivatives[edb]-it.second), 2);
+  }
+  return std::pow(ret, 0.5) / approx_derivatives.size();
+}
+
+inline float computeDerivativeDiff(std::vector<double>& target_derivatives, std::vector<double>& approx_derivatives) {
+  float ret = 0;
+  for (int i=0; i<approx_derivatives.size(); i++)
+    ret += std::pow(std::abs(target_derivatives[i]-approx_derivatives[i]), 2);
+  return std::pow(ret, 0.5) / approx_derivatives.size();
+}
+
+inline std::string vector_to_string(std::vector<double>& v) {
+  std::string ret = "[";
+  for (double d : v) {
+    ret += std::to_string(d) + ", ";
+  }
+  ret += "]";
+  return ret;
+}
+
 }
 #endif // UTILS_H
