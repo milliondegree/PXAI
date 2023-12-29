@@ -24,7 +24,7 @@
 const int input_size = 46;
 const int number_classes = 3;
 const char *credit_score_dataset = "./data/credit-score/train.csv";
-const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_3_layer.mlp";
+const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_5_layer.mlp";
 const std::string cprov_save_path = "./data/credit-score/cprov/test.dot";
 const std::array<std::string, number_classes> class_names =
 { "Good", "Standard", "Poor" };
@@ -154,7 +154,7 @@ int main(int argc, char *argv[]) {
     my_mlp.provG.saveGraph();
     std::cout << "With provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
-    std::string to_query = "input_4"; 
+    std::string to_query = "input_6"; 
     cpg::CProvGraph query_output = my_mlp.provG.ProvenanceQuery(to_query);
     
     t1 = clock();
