@@ -279,6 +279,14 @@ public:
     g[e].contribution = contribution;
   }
 
+  inline void addProvEdge(vertex_t v1, vertex_t v2, float contribution, float derivative) {
+    edge_t e;
+    bool b;
+    boost::tie(e, b) = boost::add_edge(v1, v2, g);
+    g[e].contribution = contribution;
+    g[e].derivative = derivative;
+  }
+
   inline void setVertexValue(vertex_t v, float value) {
     g[v].value = value;
   }
