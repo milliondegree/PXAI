@@ -134,12 +134,14 @@ int main(int argc, char *argv[]) {
   }
   
   //Destruction/Construction of a MLP object to show off saving and loading a trained model
-  MLP my_mlp(credit_score_mlp_weights);
+  
 
   int correct = 0;
-  samples = 1;
+  samples = 3;
   for (int j = 0; j < samples; ++j) {
     std::vector<double> guess;
+
+    MLP my_mlp(credit_score_mlp_weights);
 
     clock_t t1, t2;
     t1 = clock();
@@ -154,8 +156,11 @@ int main(int argc, char *argv[]) {
     // my_mlp.provG.saveGraph();
     std::cout << "With provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
+    t1 = clock();
     std::string to_query = "softmax_0"; 
     cpg::CProvGraph query_output = my_mlp.provG.ProvenanceQuery(to_query);
+    t2 = clock();
+    std::cout << "Provenance query: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
     
     t1 = clock();
     std::cout << query_output.computeVariable(to_query) << std::endl;
@@ -163,7 +168,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
     // query_output.computeDerivative(to_query);
-    query_output.saveGraph();
+    // query_output.saveGraph();
 
     // std::unordered_map<std::string, float> changedEDBs;
     // changedEDBs["input_0_2"] = changedEDBs["input_0_2"];
@@ -173,7 +178,7 @@ int main(int argc, char *argv[]) {
     // std::cout << "Recompute with changed EDBs time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
     t1 = clock();
-    cpg::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPruneMLP(to_query, 0.02, 0.01);
+    cpg::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPruneMLP(to_query, 0.3, 0.01);
     t2 = clock();
     std::cout << "Approx prune time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
@@ -187,7 +192,7 @@ int main(int argc, char *argv[]) {
     // t2 = clock();
     // std::cout << "Recompute with changed EDBs time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
-    approx_output.saveGraph();
+    // approx_output.saveGraph();
 
   }
 

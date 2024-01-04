@@ -114,8 +114,9 @@ struct my_node_writer {
   my_node_writer(Graph& g_) : g (g_) {};
   template <class Vertex>
   void operator()(std::ostream& out, Vertex v) {
-    if (g[v].vt==Input) 
+    if (g[v].vt==Input) {
       out << " [label=\"" << g[v].name << ": " << g[v].value << ", d: " << g[v].derivative << "\", shape=oval, color=dodgerblue]";
+    }
     else if (g[v].vt==Derived) 
       out << " [label=\"" << g[v].name << ": " << g[v].value << ", d: " << g[v].derivative << "\", shape=oval, color=limegreen]";
     else if (g[v].vt==Parameter) 

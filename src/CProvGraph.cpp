@@ -290,17 +290,26 @@ void CProvGraph::DFSComputeContribution(vertex_t s, std::unordered_set<std::stri
           }
         }
         if (all_visited) {
-          auxilary_data.push_back(std::vector<double> (auxilary_data[int(g[v].value)].size(), 1.0));
+          auxilary_data.push_back(std::vector<double> (auxilary_data[int(g[v].value)].size(), 0.0));
           int pos = auxilary_data.size()-1;
           for (int i=0; i<auxilary_data[pos].size(); i++) {
             float previous_input = auxilary_data[g[v].value][i];
             adjacency_tier ai_vv, ai_vv_end;
             boost::tie(ai_vv, ai_vv_end) = boost::adjacent_vertices(s, g);
+            auxilary_data[g[v].value][i] = 0;
             for (; ai_vv!=ai_vv_end; ai_vv++) {
-              vertex_t v_operator = * ai_vv;
-              
+              float new_output = std::inner_product(begin(auxilary_data[g[v].value]), end(auxilary_data[g[v].value]), begin(g[* ai_vv].weights), 0.0);
+              if (g[* ai_vv].params["act"]=="sigmoid") 
+                float new_output = utils::sigmoid(new_output);
+              float previous_output = auxilary_data[g[s].value][std::stoi(g[* ai_vv].params["node_num"])];
+              auxilary_data[pos][i] += (previous_output - new_output) * auxilary_data[g[s].contribution][std::stoi(g[*ai_vv].params["node_num"])] / auxilary_data[g[s].value].size();
+              // std::cout << new_output << " " << previous_output << "\n";
+              // auxilary_data[pos][i] += (previous_output - new_output);
             }
+            // std::cout << auxilary_data[pos][i] << " ";
+            auxilary_data[g[v].value][i] = previous_input;
           }
+          // std::cout << std::endl;
           g[v].contribution = pos;
           DFSComputeContribution(v, visited);
         }
@@ -613,7 +622,7 @@ CProvGraph CProvGraph::ApproximateSubGraphQueryPruneMLP(std::string& name, float
   
   int count = 0;
   // int step = edge_list.size()/15;
-  int step = std::max(1, int(edge_queue.size()/20));
+  int step = std::max(1, int(edge_queue.size()/30));
   std::cout << "number of edges: " << edge_queue.size() << ", prune step: " << step << std::endl;
   CProvGraph ret = *this;
   // for (edge_t e : edge_list) {
