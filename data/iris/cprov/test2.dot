@@ -18,11 +18,11 @@ digraph G {
 1->2  [color=purple]
  [label=""];
 2->0  [color=purple]
- [label="Con: -9.13344e-33 Dev: 4.59135e-41"];
+ [label="Con: 1.17525e-38 Dev: 8.96831e-44"];
 1->3  [color=purple]
  [label=""];
 3->0  [color=purple]
- [label="Con: 0 Dev: 0"];
+ [label="Con: 1.17524e-38 Dev: 8.96831e-44"];
 1->4  [color=purple]
  [label=""];
 4->0  [color=purple]
@@ -34,7 +34,7 @@ digraph G {
 6->7  [color=purple]
  [label=""];
 7->1  [color=purple]
- [label="Con: -9.13302e-33 Dev: 4.59135e-41"];
+ [label="Con: 1.17521e-38 Dev: 8.96831e-44"];
 6->8  [color=purple]
  [label=""];
 8->1  [color=purple]
@@ -46,13 +46,13 @@ digraph G {
 10->11  [color=purple]
  [label=""];
 11->6  [color=purple]
- [label="Con: -9.13323e-33 Dev: 4.59135e-41"];
+ [label="Con: 1.17525e-38 Dev: 8.96831e-44"];
 12->13  [color=purple]
  [label=""];
 13->6  [color=purple]
- [label="Con: -9.13323e-33 Dev: 4.59135e-41"];
+ [label="Con: 1.17525e-38 Dev: 8.96831e-44"];
 14->15  [color=purple]
  [label=""];
 15->6  [color=purple]
- [label="Con: -9.13323e-33 Dev: 4.59135e-41"];
+ [label="Con: 1.17525e-38 Dev: 8.96831e-44"];
 }

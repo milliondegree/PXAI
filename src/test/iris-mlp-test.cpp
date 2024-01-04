@@ -168,8 +168,8 @@ int main(int argc, char *argv[]) {
     t2 = clock();
     std::cout << "Provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
     
-    // query_output.computeContribution(to_query); 
-    // query_output.computeDerivative(to_query);
+    query_output.computeContribution_v2(to_query); 
+    query_output.computeDerivative(to_query);
     query_output.saveGraph();
 
     // std::unordered_map<std::string, float> changedEDBs;
@@ -180,7 +180,7 @@ int main(int argc, char *argv[]) {
     // std::cout << "Recompute with changed EDBs time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
     t1 = clock();
-    cpg::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPruneMLP(to_query, 0.01, 0.000161934);
+    cpg::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPruneMLP(to_query, 0.01, 0.01);
     t2 = clock();
     std::cout << "Approx prune time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 

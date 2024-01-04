@@ -24,7 +24,7 @@
 const int input_size = 46;
 const int number_classes = 3;
 const char *credit_score_dataset = "./data/credit-score/train.csv";
-const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_5_layer.mlp";
+const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal.mlp";
 const std::string cprov_save_path = "./data/credit-score/cprov/test.dot";
 const std::array<std::string, number_classes> class_names =
 { "Good", "Standard", "Poor" };
@@ -151,7 +151,7 @@ int main(int argc, char *argv[]) {
     my_mlp.GetOutputWithProv(training_sample_set_with_bias[j].input_vector(), &guess);
     t2 = clock();
     my_mlp.provG.setSavePath(cprov_save_path);
-    my_mlp.provG.saveGraph();
+    // my_mlp.provG.saveGraph();
     std::cout << "With provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
     std::string to_query = "softmax_0"; 
@@ -162,7 +162,7 @@ int main(int argc, char *argv[]) {
     t2 = clock();
     std::cout << "Provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
-    query_output.computeDerivative(to_query);
+    // query_output.computeDerivative(to_query);
     query_output.saveGraph();
 
     // std::unordered_map<std::string, float> changedEDBs;
@@ -173,7 +173,7 @@ int main(int argc, char *argv[]) {
     // std::cout << "Recompute with changed EDBs time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
     t1 = clock();
-    cpg::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPruneMLP(to_query, 0.05, 0.01);
+    cpg::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPruneMLP(to_query, 0.02, 0.01);
     t2 = clock();
     std::cout << "Approx prune time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
 
@@ -186,6 +186,8 @@ int main(int argc, char *argv[]) {
     // approx_output.computeVariableWithChangedEDBs(to_query, changedEDBs);
     // t2 = clock();
     // std::cout << "Recompute with changed EDBs time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+
+    approx_output.saveGraph();
 
   }
 
