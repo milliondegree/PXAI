@@ -6,57 +6,57 @@ digraph G {
 4 [label="centroid_1_0: 5, d: 0", shape=oval, color=darkviolet];
 5 [label="centroid_2_0: 6, d: 0", shape=oval, color=darkviolet];
 6 [label="point_0_1: 0, d: 0", shape=oval, color=limegreen];
-7 [label="nearestCentroid_point_0_1", shape=box, color=tomato];
+7 [label="vectorMean_point_0_1", shape=box, color=tomato];
 8 [label="point_1_1: 1, d: 0", shape=oval, color=limegreen];
-9 [label="nearestCentroid_point_1_1", shape=box, color=tomato];
+9 [label="vectorMean_point_1_1", shape=box, color=tomato];
 10 [label="point_2_1: 2, d: 0", shape=oval, color=limegreen];
-11 [label="nearestCentroid_point_2_1", shape=box, color=tomato];
+11 [label="vectorMean_point_2_1", shape=box, color=tomato];
 12 [label="centroid_0_1: 6, d: 0", shape=oval, color=limegreen];
-13 [label="vectorMean_centroid_0_1", shape=box, color=tomato];
+13 [label="innerProductAct_centroid_0_1", shape=box, color=tomato];
 14 [label="centroid_1_1: 7, d: 0", shape=oval, color=limegreen];
-15 [label="vectorMean_centroid_1_1", shape=box, color=tomato];
+15 [label="innerProductAct_centroid_1_1", shape=box, color=tomato];
 16 [label="centroid_2_1: 8, d: 0", shape=oval, color=limegreen];
-17 [label="vectorMean_centroid_2_1", shape=box, color=tomato];
+17 [label="innerProductAct_centroid_2_1", shape=box, color=tomato];
 6->7  [color=purple]
  [label=""];
 7->3  [color=purple]
- [label=""];
+ [label="Con: 4.2039e-45 Dev: 0"];
 7->4  [color=purple]
- [label=""];
+ [label="Con: 4.2039e-45 Dev: 0"];
 7->5  [color=purple]
- [label=""];
+ [label="Con: 4.2039e-45 Dev: 0"];
 7->0  [color=purple]
- [label=""];
+ [label="Con: 4.2039e-45 Dev: 0"];
 8->9  [color=purple]
  [label=""];
 9->3  [color=purple]
- [label=""];
+ [label="Con: 4.2039e-45 Dev: 0"];
 9->4  [color=purple]
- [label=""];
+ [label="Con: 4.2039e-45 Dev: 0"];
 9->5  [color=purple]
- [label=""];
+ [label="Con: 4.2039e-45 Dev: 0"];
 9->1  [color=purple]
- [label=""];
+ [label="Con: 4.2039e-45 Dev: 0"];
 10->11  [color=purple]
  [label=""];
 11->3  [color=purple]
- [label=""];
+ [label="Con: 4.2039e-45 Dev: 0"];
 11->4  [color=purple]
- [label=""];
+ [label="Con: 4.2039e-45 Dev: 0"];
 11->5  [color=purple]
- [label=""];
+ [label="Con: 4.2039e-45 Dev: 0"];
 11->2  [color=purple]
- [label=""];
+ [label="Con: 4.2039e-45 Dev: 0"];
 12->13  [color=purple]
  [label=""];
-13->6  [color=purple]
- [label=""];
+13->8  [color=purple]
+ [label="Con: 1.08899e-38 Dev: 0"];
 14->15  [color=purple]
  [label=""];
-15->10  [color=purple]
- [label=""];
+15->6  [color=purple]
+ [label="Con: 1.08899e-38 Dev: 0"];
 16->17  [color=purple]
  [label=""];
-17->8  [color=purple]
- [label=""];
+17->10  [color=purple]
+ [label="Con: 1.08899e-38 Dev: 0"];
 }

@@ -24,7 +24,7 @@
 const int input_size = 46;
 const int number_classes = 3;
 const char *credit_score_dataset = "./data/credit-score/train.csv";
-const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal.mlp";
+const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_5_layer.mlp";
 const std::string cprov_save_path = "./data/credit-score/cprov/test.dot";
 const std::array<std::string, number_classes> class_names =
 { "Good", "Standard", "Poor" };
@@ -137,7 +137,13 @@ int main(int argc, char *argv[]) {
   
 
   int correct = 0;
-  samples = 3;
+  samples = 1;
+  float total_inference = 0;
+  float total_prov = 0;
+  float total_prov_query = 0;
+  float total_prov_inference = 0;
+  float total_approx = 0;
+  float total_approx_prov_inference = 0;
   for (int j = 0; j < samples; ++j) {
     std::vector<double> guess;
 
@@ -148,6 +154,7 @@ int main(int argc, char *argv[]) {
     my_mlp.GetOutput(training_sample_set_with_bias[j].input_vector(), &guess);
     t2 = clock();
     std::cout << "Without provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    total_inference += (t2-t1)*1.0/CLOCKS_PER_SEC;
 
     t1 = clock();
     my_mlp.GetOutputWithProv(training_sample_set_with_bias[j].input_vector(), &guess);
@@ -155,17 +162,20 @@ int main(int argc, char *argv[]) {
     my_mlp.provG.setSavePath(cprov_save_path);
     // my_mlp.provG.saveGraph();
     std::cout << "With provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    total_prov += (t2-t1)*1.0/CLOCKS_PER_SEC;
 
     t1 = clock();
     std::string to_query = "softmax_0"; 
     cpg::CProvGraph query_output = my_mlp.provG.ProvenanceQuery(to_query);
     t2 = clock();
     std::cout << "Provenance query: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    total_prov_query += (t2-t1)*1.0/CLOCKS_PER_SEC;
     
     t1 = clock();
     std::cout << query_output.computeVariable(to_query) << std::endl;
     t2 = clock();
     std::cout << "Provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    total_prov_inference += (t2-t1)*1.0/CLOCKS_PER_SEC;
 
     // query_output.computeDerivative(to_query);
     // query_output.saveGraph();
@@ -181,11 +191,13 @@ int main(int argc, char *argv[]) {
     cpg::CProvGraph approx_output = query_output.ApproximateSubGraphQueryPruneMLP(to_query, 0.3, 0.01);
     t2 = clock();
     std::cout << "Approx prune time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    total_approx += (t2-t1)*1.0/CLOCKS_PER_SEC;
 
     t1 = clock();
     std::cout << approx_output.computeVariable(to_query) << std::endl;
     t2 = clock();
     std::cout << "Approximate provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    total_approx_prov_inference += (t2-t1)*1.0/CLOCKS_PER_SEC;
 
     // t1 = clock();
     // approx_output.computeVariableWithChangedEDBs(to_query, changedEDBs);
@@ -195,6 +207,10 @@ int main(int argc, char *argv[]) {
     // approx_output.saveGraph();
 
   }
+  std::cout << "average inference: " << total_inference/samples << "\n";
+  std::cout << "average inference on prov: " << total_prov_inference/samples << "\n";
+  std::cout << "average approx: " << total_approx/samples << "\n";
+  std::cout << "average inference on approx: " << total_approx_prov_inference/samples << "\n";
 
   return 0;
 }
