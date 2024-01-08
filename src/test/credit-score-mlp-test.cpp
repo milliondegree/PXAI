@@ -24,7 +24,7 @@
 const int input_size = 46;
 const int number_classes = 3;
 const char *credit_score_dataset = "./data/credit-score/train.csv";
-const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_5_layer.mlp";
+const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_2048.mlp";
 const std::string cprov_save_path = "./data/credit-score/cprov/test.dot";
 const std::array<std::string, number_classes> class_names =
 { "Good", "Standard", "Poor" };
@@ -44,7 +44,7 @@ bool load_data(int *samples,
   while (!feof(in) && fgets(line, 1024, in)) {
     ++(*samples);
   }
-  fseek(in, 0, SEEK_SET);
+  fseek(in, 0, SEEK_SET); 
 
   (*samples) = 1000;
   std::cout << "Loading " << (*samples)
@@ -170,11 +170,16 @@ int main(int argc, char *argv[]) {
     t2 = clock();
     std::cout << "Provenance query: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
     total_prov_query += (t2-t1)*1.0/CLOCKS_PER_SEC;
-    
+
     t1 = clock();
     std::cout << query_output.computeVariable(to_query) << std::endl;
     t2 = clock();
     std::cout << "Provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    
+    t1 = clock();
+    std::cout << query_output.computeVariableMLP(to_query) << std::endl;
+    t2 = clock();
+    std::cout << "Provenance recompute time optimized: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
     total_prov_inference += (t2-t1)*1.0/CLOCKS_PER_SEC;
 
     // query_output.computeDerivative(to_query);
@@ -194,7 +199,7 @@ int main(int argc, char *argv[]) {
     total_approx += (t2-t1)*1.0/CLOCKS_PER_SEC;
 
     t1 = clock();
-    std::cout << approx_output.computeVariable(to_query) << std::endl;
+    std::cout << approx_output.computeVariableMLP(to_query) << std::endl;
     t2 = clock();
     std::cout << "Approximate provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
     total_approx_prov_inference += (t2-t1)*1.0/CLOCKS_PER_SEC;

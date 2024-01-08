@@ -1,20 +1,20 @@
 digraph G {
 0 [label="softmax_0: 0.999471, d: 1", shape=oval, color=limegreen];
 1 [label="softmax_softmax_0", shape=box, color=tomato];
-2 [label="input_2: 2, d: 38", shape=oval, color=limegreen];
+2 [label="input_2: 2, d: 36", shape=oval, color=limegreen];
 3 [label="innerProductAct_input_2", shape=box, color=tomato];
-4 [label="input_1: 1, d: 40", shape=oval, color=limegreen];
+4 [label="input_1: 1, d: 38", shape=oval, color=limegreen];
 5 [label="innerProductAct_input_1", shape=box, color=tomato];
 6 [label="innerProductAct_input_1_1", shape=box, color=tomato];
 7 [label="innerProductAct_input_1_2", shape=box, color=tomato];
 8 [label="innerProductAct_input_1_3", shape=box, color=tomato];
-9 [label="input_0: 0, d: 42", shape=oval, color=dodgerblue];
+9 [label="input_0: 0, d: 40", shape=oval, color=dodgerblue];
 10 [label="innerProductAct_input_2_1", shape=box, color=tomato];
 11 [label="innerProductAct_input_2_2", shape=box, color=tomato];
 0->1  [color=purple]
  [label=""];
 1->2  [color=purple]
- [label="Con: 1.17521e-38 Dev: 38"];
+ [label="Con: 1.17521e-38 Dev: 36"];
 2->3  [color=purple]
  [label=""];
 4->5  [color=purple]
@@ -30,7 +30,7 @@ digraph G {
 2->11  [color=purple]
  [label=""];
 3->4  [color=purple]
- [label="Con: 0.666138 Dev: 39"];
+ [label="Con: 0.666138 Dev: 37"];
 8->9  [color=purple]
- [label="Con: 0.666138 Dev: 41"];
+ [label="Con: 0.666138 Dev: 39"];
 }

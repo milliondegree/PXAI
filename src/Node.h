@@ -169,7 +169,7 @@ public:
     std::unordered_map<std::string, std::string> params;
     params["act"] = m_activation_function_str;
     params["node_num"] = std::to_string(node_num);
-    provG.addComputingSubgraph(output_name, float(pos), cpg::InnerProductAct, input_names, params, m_weights, node_num);
+    provG.addComputingSubgraph(output_name, float(pos), cpg::InnerProductAct, input_names, params, &m_weights, node_num);
   }
 
   void GetBooleanOutput(const std::vector<double> &input,

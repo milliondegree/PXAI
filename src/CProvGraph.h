@@ -91,7 +91,7 @@ struct ProvVertex {
   float contribution;
   float derivative;
   std::unordered_map<std::string, std::string> params;
-  std::vector<double> weights;
+  std::vector<double>* weights;
   std::unordered_set<std::string> EDBs;
 };
 
@@ -252,17 +252,17 @@ public:
 
   inline vertex_t addOperatorVertex(const VertexType vt, const std::string& name, const std::unordered_map<std::string, std::string>& params);
 
-  inline vertex_t addOperatorVertex(const VertexType vt, const std::string& name, const std::vector<double>& weights);
+  inline vertex_t addOperatorVertex(const VertexType vt, const std::string& name, std::vector<double>* weights);
 
-  inline vertex_t addOperatorVertex(const VertexType vt, const std::string& name, const std::unordered_map<std::string, std::string>& params, const std::vector<double>& weights);
+  inline vertex_t addOperatorVertex(const VertexType vt, const std::string& name, const std::unordered_map<std::string, std::string>& params, std::vector<double>* weights);
 
   void addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names);
 
   void addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names, const std::unordered_map<std::string, std::string>& params);
 
-  void addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names, const std::vector<double>& weights);
+  void addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names, std::vector<double>* weights);
 
-  void addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names, const std::unordered_map<std::string, std::string>& params, const std::vector<double>& weights, int number_of_op);
+  void addComputingSubgraph(const std::string& output_name, const float value, VertexType vt, const std::vector<std::string>& input_names, const std::unordered_map<std::string, std::string>& params, std::vector<double>* weights, int number_of_op);
 
   inline void addProvEdge(vertex_t v1, vertex_t v2, bool reverse) {
     if (!reverse) boost::add_edge(v1, v2, g);
@@ -362,6 +362,8 @@ public:
 
   float computeVariable(const std::string& name);
 
+  float computeVariableMLP(const std::string& name);
+
 private:
   inline bool hasIntersection(const std::unordered_set<std::string>& l_set, const std::unordered_set<std::string>& r_set);
 
@@ -370,6 +372,8 @@ private:
   float DFSComputeVariable(vertex_t s, std::unordered_set<vertex_t>& visited);
 
   float DFSComputeVariableNoEDB(vertex_t s, std::unordered_set<vertex_t>& visited);
+
+  float DFSComputeVariableNoEDBMLP(vertex_t& s);
 
   inline float DFSComputeSum(vertex_t s, std::unordered_set<vertex_t>& visited);
 
