@@ -24,7 +24,7 @@
 const int input_size = 46;
 const int number_classes = 3;
 const char *credit_score_dataset = "./data/credit-score/train.csv";
-const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_2048.mlp";
+const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_1024.mlp";
 const std::string cprov_save_path = "./data/credit-score/cprov/test.dot";
 const std::array<std::string, number_classes> class_names =
 { "Good", "Standard", "Poor" };

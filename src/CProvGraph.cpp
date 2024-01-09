@@ -300,15 +300,17 @@ void CProvGraph::DFSComputeContribution(vertex_t s, std::unordered_set<std::stri
             adjacency_tier ai_vv, ai_vv_end;
             boost::tie(ai_vv, ai_vv_end) = boost::adjacent_vertices(s, g);
             auxilary_data[g[v].value][i] = 0;
+            int cnt = 0;
             for (; ai_vv!=ai_vv_end; ai_vv++) {
               float new_output = std::inner_product(begin(auxilary_data[g[v].value]), end(auxilary_data[g[v].value]), begin(*g[* ai_vv].weights), 0.0);
               // float new_output = 1;
               if (g[* ai_vv].params["act"]=="sigmoid") 
                 float new_output = utils::sigmoid(new_output);
-              float previous_output = auxilary_data[g[s].value][std::stoi(g[* ai_vv].params["node_num"])];
-              auxilary_data[pos][i] += (previous_output - new_output) * auxilary_data[g[s].contribution][std::stoi(g[*ai_vv].params["node_num"])] / auxilary_data[g[s].value].size();
+              float previous_output = auxilary_data[g[s].value][cnt];
+              auxilary_data[pos][i] += (previous_output - new_output) * auxilary_data[g[s].contribution][cnt] / auxilary_data[g[s].value].size();
               // std::cout << new_output << " " << previous_output << "\n";
               // auxilary_data[pos][i] += (previous_output - new_output);
+              cnt += 1;
             }
             sum += auxilary_data[pos][i];
             // std::cout << auxilary_data[pos][i] << " ";
