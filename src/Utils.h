@@ -37,6 +37,10 @@ inline double sigmoid(double x) {
   return 1 / (1 + exp(-x));
 }
 
+inline double inverse_sigmoid(double x) {
+  return log(x / (1-x));
+}
+
 // Derivative of sigmoid function
 inline double deriv_sigmoid(double x) {
   return sigmoid(x)*(1 - sigmoid(x));

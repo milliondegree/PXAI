@@ -302,14 +302,22 @@ void CProvGraph::DFSComputeContribution(vertex_t s, std::unordered_set<std::stri
             auxilary_data[g[v].value][i] = 0;
             int cnt = 0;
             for (; ai_vv!=ai_vv_end; ai_vv++) {
-              float new_output = std::inner_product(begin(auxilary_data[g[v].value]), end(auxilary_data[g[v].value]), begin(*g[* ai_vv].weights), 0.0);
-              // float new_output = 1;
-              if (g[* ai_vv].params["act"]=="sigmoid") 
-                float new_output = utils::sigmoid(new_output);
+              // float new_output = std::inner_product(begin(auxilary_data[g[v].value]), end(auxilary_data[g[v].value]), begin(*g[* ai_vv].weights), 0.0);
+              // if (g[* ai_vv].params["act"]=="sigmoid") 
+              //   new_output = utils::sigmoid(new_output);
+              // float previous_output = auxilary_data[g[s].value][cnt];
+              // auxilary_data[pos][i] += (previous_output - new_output) / previous_output * auxilary_data[g[s].contribution][cnt];
+
               float previous_output = auxilary_data[g[s].value][cnt];
-              auxilary_data[pos][i] += (previous_output - new_output) * auxilary_data[g[s].contribution][cnt] / auxilary_data[g[s].value].size();
-              // std::cout << new_output << " " << previous_output << "\n";
-              // auxilary_data[pos][i] += (previous_output - new_output);
+              float new_output;
+              if (g[* ai_vv].params["act"]=="sigmoid") {
+                float inverse_previous_output = utils::inverse_sigmoid(previous_output);
+                new_output = utils::sigmoid(inverse_previous_output-previous_input*(*g[* ai_vv].weights)[i]);
+              }
+              else{
+                new_output = previous_output-previous_input*(*g[* ai_vv].weights)[i];
+              }
+              auxilary_data[pos][i] += (previous_output - new_output) / previous_output * auxilary_data[g[s].contribution][cnt];
               cnt += 1;
             }
             sum += auxilary_data[pos][i];
@@ -320,7 +328,7 @@ void CProvGraph::DFSComputeContribution(vertex_t s, std::unordered_set<std::stri
           for (int i=0; i<auxilary_data[pos].size(); i++) {
             auxilary_data[pos][i] /= sum;
           }
-          // std::cout << std::endl;
+
           g[v].contribution = pos;
           DFSComputeContribution(v, visited);
         }
@@ -674,7 +682,7 @@ CProvGraph CProvGraph::ApproximateSubGraphQueryPruneMLP(std::string& name, float
       t2 = clock();
       std::cout << "search time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << "\n";
       if (value_diff>epsilon||derivative_diff>lambda||edge_queue.size()<=step) {
-        // std::cout << "value diff: " << value_diff << ", derivative diff: " << derivative_diff << std::endl;
+        std::cout << "value diff: " << value_diff << ", derivative diff: " << derivative_diff << std::endl;
         break;
       }
       else ret = approxSubProvG;

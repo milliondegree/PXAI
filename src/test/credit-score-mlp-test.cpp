@@ -137,7 +137,7 @@ int main(int argc, char *argv[]) {
   
 
   int correct = 0;
-  samples = 1;
+  samples = 100;
   float total_inference = 0;
   float total_prov = 0;
   float total_prov_query = 0;

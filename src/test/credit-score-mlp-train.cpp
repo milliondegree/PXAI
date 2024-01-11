@@ -24,7 +24,7 @@
 const int input_size = 46;
 const int number_classes = 3;
 const char *credit_score_dataset = "./data/credit-score/train.csv";
-const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_256.mlp";
+const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_4096.mlp";
 const std::array<std::string, number_classes> class_names =
 { "Good", "Standard", "Poor" };
 
@@ -141,6 +141,7 @@ int main(int argc, char *argv[]) {
     // MLP my_mlp({ input_size + 1, 512, 512, number_classes }, { "sigmoid", "sigmoid", "linear" }, false);
     // MLP my_mlp({ input_size + 1, 1024, 1024, number_classes }, { "sigmoid", "sigmoid", "linear" }, false);
     // MLP my_mlp({ input_size + 1, 2048, 2048, number_classes }, { "sigmoid", "sigmoid", "linear" }, false);
+    // MLP my_mlp({ input_size + 1, 4096, 4096, number_classes }, { "sigmoid", "sigmoid", "linear" }, false);
     // MLP my_mlp({ input_size + 1, 1024, 1024, 1024, number_classes }, { "sigmoid", "sigmoid", "sigmoid", "linear" }, false);
     // MLP my_mlp({ input_size + 1, 1024, 1024, 1024, 1024, number_classes }, { "sigmoid", "sigmoid", "sigmoid", "sigmoid", "linear" }, false);
     // MLP my_mlp({ input_size + 1, 1024, 1024, 1024, 1024, 1024, number_classes }, { "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "linear" }, false);
