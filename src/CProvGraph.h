@@ -22,7 +22,7 @@
 #endif
 
 #define MAX_NUM_OF_SEARCH 100
-#define ALPHA 0.5
+#define ALPHA 1
 #define BETA 0.5
 #define PRUNE_STEP 10
 
@@ -115,12 +115,15 @@ struct my_node_writer {
   template <class Vertex>
   void operator()(std::ostream& out, Vertex v) {
     if (g[v].vt==Input) {
-      out << " [label=\"" << g[v].name << ": " << g[v].value << ", d: " << g[v].derivative << "\", shape=oval, color=dodgerblue]";
+      // out << " [label=\"" << g[v].name << ": " << g[v].value << ", d: " << g[v].derivative << "\", shape=oval, color=dodgerblue]";
+      out << " [label=\"" << g[v].name << ": " << g[v].value << "\", shape=oval, color=dodgerblue]";
     }
     else if (g[v].vt==Derived) 
-      out << " [label=\"" << g[v].name << ": " << g[v].value << ", d: " << g[v].derivative << "\", shape=oval, color=limegreen]";
+      // out << " [label=\"" << g[v].name << ": " << g[v].value << ", d: " << g[v].derivative << "\", shape=oval, color=limegreen]";
+      out << " [label=\"" << g[v].name << ": " << g[v].value << "\", shape=oval, color=limegreen]";
     else if (g[v].vt==Parameter) 
-      out << " [label=\"" << g[v].name << ": " << g[v].value << ", d: " << g[v].derivative << "\", shape=oval, color=darkviolet]";
+      // out << " [label=\"" << g[v].name << ": " << g[v].value << ", d: " << g[v].derivative << "\", shape=oval, color=darkviolet]";
+      out << " [label=\"" << g[v].name << ": " << g[v].value << "\", shape=oval, color=darkviolet]";
     else 
       out << " [label=\"" << g[v].name << "\", shape=box, color=tomato]";
   };
@@ -142,8 +145,8 @@ struct my_edge_writer {
       // if (abs(g[e].derivative)>0.001) {
       //   out << "Dev: " << g[e].derivative;
       // }
-      out << "Con: " << g[e].contribution << ' ';
-      out << "Dev: " << g[e].derivative;
+      // out << "Con: " << g[e].contribution << ' ';
+      // out << "Dev: " << g[e].derivative;
     }
     out << "\"]";
   };
@@ -243,6 +246,8 @@ public:
   inline float getVertexValueByName(const std::string& name) {
     return g[getVertexByName(name)].value;
   }
+
+  int getNumberOfEdgesOfInterest();
 
 
   /* write functions */
@@ -570,10 +575,10 @@ public:
 
  /* class members */
 public:
- std::vector<std::vector<double> > auxilary_data;
-
-private:
+  std::vector<std::vector<double> > auxilary_data;
   Graph g;
+private:
+  
   std::string save_path = "/home/jz598/MLNInfer/data/CProv/raw/test.dot";
   std::unordered_map<std::string, vertex_t> vertex_set;
   std::unordered_map<std::string, float> changedEDBs;

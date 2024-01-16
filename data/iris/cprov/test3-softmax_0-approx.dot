@@ -1,0 +1,42 @@
+digraph G {
+0 [label="softmax_0: 0.999998, d: 1", shape=oval, color=limegreen];
+1 [label="softmax_softmax_0", shape=box, color=tomato];
+2 [label="input_2: 2, d: 37", shape=oval, color=limegreen];
+3 [label="innerProductAct_input_2", shape=box, color=tomato];
+4 [label="input_1: 1, d: 39", shape=oval, color=limegreen];
+5 [label="innerProductAct_input_1", shape=box, color=tomato];
+6 [label="input_0: 0, d: 44", shape=oval, color=dodgerblue];
+7 [label="innerProductAct_input_1_1", shape=box, color=tomato];
+8 [label="innerProductAct_input_1_2", shape=box, color=tomato];
+9 [label="innerProductAct_input_1_3", shape=box, color=tomato];
+10 [label="innerProductAct_input_2_1", shape=box, color=tomato];
+11 [label="innerProductAct_input_2_2", shape=box, color=tomato];
+0->1  [color=purple]
+ [label=""];
+1->2  [color=purple]
+ [label="Con: 1.17521e-38 Dev: 37"];
+2->3  [color=purple]
+ [label=""];
+4->5  [color=purple]
+ [label=""];
+4->7  [color=purple]
+ [label=""];
+4->8  [color=purple]
+ [label=""];
+4->9  [color=purple]
+ [label=""];
+2->10  [color=purple]
+ [label=""];
+2->11  [color=purple]
+ [label=""];
+3->4  [color=purple]
+ [label="Con: 0.666664 Dev: 38"];
+5->6  [color=purple]
+ [label="Con: -5.96046e-08 Dev: 40"];
+7->6  [color=purple]
+ [label="Con: 0.000748277 Dev: 41"];
+8->6  [color=purple]
+ [label="Con: -6.55651e-07 Dev: 42"];
+9->6  [color=purple]
+ [label="Con: 0.00922197 Dev: 43"];
+}
