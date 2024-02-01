@@ -24,7 +24,7 @@
 const int input_size = 46;
 const int number_classes = 3;
 const char *credit_score_dataset = "./data/credit-score/train.csv";
-const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_256.mlp";
+const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_10_layer.mlp";
 const std::string cprov_save_path = "./data/credit-score/cprov/test.dot";
 const std::array<std::string, number_classes> class_names =
 { "Good", "Standard", "Poor" };
@@ -136,7 +136,8 @@ int main(int argc, char *argv[]) {
   //Destruction/Construction of a MLP object to show off saving and loading a trained model
   
   int correct = 0;
-  samples = 5;
+  samples = 100;
+  int cnt = 0;
   float total_inference = 0;
   float total_prov = 0;
   float total_prov_query = 0;
@@ -152,6 +153,7 @@ int main(int argc, char *argv[]) {
     clock_t t1, t2;
     t1 = clock();
     my_mlp.GetOutput(training_sample_set_with_bias[j].input_vector(), &guess);
+    // if (guess[1]>0.1||guess[1]<1e-7) continue;
     t2 = clock();
     std::cout << "Without provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
     total_inference += (t2-t1)*1.0/CLOCKS_PER_SEC;
@@ -201,13 +203,16 @@ int main(int argc, char *argv[]) {
     total_approx += (t2-t1)*1.0/CLOCKS_PER_SEC;
 
     t1 = clock();
-    std::cout << approx_output.computeVariableMLP(to_query) << std::endl;
+    std::cout << approx_output.computeVariable(to_query) << std::endl;
     t2 = clock();
     std::cout << "Approximate provenance recompute time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl << std::endl;
     total_approx_prov_inference += (t2-t1)*1.0/CLOCKS_PER_SEC;
 
     int approx_edges = approx_output.getNumberOfEdgesOfInterest();
     cut_edges += previous_edges - approx_edges;
+
+    cnt += 1;
+    // if (cnt==5) break;
 
     // t1 = clock();
     // approx_output.computeVariableWithChangedEDBs(to_query, changedEDBs);
@@ -217,11 +222,13 @@ int main(int argc, char *argv[]) {
     // approx_output.saveGraph();
 
   }
-  std::cout << "average inference: " << total_inference/samples << "\n";
-  std::cout << "average inference on prov: " << total_prov_inference/samples << "\n";
-  std::cout << "average approx: " << total_approx/samples << "\n";
-  std::cout << "average inference on approx: " << total_approx_prov_inference/samples << "\n";
-  std::cout << "average cut edges: " << cut_edges*1.0/samples << "\n";
+  std::cout << "average inference: " << total_inference/cnt << "\n";
+  std::cout << "average prov: " << total_prov/cnt << "\n";
+  std::cout << "average prov query: " << total_prov_query/cnt << "\n";
+  std::cout << "average inference on prov: " << total_prov_inference/cnt << "\n";
+  std::cout << "average approx: " << total_approx/cnt << "\n";
+  std::cout << "average inference on approx: " << total_approx_prov_inference/cnt << "\n";
+  std::cout << "average cut edges: " << cut_edges*1.0/cnt << "\n";
 
   return 0;
 }

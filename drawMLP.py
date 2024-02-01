@@ -13,10 +13,14 @@ def drawMaintenanceQuery():
   ax1 = plt.subplot(gs[0])
   # xList = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
   # xList = ["1", "2", "3", "4", "5"]
-  xList = ["256", "512", "1024", "2048", "4096"]
-  origin = []
-  maintenance_fine = []
-  query_fine = []
+  # xList = ["256", "512", "1024", "2048", "4096"]
+  xList = ["2", "4", "6", "8", "10"]
+  # origin = [0.000802, 0.0027874, 0.0103934, 0.0388768, 0.151103]
+  origin = [0.0103934, 0.0296587, 0.0487692, 0.0674988, 0.0897603]
+  # maintenance_fine = [0.0029882, 0.006797, 0.01833, 0.056045, 0.188274]
+  maintenance_fine = [0.01833, 0.0460055, 0.0725224, 0.103197, 0.130088]
+  # query_fine = [0.002376, 0.0046202, 0.0089758, 0.0180652, 0.0374882]
+  query_fine = [0.0089758, 0.0185459, 0.026041, 0.0378036, 0.0467306]
   # origin = [0.000687, 0.0101, 0.018671, 0.028236, 0.038523]
   # maintenance_fine = [0.006961, 0.054,  0.101907, 0.152218, 0.197581]
   # query_fine = [0.006967, 0.04, 0.08362,  0.124492, 0.165602]
@@ -41,14 +45,16 @@ def drawMaintenanceQuery():
   fs2 = 20
   ax1.set_ylabel('Model inference time (s)', fontsize=fs1)
   ax1.set_yscale("linear")
-  ax1.set_xlabel('Number of nodes per layer\n(a)', fontsize=fs1)
+  # ax1.set_xlabel('# of nodes per layer\n(a)', fontsize=fs1)
+  ax1.set_xlabel('# of layers\n(a)', fontsize=fs1)
   ax1.set_xticks(x)
   ax1.set_xticklabels(xList, fontsize=fs2)
   ax1.tick_params(axis="y", which="both", labelsize=fs2)
   ax1.tick_params(axis="y", which="both", labelsize=fs2)
   ax2.set_ylabel('Backward trace time (s)', fontsize=fs1)
   ax2.set_yscale("linear")
-  ax2.set_xlabel('Number of nodes per layer\n(b)', fontsize=fs1)
+  # ax2.set_xlabel('# of nodes per layer\n(b)', fontsize=fs1)
+  ax2.set_xlabel('# of layers\n(b)', fontsize=fs1)
   ax2.set_xticks(x)
   ax2.set_xticklabels(xList, fontsize=fs2)
   ax2.tick_params(axis="y", which="both", labelsize=fs2)
@@ -69,19 +75,21 @@ def drawMaintenanceQuery():
 def overallComparison2():
   # mlp = [95, 121*2, 131*3, 146*4, 154*5, 175*6, 187*7, 211*8, 229*9, 269*10]
   # mlp = [ 0.000687*46*2, 0.01*46*2,  0.019637*46*2, 0.028236*92, 0.038523*92, 0.049059*92]
-  mlp = []
-  mlp = np.array(mlp)
+  # mlp = [0.000788, 0.0027874, 0.0103934, 0.0388768, 0.151103]
+  mlp = [0.0103934, 0.0296587, 0.0487692, 0.0674988, 0.0897603]
+  mlp = np.array(mlp)*46*2
   
   fig = plt.figure(figsize=(13, 5.5))
-  gs = gridspec.GridSpec(1, 3, width_ratios=[4.4, 2.6, 2.6])
+  gs = gridspec.GridSpec(1, 2, width_ratios=[4, 2.6])
   # ax1 = fig.add_subplot(1, 2, 1)
   ax = plt.subplot(gs[0])
   ax1 = plt.subplot(gs[1])
-  ax2 =  plt.subplot(gs[2])
+  # ax2 =  plt.subplot(gs[2])
 
   # xList = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
   # xList = ["1", "2", "3", "4", "5"]
-  xList = ["256", "512", "1024", "2048", "4096"]
+  # xList = ["256", "512", "1024", "2048", "4096"]
+  xList = ["2", "4", "6", "8", "10"]
   w = 0.3
   lw = 2
   x = np.arange(len(xList))
@@ -92,11 +100,14 @@ def overallComparison2():
   # ax1.bar(x-w/2, approx_times, w, color="tab:purple", label="Subset search", edgecolor="black", linewidth=lw, hatch='x', alpha=0.7)
 
   # approx_time_prune = [0.766496, 14.23, 23.9478, 39.2783, 45.4645, 57.0926]
-  approx_time_prune = []
+  # approx_time_prune = [0.07, 0.26, 1.11, 4.1, 16.5]
+  approx_time_prune = [1.90821, 4.37594, 7.17987, 8.98655, 13.3543]
   ax1.bar(x, approx_time_prune, 0.5, color="tab:green", label="Prune", edgecolor="black", linewidth=lw, hatch='-', alpha=0.7)
 
   # influ_times = [0.001396*46*2, 0.012*46*2, 0.022598*92, 0.03339*92, 0.044629*92, 0.055715*92]
-  influ_times = []
+  # influ_times = [0.0008968, 0.0030992, 0.0108384, 0.0401832, 0.153216]
+  influ_times = [0.0108384, 0.0312143, 0.0503626, 0.0726506, 0.090377]
+  influ_times = np.array(influ_times)*46*2
   ax.bar(x-0.5*w, influ_times, w, label='ICE on original PROV graph', color="tab:orange", hatch='.', edgecolor="black", linewidth=lw, alpha=0.7)
 
   # counter_times = [0.04, 0.1, 0.2, 0.45, 1, 1.9, 2.3, 3, 5.5, 9.061]
@@ -107,7 +118,9 @@ def overallComparison2():
 
 
   # influ_time_approx_prune = [0.001297*46*2, 0.003*46*2,  0.017573*92, 0.024968*92, 0.043729*92, ]
-  influ_time_approx_prune = []
+  # influ_time_approx_prune = [0.0001194, 0.001951, 0.0046556, 0.0066, 0.0389368]
+  influ_time_approx_prune = [0.0043556, 0.01085915, 0.0165578, 0.0202041, 0.0211376]
+  influ_time_approx_prune = np.array(influ_time_approx_prune)*46*2
   ax.bar(x+0.5*w, influ_time_approx_prune, w, label="ICE on approx subgraph (prune)", color="tab:green", hatch='-', edgecolor="black", linewidth=lw, alpha=0.7)
 
   # counter_times_approx = [4, 8, 12, 15, 24, 50, 56, 85, 100, 123]
@@ -116,22 +129,28 @@ def overallComparison2():
   # box = ax.get_position()
   # ax.set_position([box.x0, box.y0+box.height*0.05, box.width, box.height*0.95])
 
-  origin_model_size = [78336, 287744, 1099776, 4296704, 16982016]
-  ax2.plot(x, origin_model_size, label="original PROV", marker="D", markersize=15, color="tab:orange", linewidth=4, alpha=0.9)
+  # origin_model_size = [78336, 287744, 1099776, 4296704, 16982016]
+  # origin_model_size = [1099776, , , , ]
+  # ax2.plot(x, origin_model_size, label="original PROV", marker="D", markersize=15, color="tab:orange", linewidth=4, alpha=0.9)
 
-  approx_model_size = []
-  ax2.plot(x, approx_model_size, label="approx PROV", marker="D", markersize=15, color="tab:green", linewidth=4, alpha=0.9)
+  # origin_edges = [2051, 4099, 6147, 8195, 10243]
+  # cut_edges = [1271, 2559.5, 3047.2, 4947.93, 8236.65]
+  # approx_model_size = [19031, 152538, 432725, 2928760, 14271524]
+  # ax2.plot(x, approx_model_size, label="approx PROV", marker="D", markersize=15, color="tab:green", linewidth=4, alpha=0.9)
 
   fs1 = 20
   fs2 = 16
   ax.set_ylabel('Running time of ICE (s)', fontsize=fs1)
-  ax.set_xlabel('Number of nodes per layer\n (a)', fontsize=fs1)
+  # ax.set_xlabel('# of nodes per layer\n (a)', fontsize=fs1)
+  ax.set_xlabel('# of layers\n (a)', fontsize=fs1)
   ax1.set_ylabel('Running time of approx search (s)', fontsize=fs1)
-  ax1.set_xlabel('Number of nodes per layer\n (b)', fontsize=fs1)
-  ax2.set_ylabel('Number of parameters', fontsize=fs1)
-  ax2.set_xlabel('Number of nodes per layer\n (b)', fontsize=fs1)
+  # ax1.set_xlabel('# of nodes per layer\n (b)', fontsize=fs1)
+  ax1.set_xlabel('# of layers\n (b)', fontsize=fs1)
+  # ax2.set_ylabel('# of parameters', fontsize=fs1)
+  # ax2.set_xlabel('# of nodes per layer\n (b)', fontsize=fs1)
   # ax.set_yscale("log")
   # ax1.set_yscale("log")
+  # ax2.set_yscale("log")
   ax.set_xticks(x)
   ax.set_xticklabels(xList, fontsize=fs2)
   # ax.set_yticks([0.001, 0.01, 0.1, 1, 10, 100, 1000])
@@ -140,22 +159,22 @@ def overallComparison2():
   ax1.set_xticklabels(xList, fontsize=fs2)
   # ax1.set_yticks([0.01, 0.1, 1, 10])
   # ax1.set_yticklabels(["1e-2","1e-1", "1", "10"], fontsize=fs2)
-  ax2.set_xticks(x)
-  ax2.set_xticklabels(xList, fontsize=fs2)
-  # ax2.set_yticks([0.01, 0.1, 1, 10])
-  # ax2.set_yticklabels(["1e-2","1e-1", "1", "10"], fontsize=fs2)
+  # ax2.set_xticks(x)
+  # ax2.set_xticklabels(xList, fontsize=fs2)
+  # ax2.set_yticks([10000, 1000000, 10000000, 17000000,])
+  # ax2.set_yticklabels(["10k", "1m", "10m", "17m"], fontsize=fs2)
   ax.tick_params(axis="y", which="both", labelsize=fs2)
   ax1.tick_params(axis="y", which="both", labelsize=fs2)
-  ax2.tick_params(axis="y", which="both", labelsize=fs2)
+  # ax2.tick_params(axis="y", which="both", labelsize=fs2)
   # fig.legend(fontsize=26, ncol=1, loc='upper center', bbox_to_anchor=(0.7,0.76),fancybox=True)
   ax.legend(fontsize=fs2)
   ax1.legend(fontsize=fs2)
-  ax2.legend(fontsize=fs2)
+  # ax2.legend(fontsize=fs2)
   ax.grid(axis='y')
   ax1.grid(axis='y')
-  ax2.grid(axis='y')
+  # ax2.grid(axis='both')
   plt.tight_layout()
-  plt.savefig("./data/credit-score/images/mlp_pxai_approx_ice_2.png")
+  plt.savefig("./data/credit-score/images/mlp_pxai_approx_ice_3.png")
 
 if __name__=="__main__":
   drawMaintenanceQuery()

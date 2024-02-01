@@ -671,7 +671,7 @@ CProvGraph CProvGraph::ApproximateSubGraphQueryPruneMLP(std::string& name, float
   std::vector<double> target_derivatives = auxilary_data[int(g[getVertexByName("input_0")].derivative)];
   
   int count = 0;
-  int step = std::max(1, int(edge_queue.size()/20));
+  int step = std::max(1, int(edge_queue.size()/5));
   std::cout << "number of edges: " << edge_queue.size() << ", prune step: " << step << std::endl;
   CProvGraph ret = *this;
   while (!edge_queue.empty()) {
@@ -686,12 +686,7 @@ CProvGraph CProvGraph::ApproximateSubGraphQueryPruneMLP(std::string& name, float
       clock_t t1 = clock();
       CProvGraph approxSubProvG = ProvenanceQuery(name);
       float value_diff = std::abs(target-approxSubProvG.computeVariable(name));
-      // this->computeVariableMLP(name);
-      // float value_diff = std::abs(target-this->getVertexValueByName(name));
       approxSubProvG.computeDerivative(name);
-      // approxSubProvG.computeVariable(name);
-      // float value_diff_2 = std::abs(approxSubProvG.getVertexValueByName(name)-this->getVertexValueByName(name));
-      // std::cout << "recompute diff: " << value_diff_2 << "\n";
       std::vector<double> approx_derivatives = approxSubProvG.auxilary_data[approxSubProvG.g[approxSubProvG.getVertexByName("input_0")].derivative];
       float derivative_diff = utils::computeDerivativeDiff(target_derivatives, approx_derivatives);
       // std::cout << "value diff: " << value_diff << ", derivative diff: " << derivative_diff << std::endl;

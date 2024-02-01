@@ -24,7 +24,7 @@
 const int input_size = 46;
 const int number_classes = 3;
 const char *credit_score_dataset = "./data/credit-score/train.csv";
-const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_4096.mlp";
+const std::string credit_score_mlp_weights = "./data/credit-score/credit_score_normal_8_layer_2.mlp";
 const std::array<std::string, number_classes> class_names =
 { "Good", "Standard", "Poor" };
 
@@ -45,7 +45,7 @@ bool load_data(int *samples,
   }
   fseek(in, 0, SEEK_SET);
 
-  (*samples) = 1000;
+  (*samples) = 100;
   std::cout << "Loading " << (*samples)
     << " data points from " << credit_score_dataset << "." << std::endl;
   // Allocate memory for input and output data.
@@ -151,7 +151,7 @@ int main(int argc, char *argv[]) {
     // MLP my_mlp({ input_size + 1, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, number_classes }, { "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "linear" }, false);
     // MLP my_mlp({ input_size + 1, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, number_classes }, { "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "sigmoid", "linear" }, false);
 
-    int loops = 100;
+    int loops = 50;
 
     MLP my_mlp(credit_score_mlp_weights);
 
