@@ -3,13 +3,14 @@
 
 #include "../KMeans.h"
 #include <boost/algorithm/string.hpp>
+#include <chrono>
 
 
 const int number_classes = 3;
 const int number_features = 2;
-const int number_points = 3;
-const char *toy_kmeans_dataset = "./data/toy-kmeans/toy-kmeans-3-points.data";
-const std::string cprov_save_path = "./data/toy-kmeans/cprov/test-3-points.dot";
+const int number_points = 6;
+const char *toy_kmeans_dataset = "./data/toy-kmeans/toy-kmeans.data";
+const std::string cprov_save_path = "./data/toy-kmeans/cprov/test.dot";
 const std::array<std::string, number_classes> class_names =
 { "Class-1", "Class-2", "Class-3" };
 
@@ -44,7 +45,7 @@ int main(int argc, char *argv[])
 
   int K, max_iterations;
 
-  K = 3;
+  K = number_classes;
   max_iterations = 100;
 
   vector<Point> points; 
@@ -53,16 +54,23 @@ int main(int argc, char *argv[])
   KMeans kmeans(K, number_points, number_features, max_iterations);
   KMeans kmeans_prov(K, number_points, number_features, max_iterations);
 
-  clock_t t1, t2;
-  t1 = clock();
+  auto start = std::chrono::high_resolution_clock::now();
   kmeans.run(points);
-  t2 = clock();
-  std::cout << "Without provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl; 
+  auto end = std::chrono::high_resolution_clock::now();
+  auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+  std::cout << "Without provenance: " << duration * 1.0/1000000 << " seconds" << std::endl << std::endl;
 
-  t1 = clock(); 
+  start = std::chrono::high_resolution_clock::now();
   kmeans_prov.runWithProv(points);
-  t2 = clock();
-  std::cout << "With provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+  end = std::chrono::high_resolution_clock::now();
+  duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+  std::cout << "With provenance: " << duration * 1.0/1000000 << " seconds" << std::endl;
+
+  // std::string delete_name = "point_5";
+  // start = std::chrono::high_resolution_clock::now();
+  // kmeans_prov.provG.deleteOnProvG(delete_name, K, number_points, number_features);
+  // duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+  // std::cout << "ML deletion time: " << duration * 1.0/1000000 << " seconds" << std::endl;
 
   kmeans_prov.provG.setSavePath(cprov_save_path);
   kmeans_prov.provG.saveGraph();

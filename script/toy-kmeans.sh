@@ -1,1 +1,1 @@
-dot -Tpng ./data/toy-kmeans/cprov/test-3-points.dot -o ./data/toy-kmeans/cprov/test-3-points.png
+dot -Tpng ./data/toy-kmeans/cprov/test.dot -o ./data/toy-kmeans/cprov/test.png

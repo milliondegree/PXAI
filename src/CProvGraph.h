@@ -271,7 +271,7 @@ public:
 
   inline void addProvEdge(vertex_t v1, vertex_t v2, bool reverse) {
     if (!reverse) boost::add_edge(v1, v2, g);
-    else boost::add_edge(v2, v2, g);
+    else boost::add_edge(v2, v1, g);
   }
 
   inline void addProvEdge(vertex_t v1, vertex_t v2) {
