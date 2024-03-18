@@ -63,6 +63,8 @@ int main(int argc, char *argv[])
     KMeans kmeans(K, number_points, number_features, max_iterations);
     KMeans kmeans_prov(K, number_points, number_features, max_iterations);
 
+    points.clear(); 
+    load_data(points);
     auto start = std::chrono::high_resolution_clock::now();
     kmeans.run(points, index);
     auto end = std::chrono::high_resolution_clock::now();
@@ -80,9 +82,6 @@ int main(int argc, char *argv[])
     duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
     std::cout << "With provenance: " << duration * 1.0/1000000 << " seconds" << std::endl;
     with_prov_time.push_back(duration * 1.0/1000000);
-
-    // kmeans_prov.provG.setSavePath(cprov_save_path);
-    // kmeans_prov.provG.saveGraph();
 
     start = std::chrono::high_resolution_clock::now();
     kmeans_prov.deletePoint(points, centroids, distances, index, iteration);

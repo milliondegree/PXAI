@@ -68,8 +68,8 @@ void KMeans::run(vector<Point> & points)
   }
 
   // shows elements of clusters
-  // for(int i = 0; i < K; i++)
-  // {
+  for(int i = 0; i < K; i++)
+  {
   //   int total_points_cluster =  clusters[i].getTotalPoints();
 
   //   std::cout << "Cluster " << clusters[i].getID() + 1 << endl;
@@ -87,13 +87,13 @@ void KMeans::run(vector<Point> & points)
   //     std::cout << endl;
   //   }
 
-  //   std::cout << "Cluster values: ";
+    std::cout << "Cluster values: ";
 
-  //   for(int j = 0; j < total_values; j++)
-  //     std::cout << clusters[i].getCentralValue(j) << " ";
+    for(int j = 0; j < total_values; j++)
+      std::cout << clusters[i].getCentralValue(j) << " ";
 
-  //   std::cout << "\n\n";
-  // }
+    std::cout << "\n";
+  }
 }
 
 void KMeans::run(vector<Point> & points, int index)
@@ -190,7 +190,7 @@ void KMeans::run(vector<Point> & points, int index)
     for(int j = 0; j < total_values; j++)
       std::cout << clusters[i].getCentralValue(j) << " ";
 
-    // std::cout << "\n\n";
+    std::cout << "\n";
   }
 }
 
@@ -435,8 +435,8 @@ int KMeans::runWithProv_v2(vector<Point> & points, vector<vector<double>*>& cent
   }
 
   // shows elements of clusters
-  // for(int i = 0; i < K; i++)
-  // {
+  for(int i = 0; i < K; i++)
+  {
   //   int total_points_cluster =  clusters[i].getTotalPoints();
 
   //   std::cout << "Cluster " << clusters[i].getID() + 1 << endl;
@@ -454,13 +454,13 @@ int KMeans::runWithProv_v2(vector<Point> & points, vector<vector<double>*>& cent
   //     std::cout << endl;
   //   }
 
-  //   std::cout << "Cluster values: ";
+    std::cout << "Cluster values: ";
 
-  //   for(int j = 0; j < total_values; j++)
-  //     std::cout << clusters[i].getCentralValue(j) << " ";
+    for(int j = 0; j < total_values; j++)
+      std::cout << clusters[i].getCentralValue(j) << " ";
 
-  //   std::cout << "\n\n";
-  // }
+    std::cout << "\n";
+  }
 
   return iter;
 }
