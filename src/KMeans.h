@@ -197,6 +197,8 @@ public:
 
   void run(vector<Point> & points);
 
+  void run(vector<Point> & points, int index);
+
   ckpg::CKMeansProvGraph provG;
 
   void runWithProv(vector<Point> & points);

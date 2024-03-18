@@ -53,9 +53,10 @@ int main(int argc, char *argv[])
   vector<double> with_prov_time;
   vector<double> delete_time;
 
-  int num = 100;
+  int num = 2;
 
   for (int index = 0; index<num; index++) {
+    if (index%(number_points / number_classes)==0) continue;
     vector<Point> points; 
     load_data(points);
 
@@ -63,7 +64,7 @@ int main(int argc, char *argv[])
     KMeans kmeans_prov(K, number_points, number_features, max_iterations);
 
     auto start = std::chrono::high_resolution_clock::now();
-    kmeans.run(points);
+    kmeans.run(points, index);
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
     std::cout << "Without provenance: " << duration * 1.0/1000000 << " seconds" << std::endl << std::endl;

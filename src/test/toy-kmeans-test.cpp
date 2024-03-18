@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
   KMeans kmeans_prov(K, number_points, number_features, max_iterations);
 
   auto start = std::chrono::high_resolution_clock::now();
-  kmeans.run(points);
+  kmeans.run(points, 5);
   auto end = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
   std::cout << "Without provenance: " << duration * 1.0/1000000 << " seconds" << std::endl << std::endl;
