@@ -60,20 +60,24 @@ int main(int argc, char *argv[])
   auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
   std::cout << "Without provenance: " << duration * 1.0/1000000 << " seconds" << std::endl << std::endl;
 
+  points.clear();
+  load_data(points);
   start = std::chrono::high_resolution_clock::now();
-  kmeans_prov.runWithProv(points);
+  vector<vector<double>*> centroids;
+  vector<vector<double>*> distances;
+  int iteration = kmeans_prov.runWithProv_v2(points, centroids, distances);
   end = std::chrono::high_resolution_clock::now();
   duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
   std::cout << "With provenance: " << duration * 1.0/1000000 << " seconds" << std::endl;
 
-  // std::string delete_name = "point_5";
-  // start = std::chrono::high_resolution_clock::now();
-  // kmeans_prov.provG.deleteOnProvG(delete_name, K, number_points, number_features);
-  // duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
-  // std::cout << "ML deletion time: " << duration * 1.0/1000000 << " seconds" << std::endl;
-
   kmeans_prov.provG.setSavePath(cprov_save_path);
   kmeans_prov.provG.saveGraph();
+
+  start = std::chrono::high_resolution_clock::now();
+  kmeans_prov.deletePoint(points, centroids, distances, 5, iteration);
+  end = std::chrono::high_resolution_clock::now();
+  duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+  std::cout << "ML deletion time: " << duration * 1.0/1000000 << " seconds" << std::endl;
 
   return 0;
 }

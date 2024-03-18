@@ -146,6 +146,7 @@ private:
   int K; // number of clusters
   int total_values, total_points, max_iterations;
   vector<Cluster> clusters;
+  std::vector<std::vector<double>*> centroids; // Store pointers to centroid data
 
 public:
   // return ID of nearest center (uses euclidean distance)
@@ -200,8 +201,16 @@ public:
 
   void runWithProv(vector<Point> & points);
 
+  int runWithProv_v2(vector<Point> & points, vector<vector<double>*>& centroids, vector<vector<double>*>& distances);
+
     /* ML deletion */
 public:
-  void deletePoint(vector<Point> & points, int index);
+  void deletePoint(vector<Point> & points, vector<vector<double>*>& centroids, vector<vector<double>*>& distances, int index, int iteration);
+
+  void printCentroid(vector<double>* centroid) {
+    for (auto d : *centroid) {
+      cout << d << ' ';
+    }
+  }
 
 };

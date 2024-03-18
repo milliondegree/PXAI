@@ -3,11 +3,13 @@
 
 #include "../KMeans.h"
 #include <boost/algorithm/string.hpp>
+#include <chrono>
+#include <numeric>
 
 
 const int number_classes = 3;
 const int number_features = 4;
-const int number_points = 150;
+const int number_points = 150 * 1;
 const char *iris_dataset = "./data/iris-kmeans/iris.data";
 const std::string cprov_save_path = "./data/iris-kmeans/cprov/test.dot";
 const std::array<std::string, number_classes> class_names =
@@ -42,30 +44,57 @@ int main(int argc, char *argv[])
 {
   srand (time(NULL));
 
-  int K, max_iterations; 
+  int K, max_iterations;
 
-  K = 3;
+  K = number_classes;
   max_iterations = 100;
 
-  vector<Point> points;
-  load_data(points);
+  vector<double> without_prov_time;
+  vector<double> with_prov_time;
+  vector<double> delete_time;
 
-  KMeans kmeans(K, number_points, number_features, max_iterations);
-  KMeans kmeans_prov(K, number_points, number_features, max_iterations);
+  int num = 100;
 
-  clock_t t1, t2;
-  t1 = clock();
-  kmeans.run(points);
-  t2 = clock();
-  std::cout << "Without provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+  for (int index = 0; index<num; index++) {
+    vector<Point> points; 
+    load_data(points);
 
-  t1 = clock();
-  kmeans_prov.runWithProv(points);
-  t2 = clock();
-  std::cout << "With provenance: " << (t2-t1)*1.0/CLOCKS_PER_SEC << std::endl;
+    KMeans kmeans(K, number_points, number_features, max_iterations);
+    KMeans kmeans_prov(K, number_points, number_features, max_iterations);
 
-  kmeans_prov.provG.setSavePath(cprov_save_path);
-  kmeans_prov.provG.saveGraph();
+    auto start = std::chrono::high_resolution_clock::now();
+    kmeans.run(points);
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    std::cout << "Without provenance: " << duration * 1.0/1000000 << " seconds" << std::endl << std::endl;
+    without_prov_time.push_back(duration * 1.0/1000000);
+
+    points.clear();
+    load_data(points);
+    start = std::chrono::high_resolution_clock::now();
+    vector<vector<double>*> centroids;
+    vector<vector<double>*> distances;
+    int iteration = kmeans_prov.runWithProv_v2(points, centroids, distances);
+    end = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    std::cout << "With provenance: " << duration * 1.0/1000000 << " seconds" << std::endl;
+    with_prov_time.push_back(duration * 1.0/1000000);
+
+    // kmeans_prov.provG.setSavePath(cprov_save_path);
+    // kmeans_prov.provG.saveGraph();
+
+    start = std::chrono::high_resolution_clock::now();
+    kmeans_prov.deletePoint(points, centroids, distances, index, iteration);
+    end = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    std::cout << "ML deletion time: " << duration * 1.0/1000000 << " seconds" << std::endl;
+    delete_time.push_back(duration * 1.0/1000000);
+    std::cout << endl;
+  }
+
+  cout << "without prov: " << std::accumulate(without_prov_time.begin(), without_prov_time.end(), 0.0) / num << endl;
+  cout << "with prov: " << std::accumulate(with_prov_time.begin(), with_prov_time.end(), 0.0) / num << endl;
+  cout << "delete prov: " << std::accumulate(delete_time.begin(), delete_time.end(), 0.0) / num << endl;
 
   return 0;
 }

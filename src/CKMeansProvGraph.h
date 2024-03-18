@@ -51,14 +51,10 @@ struct ProvVertex {
   VertexType vt;
   std::string name;
   void* value;
-  float contribution;
-  float derivative;
+  int centroid;
 };
 
 struct ProvEdge{
-  float contribution;
-  float derivative;
-  float importance;
 };
 
 typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::bidirectionalS, ProvVertex, ProvEdge> Graph;
@@ -68,7 +64,7 @@ typedef boost::graph_traits<Graph>::vertex_iterator vertex_iter;
 typedef boost::graph_traits<Graph>::edge_iterator edge_iter;
 typedef boost::graph_traits<Graph>::in_edge_iterator in_edge_iter;
 typedef boost::graph_traits<Graph>::out_edge_iterator out_edge_iter;
-typedef boost::graph_traits<Graph>::adjacency_iterator adjacency_tier;
+typedef boost::graph_traits<Graph>::adjacency_iterator adjacency_iter;
 
 struct my_node_writer {
   my_node_writer(Graph& g_) : g (g_) {};
@@ -97,17 +93,6 @@ struct my_edge_writer {
     out << " [color=purple]" << std::endl;
     out << " [label=\"";
     vertex_t v_target = boost::target(e, g);
-    // std::cout << g[v_target].vt << std::endl;
-    if (g[v_target].vt==Derived || g[v_target].vt==Input || g[v_target].vt==Parameter) {
-      // if (abs(g[e].contribution)>0.001) {
-      //   out << "Con: " << g[e].contribution << ' ';
-      // }
-      // if (abs(g[e].derivative)>0.001) {
-      //   out << "Dev: " << g[e].derivative;
-      // }
-      // out << "Con: " << g[e].contribution << ' ';
-      // out << "Dev: " << g[e].derivative;
-    }
     out << "\"]";
   };
   Graph g;
@@ -144,9 +129,9 @@ public:
     return vertex_set.find(name)!=vertex_set.end();
   }
 
-  inline float getVertexDerivativeByName(const std::string& name) {
-    return g[getVertexByName(name)].derivative;
-  }
+  // inline float getVertexDerivativeByName(const std::string& name) {
+  //   return g[getVertexByName(name)].derivative;
+  // }
 
   inline void* getVertexValueByName(const std::string& name) {
     return g[getVertexByName(name)].value;
@@ -158,9 +143,13 @@ public:
   /* write functions */
   inline vertex_t addVariableVertex(const VertexType vt, const std::string& name, void* value);
 
+  inline vertex_t addVariableVertex(const VertexType vt, const std::string& name, void* value, int centroid);
+
   inline vertex_t addOperatorVertex(const VertexType vt, const std::string& name);
 
   void addComputingSubgraph(const std::string& output_name, void* value, VertexType vt, const std::vector<std::string>& input_names);
+
+  void addComputingSubgraph(const std::string& output_name, void* value, VertexType vt, const std::vector<std::string>& input_names, int centroid);
 
   inline void addProvEdge(vertex_t v1, vertex_t v2, bool reverse) {
     if (!reverse) boost::add_edge(v1, v2, g);
@@ -171,20 +160,20 @@ public:
     boost::add_edge(v1, v2, g);
   }
 
-  inline void addProvEdge(vertex_t v1, vertex_t v2, float contribution) {
-    edge_t e;
-    bool b;
-    boost::tie(e, b) = boost::add_edge(v1, v2, g);
-    g[e].contribution = contribution;
-  }
+  // inline void addProvEdge(vertex_t v1, vertex_t v2, float contribution) {
+  //   edge_t e;
+  //   bool b;
+  //   boost::tie(e, b) = boost::add_edge(v1, v2, g);
+  //   g[e].contribution = contribution;
+  // }
 
-  inline void addProvEdge(vertex_t v1, vertex_t v2, float contribution, float derivative) {
-    edge_t e;
-    bool b;
-    boost::tie(e, b) = boost::add_edge(v1, v2, g);
-    g[e].contribution = contribution;
-    g[e].derivative = derivative;
-  }
+  // inline void addProvEdge(vertex_t v1, vertex_t v2, float contribution, float derivative) {
+  //   edge_t e;
+  //   bool b;
+  //   boost::tie(e, b) = boost::add_edge(v1, v2, g);
+  //   g[e].contribution = contribution;
+  //   g[e].derivative = derivative;
+  // }
 
   inline void setVertexValue(vertex_t v, void* value) {
     g[v].value = value;
