@@ -164,39 +164,34 @@ void KMeans::run(vector<Point> & points, int index)
     iter++;
   }
 
-  for (int i=0; i<K; i++) {
-    cout << "centroid " << i << ": ";
-    this->printCentroid(centroids[K*(iteration-1)+i]);
-    cout << endl;
-  }
 
   // shows elements of clusters
-  // for(int i = 0; i < K; i++)
-  // {
-  //   int total_points_cluster =  clusters[i].getTotalPoints();
+  for(int i = 0; i < K; i++)
+  {
+    // int total_points_cluster =  clusters[i].getTotalPoints();
 
-  //   std::cout << "Cluster " << clusters[i].getID() + 1 << endl;
-  //   for(int j = 0; j < total_points_cluster; j++)
-  //   {
-  //     std::cout << "Point " << clusters[i].getPoint(j).getID() + 1 << ": ";
-  //     for(int p = 0; p < total_values; p++)
-  //       std::cout << clusters[i].getPoint(j).getValue(p) << " ";
+    // std::cout << "Cluster " << clusters[i].getID() + 1 << endl;
+    // for(int j = 0; j < total_points_cluster; j++)
+    // {
+    //   std::cout << "Point " << clusters[i].getPoint(j).getID() + 1 << ": ";
+    //   for(int p = 0; p < total_values; p++)
+    //     std::cout << clusters[i].getPoint(j).getValue(p) << " ";
 
-  //     string point_name = clusters[i].getPoint(j).getName();
+    //   string point_name = clusters[i].getPoint(j).getName();
 
-  //     if(point_name != "")
-  //       std::cout << "- " << point_name;
+    //   if(point_name != "")
+    //     std::cout << "- " << point_name;
 
-  //     std::cout << endl;
-  //   }
+    //   std::cout << endl;
+    // }
 
-  //   std::cout << "Cluster values: ";
+    std::cout << "Cluster values: ";
 
-  //   for(int j = 0; j < total_values; j++)
-  //     std::cout << clusters[i].getCentralValue(j) << " ";
+    for(int j = 0; j < total_values; j++)
+      std::cout << clusters[i].getCentralValue(j) << " ";
 
-  //   std::cout << "\n\n";
-  // }
+    // std::cout << "\n\n";
+  }
 }
 
 void KMeans::runWithProv(vector<Point> & points) {
