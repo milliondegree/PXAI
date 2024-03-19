@@ -9,6 +9,7 @@
 #include <algorithm>
 
 #include "CKMeansProvGraph.h"
+#include "Utils.h"
 
 using namespace std;
 
@@ -94,6 +95,15 @@ public:
     points.push_back(point);
   }
 
+  Cluster(int id_cluster, int number_of_values, vector<double>* centroid)
+  {
+    this->id_cluster = id_cluster;
+
+    int total_values = number_of_values;
+
+    central_values = *centroid;
+  }
+
   void addPoint(Point point)
   {
     points.push_back(point);
@@ -117,6 +127,11 @@ public:
   double getCentralValue(int index)
   {
     return central_values[index];
+  }
+
+  vector<double>* getCentralValues() 
+  {
+    return &central_values;
   }
 
   void setCentralValue(int index, double value)
@@ -145,8 +160,10 @@ class KMeans
 private:
   int K; // number of clusters
   int total_values, total_points, max_iterations;
+
+public:
   vector<Cluster> clusters;
-  std::vector<std::vector<double>*> centroids; // Store pointers to centroid data
+  // std::vector<std::vector<double>*> centroids; // Store pointers to centroid data
 
 public:
   // return ID of nearest center (uses euclidean distance)
@@ -184,6 +201,10 @@ public:
     }
 
     return id_cluster_center;
+  }
+
+  void resetClusters() {
+    this->clusters.clear();
   }
 
 public:

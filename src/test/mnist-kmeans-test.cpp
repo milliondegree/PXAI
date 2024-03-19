@@ -7,13 +7,13 @@
 #include <numeric>
 
 
-const int number_classes = 3;
-const int number_features = 4;
-const int number_points = 150 * 1;
-const char *iris_dataset = "./data/iris-kmeans/iris.data";
-const std::string cprov_save_path = "./data/iris-kmeans/cprov/test.dot";
-const std::array<std::string, number_classes> class_names =
-{ "Iris-setosa", "Iris-versicolor", "Iris-virginica" };
+const int number_classes = 10;
+const int number_features = 784;
+const int number_points = 100;
+const char *mnist_dataset = "./data/mnist/mnist_train.csv";
+// const std::string cprov_save_path = "./data/iris-kmeans/cprov/test.dot";
+// const std::array<std::string, number_classes> class_names =
+// { "Iris-setosa", "Iris-versicolor", "Iris-virginica" };
 
 double euclideanDistance(const std::vector<double>* vec1, const std::vector<double>* vec2) {
   if (vec1->size() != vec2->size()) {
@@ -30,7 +30,7 @@ double euclideanDistance(const std::vector<double>* vec1, const std::vector<doub
 
 
 void load_data(vector<Point>& points) {
-  ifstream ofin(iris_dataset);
+  ifstream ofin(mnist_dataset);
   string line;
 
   int n = 0;
@@ -41,15 +41,17 @@ void load_data(vector<Point>& points) {
       vector<string> split;
       boost::split(split, line, boost::is_any_of(","));
       vector<double> values;
-      for (int i=0; i<number_features; i++) {
+      for (int i=1; i<=number_features; i++) {
         values.push_back(stod(split[i]));
       }
-      string class_name = split[number_features];
+      string class_name = split[0];
       Point p(n, values, class_name); 
       points.push_back(p);
       n++;
+      if (n==number_points) break;
     }
   }
+  cout << n << endl;
 }
 
 
@@ -66,7 +68,7 @@ int main(int argc, char *argv[])
   vector<double> with_prov_time;
   vector<double> delete_time;
 
-  int num = 2;
+  int num = 100;
   int count = 0;
 
   for (int index = 0; index<num; index++) {
@@ -104,6 +106,12 @@ int main(int argc, char *argv[])
     std::cout << "ML deletion time: " << duration * 1.0/1000000 << " seconds" << std::endl;
     delete_time.push_back(duration * 1.0/1000000);
     std::cout << endl;
+
+    double dist = 0;
+    for (int i=0; i<number_classes; i++) {
+      dist += euclideanDistance(kmeans.clusters[i].getCentralValues(), kmeans_prov.clusters[i].getCentralValues());
+    }
+    std::cout << dist << endl;
     
     count++;
   }
