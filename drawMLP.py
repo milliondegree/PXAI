@@ -45,16 +45,16 @@ def drawMaintenanceQuery():
   fs2 = 20
   ax1.set_ylabel('Model inference time (s)', fontsize=fs1)
   ax1.set_yscale("linear")
-  # ax1.set_xlabel('# of nodes per layer\n(a)', fontsize=fs1)
-  ax1.set_xlabel('# of layers\n(a)', fontsize=fs1)
+  # ax1.set_xlabel('Number of nodes per layer\n(a)', fontsize=fs1)
+  ax1.set_xlabel('Number of layers\n(a)', fontsize=fs1)
   ax1.set_xticks(x)
   ax1.set_xticklabels(xList, fontsize=fs2)
   ax1.tick_params(axis="y", which="both", labelsize=fs2)
   ax1.tick_params(axis="y", which="both", labelsize=fs2)
   ax2.set_ylabel('Backward trace time (s)', fontsize=fs1)
   ax2.set_yscale("linear")
-  # ax2.set_xlabel('# of nodes per layer\n(b)', fontsize=fs1)
-  ax2.set_xlabel('# of layers\n(b)', fontsize=fs1)
+  # ax2.set_xlabel('Number of nodes per layer\n(b)', fontsize=fs1)
+  ax2.set_xlabel('Number of layers\n(b)', fontsize=fs1)
   ax2.set_xticks(x)
   ax2.set_xticklabels(xList, fontsize=fs2)
   ax2.tick_params(axis="y", which="both", labelsize=fs2)
@@ -68,7 +68,7 @@ def drawMaintenanceQuery():
   ax1.legend(fontsize=fs2)
   ax2.legend(fontsize=fs2)
   plt.tight_layout()
-  plt.savefig("./data/credit-score/images/mlp_pxai_maintain_query.png")
+  plt.savefig("./data/credit-score/images/mlp_pxai_maintain_query.pdf")
 
 
 
@@ -141,13 +141,13 @@ def overallComparison2():
   fs1 = 20
   fs2 = 16
   ax.set_ylabel('Running time of ICE (s)', fontsize=fs1)
-  # ax.set_xlabel('# of nodes per layer\n (a)', fontsize=fs1)
-  ax.set_xlabel('# of layers\n (a)', fontsize=fs1)
+  # ax.set_xlabel('Number of nodes per layer\n (a)', fontsize=fs1)
+  ax.set_xlabel('Number of layers\n (a)', fontsize=fs1)
   ax1.set_ylabel('Running time of approx search (s)', fontsize=fs1)
-  # ax1.set_xlabel('# of nodes per layer\n (b)', fontsize=fs1)
-  ax1.set_xlabel('# of layers\n (b)', fontsize=fs1)
-  # ax2.set_ylabel('# of parameters', fontsize=fs1)
-  # ax2.set_xlabel('# of nodes per layer\n (b)', fontsize=fs1)
+  # ax1.set_xlabel('Number of nodes per layer\n (b)', fontsize=fs1)
+  ax1.set_xlabel('Number of layers\n (b)', fontsize=fs1)
+  # ax2.set_ylabel('Number of parameters', fontsize=fs1)
+  # ax2.set_xlabel('Number of nodes per layer\n (b)', fontsize=fs1)
   # ax.set_yscale("log")
   # ax1.set_yscale("log")
   # ax2.set_yscale("log")
@@ -174,8 +174,123 @@ def overallComparison2():
   ax1.grid(axis='y')
   # ax2.grid(axis='both')
   plt.tight_layout()
-  plt.savefig("./data/credit-score/images/mlp_pxai_approx_ice_3.png")
+  plt.savefig("./data/credit-score/images/mlp_pxai_approx_ice_3.pdf")
+
+
+def drawAll():
+  fig = plt.figure(figsize=(24, 4.75))
+  gs = gridspec.GridSpec(1, 4, width_ratios=[6.5, 4.5, 8.5, 4.5])
+  ax1 = plt.subplot(gs[0])
+  xList = ["2", "4", "6", "8", "10"]
+  origin = [0.0103934, 0.0296587, 0.0487692, 0.0674988, 0.0897603]
+  origin = np.array(origin) * 1000
+  maintenance_fine = [0.01833, 0.0460055, 0.0725224, 0.103197, 0.130088]
+  maintenance_fine = np.array(maintenance_fine) * 1000
+  query_fine = [0.0089758, 0.0185459, 0.026041, 0.0378036, 0.0467306]
+  query_fine = np.array(query_fine) * 1000
+  x = np.arange(len(xList))
+  w = 0.3
+  lw = 2
+  ax1.bar(x-w, origin, w, label='W/o provenance', color="tab:blue", edgecolor="black", linewidth=lw)
+  ax1.bar(x, maintenance_fine, w, label='W/ provenance', color="tab:orange", edgecolor="black", linewidth=lw)
+
+  # ax2 = plt.subplot(gs[1])
+  gs_nested = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=gs[1], hspace=0.05)
+
+  ax2 = plt.subplot(gs_nested[0])
+  # 配置ax2 (假设这是柱形图双轴左侧的那部分)
+
+  # 下半部分的子图，与ax2共享X轴
+  ax2_twine = plt.subplot(gs_nested[1], sharex=ax2)
+
+  storage = [128.82, 256.836, 384.852, 512.867, 640.883]
+  ln2 = ax2.bar(x, storage, 0.5, label='In-memory storage', color="tab:orange", edgecolor="black", linewidth=lw)
+
+  ln1 = ax2_twine.plot(x, query_fine, label="PROV query time", marker="^", markersize=15, color="tab:orange", linewidth=3, alpha=0.9)
+
+  # 解包ln1中的所有线条句柄
+  lns = [*ln1]
+
+  # 添加ln2中的标签和句柄
+  lns.append(ln2)  # ln2 本身作为一个整体加入
+  labs = [l.get_label() for l in ln1]  # 只解包ln1的标签
+  labs.append(ln2.get_label())  # 添加ln2的标签
+
+  fs1 = 18
+  fs2 = 16
+  ax1.set_ylabel('Model inference \ntime (ms)', fontsize=fs1)
+  ax1.set_yscale("linear")
+  ax1.set_xlabel('Number of layers\n(a)', fontsize=fs1)
+  ax1.set_xticks(x)
+  ax1.set_xticklabels(xList, fontsize=fs2)
+  ax1.tick_params(axis="y", which="both", labelsize=fs2)
+  ax1.tick_params(axis="y", which="both", labelsize=fs2)
+  ax2_twine.set_ylabel('Backward trace \ntime (ms)', fontsize=fs1)
+  ax2_twine.set_yscale("linear")
+  ax2_twine.set_xlabel('Number of layers\n(b)', fontsize=fs1)
+  ax2_twine.set_xticks(x)
+  ax2_twine.set_xticklabels(xList, fontsize=fs2)
+  ax2_twine.tick_params(axis="y", which="both", labelsize=fs2)
+  ax1.grid()
+  ax2.grid()
+  ax2_twine.grid()
+  ax1.legend(fontsize=fs2)
+  
+
+  ax2.set_ylabel('In-memory \n storage (KB)', fontsize=fs1)
+  ax2.tick_params(axis="y", which="both", labelsize=fs2)
+
+  # ax2_twine.legend(lns, labs, loc='upper left', fontsize=fs2)  # 在ax1上显示合并后的图例
+
+
+
+
+  mlp = [0.0103934, 0.0296587, 0.0487692, 0.0674988, 0.0897603]
+  mlp = np.array(mlp)*46*2
+  
+
+  ax3 = plt.subplot(gs[2])
+  ax4 = plt.subplot(gs[3])
+
+  xList = ["2", "4", "6", "8", "10"]
+  w = 0.3
+  lw = 2
+  x = np.arange(len(xList))
+
+  ax3.plot(x, mlp, label='ICE on MLP models', marker="D", markersize=15, color="tab:blue", linewidth=4, alpha=0.9)
+
+  approx_time_prune = [1.90821, 4.37594, 7.17987, 8.98655, 13.3543]
+  ax4.bar(x, approx_time_prune, 0.5, color="tab:green", label="Prune", edgecolor="black", linewidth=lw, hatch='-', alpha=0.7)
+
+  influ_times = [0.0108384, 0.0312143, 0.0503626, 0.0726506, 0.090377]
+  influ_times = np.array(influ_times)*46*2
+  ax3.bar(x-0.5*w, influ_times, w, label='ICE on original PROV graph', color="tab:orange", hatch='.', edgecolor="black", linewidth=lw, alpha=0.7)
+
+  influ_time_approx_prune = [0.0043556, 0.01085915, 0.0165578, 0.0202041, 0.0211376]
+  influ_time_approx_prune = np.array(influ_time_approx_prune)*46*2
+  ax3.bar(x+0.5*w, influ_time_approx_prune, w, label="ICE on approx subgraph", color="tab:green", hatch='-', edgecolor="black", linewidth=lw, alpha=0.7)
+
+  ax3.set_ylabel('Running time of \nICE (s)', fontsize=fs1)
+  ax3.set_xlabel('Number of layers\n (c)', fontsize=fs1)
+  ax4.set_ylabel('Running time of \n approx search (s)', fontsize=fs1)
+  ax4.set_xlabel('Number of layers\n (d)', fontsize=fs1)
+  ax3.set_xticks(x)
+  ax3.set_xticklabels(xList, fontsize=fs2)
+  ax4.set_xticks(x)
+  ax4.set_xticklabels(xList, fontsize=fs2)
+  ax3.tick_params(axis="y", which="both", labelsize=fs2)
+  ax4.tick_params(axis="y", which="both", labelsize=fs2)
+  ax3.legend(fontsize=fs2)
+  ax4.legend(fontsize=fs2)
+  ax3.grid(axis='y')
+  ax4.grid(axis='y')
+
+  plt.tight_layout()
+  plt.savefig("./data/credit-score/images/mlp_pxai_all.pdf")
+
+
 
 if __name__=="__main__":
-  drawMaintenanceQuery()
-  overallComparison2()
+  # drawMaintenanceQuery()
+  # overallComparison2()
+  drawAll()

@@ -15,6 +15,20 @@ const std::array<std::string, number_classes> class_names =
 { "Class-1", "Class-2", "Class-3" };
 
 
+double euclideanDistance(const std::vector<double>* vec1, const std::vector<double>* vec2) {
+  if (vec1->size() != vec2->size()) {
+    throw std::invalid_argument("Vectors must be of the same size.");
+  }
+
+  double sum_of_squares = 0.0;
+  for (size_t i = 0; i < vec1->size(); ++i) {
+    sum_of_squares += std::pow((*vec1)[i] - (*vec2)[i], 2);
+  }
+
+  return std::sqrt(sum_of_squares);
+}
+
+
 void load_data(vector<Point>& points) {
   ifstream ofin(toy_kmeans_dataset);
   string line;
@@ -73,11 +87,18 @@ int main(int argc, char *argv[])
   kmeans_prov.provG.setSavePath(cprov_save_path);
   kmeans_prov.provG.saveGraph();
 
+  kmeans_prov.resetClusters();
   start = std::chrono::high_resolution_clock::now();
   kmeans_prov.deletePoint(points, centroids, distances, 5, iteration);
   end = std::chrono::high_resolution_clock::now();
   duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
   std::cout << "ML deletion time: " << duration * 1.0/1000000 << " seconds" << std::endl;
+
+  double dist = 0;
+  for (int i=0; i<number_classes; i++) {
+    dist += euclideanDistance(kmeans.clusters[i].getCentralValues(), kmeans_prov.clusters[i].getCentralValues());
+  }
+  std::cout << "centroid distance: " << dist << endl;
 
   return 0;
 }

@@ -78,3 +78,50 @@ void CKMeansProvGraph::addComputingSubgraph(const std::string& output_name, void
   }
 }
 
+
+CKMeansProvGraph CKMeansProvGraph::ProvenanceQuery(const std::string& name) {
+  // ASSERT_EX(checkVertexExistByName(name), std::cout << name+" does not exist" << std::endl);
+  vertex_t v = getVertexByName(name);
+  
+  // initialize CProvGraph of the queried vertex
+  std::string new_save_path = save_path.substr(0, save_path.find_last_of("."));
+  // std::cout << save_path << ' ' << new_save_path << std::endl;
+  new_save_path += "-"+name+".dot";
+  CKMeansProvGraph subProvG(new_save_path);
+
+  // insert the source vertex to subProvG
+  // ASSERT_EX(g[v].vt==Derived, std::cout << g[v].name << " is a " << vertexTypeToString(g[v].vt) << " vertex" << std::endl);
+  subProvG.addVariableVertex(g[v].vt, g[v].name, g[v].value);
+
+  // std::cout << "start provenance query" << std::endl;
+  DFSProvQuery(v, subProvG);
+  return subProvG;
+}
+
+void CKMeansProvGraph::DFSProvQuery(vertex_t s, CKMeansProvGraph& subProvG) {
+  vertex_t parent = subProvG.getVertexByName(g[s].name);
+  // start iterating adjacent vertices
+  boost::graph_traits<Graph>::adjacency_iterator ai_v, ai_v_end;
+  boost::tie(ai_v, ai_v_end) = boost::adjacent_vertices(s, g);
+  for (; ai_v!=ai_v_end; ai_v++) {
+    vertex_t v_operator = *ai_v;
+    vertex_t a_operator = subProvG.addOperatorVertex(g[v_operator].vt, g[v_operator].name);
+    subProvG.addProvEdge(parent, a_operator);
+    boost::graph_traits<Graph>::adjacency_iterator ai, ai_end;
+    for (boost::tie(ai, ai_end)=boost::adjacent_vertices(v_operator, g); ai!=ai_end; ai++) {
+      vertex_t v = *ai;
+      vertex_t child;
+      if (subProvG.checkVertexExistByName(g[v].name)) {
+        child = subProvG.getVertexByName(g[v].name);
+        subProvG.addProvEdge(a_operator, child);
+      }
+      else {
+        child = subProvG.addVariableVertex(g[v].vt, g[v].name, g[v].value);
+        subProvG.addProvEdge(a_operator, child);
+        DFSProvQuery(v, subProvG);
+      }
+    }
+  }
+  return;
+}
+

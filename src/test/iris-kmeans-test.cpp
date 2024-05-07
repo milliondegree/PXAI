@@ -28,6 +28,19 @@ double euclideanDistance(const std::vector<double>* vec1, const std::vector<doub
   return std::sqrt(sum_of_squares);
 }
 
+double euclideanDistance(const std::vector<double>* vec1, const std::vector<double>* vec2) {
+  if (vec1->size() != vec2->size()) {
+    throw std::invalid_argument("Vectors must be of the same size.");
+  }
+
+  double sum_of_squares = 0.0;
+  for (size_t i = 0; i < vec1->size(); ++i) {
+    sum_of_squares += std::pow((*vec1)[i] - (*vec2)[i], 2);
+  }
+
+  return std::sqrt(sum_of_squares);
+}
+
 
 void load_data(vector<Point>& points) {
   ifstream ofin(iris_dataset);
@@ -68,6 +81,7 @@ int main(int argc, char *argv[])
 
   int num = 2;
   int count = 0;
+  int count = 0;
 
   for (int index = 0; index<num; index++) {
     if (index%(number_points / number_classes)==0) continue;
@@ -94,8 +108,10 @@ int main(int argc, char *argv[])
     duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
     std::cout << "With provenance: " << duration * 1.0/1000000 << " seconds" << std::endl;
     std::cout << "\n";
+    std::cout << "\n";
     with_prov_time.push_back(duration * 1.0/1000000);
 
+    kmeans_prov.resetClusters();
     kmeans_prov.resetClusters();
     start = std::chrono::high_resolution_clock::now();
     kmeans_prov.deletePoint(points, centroids, distances, index, iteration);
@@ -104,6 +120,12 @@ int main(int argc, char *argv[])
     std::cout << "ML deletion time: " << duration * 1.0/1000000 << " seconds" << std::endl;
     delete_time.push_back(duration * 1.0/1000000);
     std::cout << endl;
+
+    double dist = 0;
+    for (int i=0; i<number_classes; i++) {
+      dist += euclideanDistance(kmeans.clusters[i].getCentralValues(), kmeans_prov.clusters[i].getCentralValues());
+    }
+    std::cout << "centroid distance: " << dist << std::endl << std::endl;
     
     count++;
   }

@@ -226,6 +226,8 @@ public:
 
   int runWithProv_v2(vector<Point> & points, vector<vector<double>*>& centroids, vector<vector<double>*>& distances);
 
+  void initializeCentroidsPlusPlus(vector<Point> &points, bool addProv);
+
     /* ML deletion */
 public:
   void deletePoint(vector<Point> & points, vector<vector<double>*>& centroids, vector<vector<double>*>& distances, int index, int iteration);

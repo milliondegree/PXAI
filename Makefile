@@ -20,6 +20,7 @@ TEST_6 := $(BIN)/iris-mlp-train
 TEST_7 := $(BIN)/credit-score-mlp-train
 TEST_8 := $(BIN)/credit-score-mlp-test
 TEST_9 := $(BIN)/mnist-kmeans-test
+TEST_10 := $(BIN)/mnist-kmeans-maintain-query-test
 BUILD := build
 
 # Library search directories and flags
@@ -49,7 +50,7 @@ run: build
 build: clean all
 
 # Main task
-all: $(TARGET) $(TEST_1) $(TEST_2) $(TEST_3) $(TEST_4) $(TEST_5) $(TEST_6) $(TEST_7) $(TEST_8) $(TEST_9)
+all: $(TARGET) $(TEST_1) $(TEST_2) $(TEST_3) $(TEST_4) $(TEST_5) $(TEST_6) $(TEST_7) $(TEST_8) $(TEST_9) $(TEST_10)
 
 # Task producing target from built files
 $(TARGET): $(OBJS) build/test/main.o
@@ -101,6 +102,11 @@ $(TEST_9): $(OBJS) build/test/mnist-kmeans-test.o
 	@echo "🚧 Building..."
 	mkdir -p $(dir $@)
 	$(CXX) $(OBJS) build/test/mnist-kmeans-test.o -o $@ $(LDPATHS) $(LDFLAGS)
+
+$(TEST_10): $(OBJS) build/test/mnist-kmeans-maintain-query-test.o
+	@echo "🚧 Building..."
+	mkdir -p $(dir $@)
+	$(CXX) $(OBJS) build/test/mnist-kmeans-maintain-query-test.o -o $@ $(LDPATHS) $(LDFLAGS)
 
 # Compile all cpp files
 $(BUILD)/%.o: $(SRC)/%.cpp

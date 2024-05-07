@@ -211,6 +211,17 @@ public:
 
   ~CKMeansProvGraph() {};
 
+  size_t getProvSize() {
+    size_t vertex_count = num_vertices(g);
+    size_t edge_count = num_edges(g);
+    
+    size_t base_size = sizeof(g);
+    size_t vertex_size = sizeof(vertex_t) * vertex_count;
+    size_t edge_size = sizeof(edge_t) * edge_count;
+
+    return base_size+vertex_size+edge_size;
+  }
+
  /* class members */
 public:
   Graph g;

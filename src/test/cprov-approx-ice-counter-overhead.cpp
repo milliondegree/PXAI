@@ -107,18 +107,17 @@ int main(int argc, char* argv[]) {
         MLN mmln = mln.getMinimalMLN(query);
 
         /* start to compute ICEs */
-        // t1 = clock();
-        // for (string literal : mmln.obs) {
-        //   computeInfluence(mln, query_of_output, output_variable_name, literal);
-        // }
-        // t2 = clock();
-        // ice_time_sum += (t2-t1)*1.0/CLOCKS_PER_SEC;
+        t1 = clock();
+        for (string literal : mmln.obs) {
+          computeInfluence(mln, query_of_output, output_variable_name, literal);
+        }
+        t2 = clock();
+        ice_time_sum += (t2-t1)*1.0/CLOCKS_PER_SEC;
 
         /* start to compute approx subgraph*/
         t1 = clock();
-        // MLN amln = mmln.approximateSubGraph(query, mln.prob[query], 1, 0.001);
-        // cpg::CProvGraph approx_subgraph = query_of_output.ApproximateSubGraphQuery(output_variable_name, 0.01, 0.01);
-        cpg::CProvGraph approx_subgraph = query_of_output.ApproximateSubGraphQueryPrune(output_variable_name, 0.01, 0.01);
+        cpg::CProvGraph approx_subgraph = query_of_output.ApproximateSubGraphQuery(output_variable_name, 0.01, 0.01);
+        // cpg::CProvGraph approx_subgraph = query_of_output.ApproximateSubGraphQueryPrune(output_variable_name, 0.01, 0.01);
         // approx_subgraph.saveGraph();
         t2 = clock();
         approx_time_sum += (t2-t1)*1.0/CLOCKS_PER_SEC;
@@ -133,7 +132,7 @@ int main(int argc, char* argv[]) {
 
         // add a query count
         count += 1;
-        if (count>50) break;
+        if (count>100) break;
       }
     }
     ice_time_list.push_back(ice_time_sum/count);
