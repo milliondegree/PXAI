@@ -31,35 +31,6 @@ double euclideanDistance(const std::vector<double>* vec1, const std::vector<doub
 }
 
 
-// void load_data(vector<Point>& points, int pos, int point_num) {
-//   ifstream ofin(mnist_dataset);
-//   string line;
-
-//   int n = 0;
-//   while (getline(ofin, line)) {
-//     if (!line.empty()) {
-//       if (n<pos) {
-//         n++;
-//         continue;
-//       }
-//       line.erase(0, line.find_first_not_of(" \t\r\n"));
-//       line.erase(line.find_last_not_of(" \t\r\n")+1);
-//       vector<string> split;
-//       boost::split(split, line, boost::is_any_of(","));
-//       vector<double> values;
-//       for (int i=1; i<=number_features; i++) {
-//         values.push_back(stod(split[i]));
-//       }
-//       string class_name = split[0];
-//       Point p(n, values, class_name); 
-//       points.push_back(p);
-//       n++;
-//       if (n==point_num+pos) break;
-//     }
-//   }
-//   // cout << n << endl;
-// }
-
 void load_data(vector<Point>& points) {
   ifstream ofin(mnist_dataset);
   string line;

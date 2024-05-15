@@ -8,16 +8,6 @@ void KMeans::run(vector<Point> & points)
 
   vector<int> prohibited_indexes;
 
-  // choose K distinct values for the centers of the clusters
-  // for(int i = 0; i < K; i++)
-  // {
-  //   int index_point = i * (total_points / K);
-  //   prohibited_indexes.push_back(index_point);
-  //   points[index_point].setCluster(i);
-  //   Cluster cluster(i, points[index_point]);
-  //   clusters.push_back(cluster);
-  // }
-
   initializeCentroidsPlusPlus(points, false);
 
   int iter = 1;
@@ -62,41 +52,13 @@ void KMeans::run(vector<Point> & points)
 
     if(done == true || iter >= max_iterations)
     {
-      std::cout << "Break in iteration " << iter << "\n\n";
-      std::cout << "Break in iteration " << iter << "\n\n";
+      std::cout << "Break in iteration " << iter << "\n";
       break;
     }
 
     iter++;
   }
 
-  // shows elements of clusters
-  for(int i = 0; i < K; i++)
-  {
-  //   int total_points_cluster =  clusters[i].getTotalPoints();
-
-  //   std::cout << "Cluster " << clusters[i].getID() + 1 << endl;
-  //   for(int j = 0; j < total_points_cluster; j++)
-  //   {
-  //     std::cout << "Point " << clusters[i].getPoint(j).getID() + 1 << ": ";
-  //     for(int p = 0; p < total_values; p++)
-  //       std::cout << clusters[i].getPoint(j).getValue(p) << " ";
-
-  //     string point_name = clusters[i].getPoint(j).getName();
-
-  //     if(point_name != "")
-  //       std::cout << "- " << point_name;
-
-  //     std::cout << endl;
-  //   }
-
-    // std::cout << "Cluster values: ";
-
-    // for(int j = 0; j < total_values; j++)
-    //   std::cout << clusters[i].getCentralValue(j) << " ";
-
-    // std::cout << "\n";
-  }
 }
 
 void KMeans::run(vector<Point> & points, int index)
@@ -161,127 +123,7 @@ void KMeans::run(vector<Point> & points, int index)
 
     if(done == true || iter >= max_iterations)
     {
-      std::cout << "Break in iteration " << iter << "\n\n";
-      break;
-    }
-
-    iter++;
-  }
-
-
-  // shows elements of clusters
-  for(int i = 0; i < K; i++)
-  {
-    // int total_points_cluster =  clusters[i].getTotalPoints();
-
-    // std::cout << "Cluster " << clusters[i].getID() + 1 << endl;
-    // for(int j = 0; j < total_points_cluster; j++)
-    // {
-    //   std::cout << "Point " << clusters[i].getPoint(j).getID() + 1 << ": ";
-    //   for(int p = 0; p < total_values; p++)
-    //     std::cout << clusters[i].getPoint(j).getValue(p) << " ";
-
-    //   string point_name = clusters[i].getPoint(j).getName();
-
-    //   if(point_name != "")
-    //     std::cout << "- " << point_name;
-
-    //   std::cout << endl;
-    // }
-
-    std::cout << "Cluster values: ";
-
-    for(int j = 0; j < total_values; j++)
-      std::cout << clusters[i].getCentralValue(j) << " ";
-
-    std::cout << "\n";
-  }
-}
-
-void KMeans::runWithProv(vector<Point> & points) {
-  if(K > total_points)
-    return;
-
-  // initialize variables
-  for (int i=0; i<this->total_points; i++) {
-    provG.addVariableVertex(ckpg::Input, "point_"+to_string(i)+"_"+to_string(0), &points+i);
-    // provG.auxilary_data.push_back(points[i].getValues());
-  }
-
-  vector<int> prohibited_indexes;
-
-  // choose K distinct values for the centers of the clusters
-  for(int i = 0; i < K; i++)
-  {
-    int index_point = i * (total_points / K);
-    prohibited_indexes.push_back(index_point);
-    points[index_point].setCluster(i);
-    Cluster cluster(i, points[index_point]);
-    clusters.push_back(cluster);
-    provG.addVariableVertex(ckpg::Parameter, "centroid_"+to_string(i)+"_"+to_string(0), &points+index_point);
-  }
-
-  int iter = 1;
-
-  while(true)
-  {
-    bool done = true;
-
-    // associates each point to the nearest center
-    vector<vector<string> > input_names (K, vector<string> (0));
-    for(int i = 0; i < total_points; i++)
-    {
-      int id_old_cluster = points[i].getCluster();
-      int id_nearest_center = getIDNearestCenter(points[i]);
-
-      // record input names of points
-      input_names[id_nearest_center].push_back("point_"+to_string(i)+"_"+to_string(iter));
-      
-      // from centroids to points
-      vector<string> centroid_input_names;
-      for (int j=0; j<clusters.size(); j++) {
-        centroid_input_names.push_back("centroid_"+to_string(j)+"_"+to_string(iter-1));
-      }
-      centroid_input_names.push_back("point_"+to_string(i)+"_"+to_string(iter-1));
-      provG.addComputingSubgraph("point_"+to_string(i)+"_"+to_string(iter), &points+i, ckpg::NearestCentroid, centroid_input_names);
-
-      if(id_old_cluster != id_nearest_center)
-      {
-        if(id_old_cluster != -1)
-          clusters[id_old_cluster].removePoint(points[i].getID());
-
-        points[i].setCluster(id_nearest_center);
-        clusters[id_nearest_center].addPoint(points[i]);
-        done = false;
-      }
-    }
-
-    // recalculating the center of each cluster
-    for(int i = 0; i < K; i++)
-    {
-      vector<double> centroid;
-      for(int j = 0; j < total_values; j++)
-      {
-        int total_points_cluster = clusters[i].getTotalPoints();
-        double sum = 0.0;
-
-        if(total_points_cluster > 0)
-        {
-          for(int p = 0; p < total_points_cluster; p++)
-            sum += clusters[i].getPoint(p).getValue(j);
-          clusters[i].setCentralValue(j, sum / total_points_cluster);
-          centroid.push_back(sum / total_points_cluster);
-        }
-      }
-      // add provenance subgraph
-      // provG.auxilary_data.push_back(centroid);
-      string centroid_name = "centroid_"+to_string(i)+"_"+to_string(iter);
-      provG.addComputingSubgraph(centroid_name, &centroid, ckpg::VectorMean, input_names[i]);
-    }
-
-    if(done == true || iter >= max_iterations)
-    {
-      std::cout << "Break in iteration " << iter << "\n\n";
+      std::cout << "Break in iteration " << iter << "\n";
       break;
     }
 
@@ -302,19 +144,6 @@ int KMeans::runWithProv_v2(vector<Point> & points, vector<vector<double>*>& cent
   }
 
   vector<int> prohibited_indexes;
-
-  // choose K distinct values for the centers of the clusters
-  // vector<double>* centroid = new vector<double>();
-  // centroids.push_back(centroid);
-  // for(int i = 0; i < K; i++)
-  // {
-  //   int index_point = i * (total_points / K);
-  //   prohibited_indexes.push_back(index_point);
-  //   points[index_point].setCluster(i);
-  //   Cluster cluster(i, points[index_point]);
-  //   clusters.push_back(cluster);
-  //   provG.addVariableVertex(ckpg::Parameter, "centroid_"+to_string(i)+"_"+to_string(0), &points[index_point]);
-  // }
 
   initializeCentroidsPlusPlus(points, true);
 
@@ -407,8 +236,7 @@ int KMeans::runWithProv_v2(vector<Point> & points, vector<vector<double>*>& cent
 
     if(done == true || iter >= max_iterations)
     {
-      std::cout << "Break in iteration " << iter << "\n\n";
-      std::cout << "Break in iteration " << iter << "\n\n";
+      std::cout << "Break in iteration " << iter << "\n";
       break;
     }
 
@@ -511,179 +339,121 @@ void KMeans::deletePoint(vector<Point> & points, vector<vector<double>*>& centro
 
   }
 
-  // choose K distinct values for the centers of the clusters
   for(int i = 0; i < K; i++)
   {
-    string centroid_name = "centroid_" + to_string(i) + "_" + to_string(iteration);
+    string centroid_name = "centroid_" + to_string(i) + "_" + to_string(iter);
     ckpg::vertex_t centroid_vertex = this->provG.getVertexByName(centroid_name);
     vector<double>* centroid = static_cast<vector<double>*>(g[centroid_vertex].value);
     Cluster cluster(i, total_values, centroid);
     clusters.push_back(cluster);
   }
 
-  // int iter = iteration+1;
-
-  // while(true)
-  // {
-  //   bool done = true;
-
-  //   // associates each point to the nearest center
-  //   for(int i = 0; i < total_points; i++)
-  //   {
-  //     if (i==index) continue;
-  //     int id_old_cluster = points[i].getCluster();
-  //     int id_nearest_center = getIDNearestCenter(points[i]);
-
-  //     if(id_old_cluster != id_nearest_center)
-  //     {
-  //       if(id_old_cluster != -1)
-  //         clusters[id_old_cluster].removePoint(points[i].getID());
-
-  //       points[i].setCluster(id_nearest_center);
-  //       clusters[id_nearest_center].addPoint(points[i]);
-  //       done = false;
-  //     }
-  //   }
-
-  //   // recalculating the center of each cluster
-  //   for(int i = 0; i < K; i++)
-  //   {
-  //     for(int j = 0; j < total_values; j++)
-  //     {
-  //       int total_points_cluster = clusters[i].getTotalPoints();
-  //       double sum = 0.0;
-
-  //       if(total_points_cluster > 0)
-  //       {
-  //         for(int p = 0; p < total_points_cluster; p++)
-  //           sum += clusters[i].getPoint(p).getValue(j);
-  //         clusters[i].setCentralValue(j, sum / total_points_cluster);
-  //       }
-  //     }
-  //   }
-
-  //   if(done == true || iter >= max_iterations)
-  //   {
-  //     std::cout << "Break in iteration " << iter << "\n\n";
-  //     break;
-  //   }
-
-  //   iter++;
-  // }
-
-  for(int i = 0; i < K; i++)
-  {
-  //   int total_points_cluster =  clusters[i].getTotalPoints();
-
-  //   std::cout << "Cluster " << clusters[i].getID() + 1 << endl;
-  //   for(int j = 0; j < total_points_cluster; j++)
-  //   {
-  //     std::cout << "Point " << clusters[i].getPoint(j).getID() + 1 << ": ";
-  //     for(int p = 0; p < total_values; p++)
-  //       std::cout << clusters[i].getPoint(j).getValue(p) << " ";
-
-  //     string point_name = clusters[i].getPoint(j).getName();
-
-  //     if(point_name != "")
-  //       std::cout << "- " << point_name;
-
-  //     std::cout << endl;
-  //   }
-
-    std::cout << "Cluster values: ";
-
-    for(int j = 0; j < total_values; j++)
-      std::cout << clusters[i].getCentralValue(j) << " ";
-
-    std::cout << "\n";
+  for (int i=0; i<total_points; i++) {
+    if (i==index) continue;
+    string point_name = "point_" + to_string(i) + "_" + to_string(iter);
+    ckpg::vertex_t point_vertex = this->provG.getVertexByName(point_name);
+    points[i].setCluster(prev_nearest_neightbors[i]);
+    clusters[prev_nearest_neightbors[i]].addPoint(points[i]);
   }
+
+  iter ++;
+  if (done || iter>=max_iterations) return;
+
+  while(true)
+  {
+    bool done = true;
+
+    // associates each point to the nearest center
+    for(int i = 0; i < total_points; i++)
+    {
+      if (i==index) continue;
+      int id_old_cluster = points[i].getCluster();
+      int id_nearest_center = getIDNearestCenter(points[i]);
+
+      if(id_old_cluster != id_nearest_center)
+      {
+        if(id_old_cluster != -1)
+          clusters[id_old_cluster].removePoint(points[i].getID());
+
+        points[i].setCluster(id_nearest_center);
+        clusters[id_nearest_center].addPoint(points[i]);
+        done = false;
+      }
+    }
+
+    // recalculating the center of each cluster
+    for(int i = 0; i < K; i++)
+    {
+      for(int j = 0; j < total_values; j++)
+      {
+        int total_points_cluster = clusters[i].getTotalPoints();
+        double sum = 0.0;
+
+        if(total_points_cluster > 0)
+        {
+          for(int p = 0; p < total_points_cluster; p++)
+            sum += clusters[i].getPoint(p).getValue(j);
+          clusters[i].setCentralValue(j, sum / total_points_cluster);
+        }
+      }
+    }
+
+    if(done == true || iter >= max_iterations)
+    {
+      std::cout << "Break in iteration " << iter << "\n";
+      break;
+    }
+
+    iter++;
+  }
+
 }
 
-  // choose K distinct values for the centers of the clusters
-  for(int i = 0; i < K; i++)
-  {
-    string centroid_name = "centroid_" + to_string(i) + "_" + to_string(iteration);
-    ckpg::vertex_t centroid_vertex = this->provG.getVertexByName(centroid_name);
-    vector<double>* centroid = static_cast<vector<double>*>(g[centroid_vertex].value);
-    Cluster cluster(i, total_values, centroid);
-    clusters.push_back(cluster);
+
+void KMeans::initializeCentroidsPlusPlus(vector<Point> &points, bool addProv) {
+  // Clear any existing clusters
+  clusters.clear();
+
+  // Step 1: Choose one data point at random from the dataset and add it to the list of centroids.
+  // srand(time(NULL));
+  srand(42);
+  int index = rand() % total_points;
+  points[index].setCluster(0);
+  Cluster cluster(0, points[index]);
+  clusters.push_back(cluster);
+
+  // Repeat until K centroids are selected
+  for(int c = 1; c < K; ++c) {
+    vector<double> distances(points.size(), std::numeric_limits<double>::max());
+
+    // Step 2 and Step 3: Compute distance and choose next centroid
+    for(size_t p = 0; p < points.size(); p++) {
+      for(int s = 0; s < c; s++) {
+        double dist = 0;
+        for(int i = 0; i < total_values; ++i) {
+          double diff = points[p].getValue(i) - clusters[s].getCentralValue(i);
+          dist += diff * diff;
+        }
+        distances[p] = min(distances[p], dist);
+      }
+    }
+
+    // Choose a new centroid index with probability proportional to distances squared
+    double sum = accumulate(distances.begin(), distances.end(), 0.0);
+    double r = ((double)rand() / RAND_MAX) * sum;
+    for(size_t p = 0; p < points.size(); ++p) {
+      r -= distances[p];
+      if(r <= 0) {
+        points[p].setCluster(c);
+        Cluster newCluster(c, points[p]);
+        // cout << p << ": ";
+        // for (auto v : points[p].getValues()) cout << v << " ";
+        clusters.push_back(newCluster);
+        if (addProv) 
+          provG.addVariableVertex(ckpg::Parameter, "centroid_"+to_string(clusters.size()-1)+"_"+to_string(0), &points[p]);
+        break;
+      }
+    }
+    // cout << endl;
   }
-
-  // int iter = iteration+1;
-
-  // while(true)
-  // {
-  //   bool done = true;
-
-  //   // associates each point to the nearest center
-  //   for(int i = 0; i < total_points; i++)
-  //   {
-  //     if (i==index) continue;
-  //     int id_old_cluster = points[i].getCluster();
-  //     int id_nearest_center = getIDNearestCenter(points[i]);
-
-  //     if(id_old_cluster != id_nearest_center)
-  //     {
-  //       if(id_old_cluster != -1)
-  //         clusters[id_old_cluster].removePoint(points[i].getID());
-
-  //       points[i].setCluster(id_nearest_center);
-  //       clusters[id_nearest_center].addPoint(points[i]);
-  //       done = false;
-  //     }
-  //   }
-
-  //   // recalculating the center of each cluster
-  //   for(int i = 0; i < K; i++)
-  //   {
-  //     for(int j = 0; j < total_values; j++)
-  //     {
-  //       int total_points_cluster = clusters[i].getTotalPoints();
-  //       double sum = 0.0;
-
-  //       if(total_points_cluster > 0)
-  //       {
-  //         for(int p = 0; p < total_points_cluster; p++)
-  //           sum += clusters[i].getPoint(p).getValue(j);
-  //         clusters[i].setCentralValue(j, sum / total_points_cluster);
-  //       }
-  //     }
-  //   }
-
-  //   if(done == true || iter >= max_iterations)
-  //   {
-  //     std::cout << "Break in iteration " << iter << "\n\n";
-  //     break;
-  //   }
-
-  //   iter++;
-  // }
-
-  for(int i = 0; i < K; i++)
-  {
-  //   int total_points_cluster =  clusters[i].getTotalPoints();
-
-  //   std::cout << "Cluster " << clusters[i].getID() + 1 << endl;
-  //   for(int j = 0; j < total_points_cluster; j++)
-  //   {
-  //     std::cout << "Point " << clusters[i].getPoint(j).getID() + 1 << ": ";
-  //     for(int p = 0; p < total_values; p++)
-  //       std::cout << clusters[i].getPoint(j).getValue(p) << " ";
-
-  //     string point_name = clusters[i].getPoint(j).getName();
-
-  //     if(point_name != "")
-  //       std::cout << "- " << point_name;
-
-  //     std::cout << endl;
-  //   }
-
-    std::cout << "Cluster values: ";
-
-    for(int j = 0; j < total_values; j++)
-      std::cout << clusters[i].getCentralValue(j) << " ";
-
-    std::cout << "\n";
-  }
-
 }

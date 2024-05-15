@@ -1,5 +1,5 @@
 # Pre-compiler and Compiler flags
-CXX_FLAGS := -Wall -Wextra -std=c++17 -ggdb -w
+CXX_FLAGS := -Wall -Wextra -std=c++17 -ggdb -w -I /opt/homebrew/opt/boost@1.85/include 
 PRE_FLAGS := -MMD -MP
 
 # Project directory structure

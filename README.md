@@ -1,5 +1,7 @@
 # PXAI
 
+Add the path of boost library to Makefile, e.g., -I /usr/local/include
+
 Run ```make all``` to compile three executable files in ./bin.
 
 Run ```./bin/cprov-maintain-query-overhead``` to estimate PXAI's provenance maintenance and query performance when applied to probabilistic graphical models (PGM).
