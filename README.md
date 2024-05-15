@@ -1,6 +1,8 @@
 # PXAI
 
-Add the path of boost library to Makefile, e.g., -I /usr/local/include
+Before, compile, add the path of boost library to Makefile, e.g., -I /usr/local/include
+
+Unzip mnist_train.csv at ```./data/mnist/mnist_train.csv.zip```
 
 Run ```make all``` to compile three executable files in ./bin.
 
