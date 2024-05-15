@@ -4,7 +4,7 @@ Run ```make all``` to compile three executable files in ./bin.
 
 Run ```./bin/cprov-maintain-query-overhead``` to estimate PXAI's provenance maintenance and query performance when applied to probabilistic graphical models (PGM).
 
-Run ```./bin/cprov-approx-ice-counter-overhead``` to estimate how PXAI's XAI performance when applied to PGM.
+Run ```./bin/cprov-approx-ice-counter-overhead``` to estimate PXAI's XAI performance when applied to PGM.
 
 Run ```./bin/credit-score-mlp-test``` to estimate PXAI's performance when applied to multi-layer perceptron (MLP).
 
